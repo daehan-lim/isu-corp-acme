@@ -3,19 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/activity_login"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:layout_constraintTop_toBottomOf="@+id/guideline_top"
+    app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+    >
 
     <TextView
+        android:id="@+id/text_app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@id/text_input_user_name"
+        app:layout_constraintTop_toTopOf="parent"
         android:textSize="@dimen/activity_login_app_name_text_size"
         android:gravity="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginBottom="@dimen/activity_login_app_name_margin_bottom"
         android:fontFamily="@font/sfpro_display_regular" />
 
 
@@ -29,8 +32,9 @@
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/text_app_name"
+        android:layout_marginTop="10dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_user_name"
@@ -64,4 +68,20 @@
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/login"
+        app:layout_constraintTop_toBottomOf="@id/text_input_password"
+        app:layout_constraintStart_toStartOf="@id/text_input_user_name"
+        app:layout_constraintEnd_toEndOf="@id/text_input_user_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/button_login_text_size"
+        android:paddingTop="@dimen/button_login_vertical_padding"
+        android:paddingBottom="@dimen/button_login_vertical_padding"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

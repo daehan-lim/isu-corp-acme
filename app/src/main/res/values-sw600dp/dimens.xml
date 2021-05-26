@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_login_edit_text_size">23sp</dimen>
-    <dimen name="activity_login_app_name_text_size">58sp</dimen>
+    <dimen name="activity_login_app_name_text_size">72sp</dimen>
+    <dimen name="button_login_text_size">22sp</dimen>
+    <dimen name="button_login_vertical_padding">15dp</dimen>
 </resources>
