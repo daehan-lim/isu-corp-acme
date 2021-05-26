@@ -63,11 +63,14 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
-fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginViewModel) {
+fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginViewModel, isSignUpScreen: Boolean = false) {
     val usernameTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_user_name)
     val passwordTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_password)
     val usernameEditText = parentLayout.findViewById<TextInputEditText>(R.id.edit_user_name)
     val passwordEditText = parentLayout.findViewById<TextInputEditText>(R.id.edit_password)
+
+    var secondPasswordTextInput: TextInputLayout? = null
+    var secondPasswordEditText: TextInputEditText? = null
 
     viewModel.loginFormState.observe(activity, Observer {
         val loginState = it ?: return@Observer
@@ -84,27 +87,50 @@ fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewMode
             null -> null
             else -> activity.getString(loginState.passwordError)
         }
+
+        if(isSignUpScreen) {
+            secondPasswordTextInput?.error = when(loginState.secondPasswordError) {
+                null -> null
+                else -> activity.getString(loginState.secondPasswordError)
+            }
+        }
     })
 
-    usernameEditText.afterTextChanged {
-        viewModel.loginDataChanged(
-            usernameEditText.text.toString(),
-            passwordEditText.text.toString()
-        )
-    }
+    if(isSignUpScreen) {
+        secondPasswordTextInput = parentLayout.findViewById(R.id.text_input_repeat_password)
+        secondPasswordEditText = parentLayout.findViewById(R.id.edit_repeat_password)
+        secondPasswordEditText.afterTextChanged {
+            viewModel.signupDataChanged(usernameEditText.text.toString(), passwordEditText.text.toString(),
+                secondPasswordEditText.text.toString())
+        }
 
-    passwordEditText.apply {
-        afterTextChanged {
+        usernameEditText.afterTextChanged {
+            viewModel.signupDataChanged(usernameEditText.text.toString(), passwordEditText.text.toString(),
+                secondPasswordEditText.text.toString())
+        }
+
+        passwordEditText.afterTextChanged {
+            viewModel.signupDataChanged(usernameEditText.text.toString(), passwordEditText.text.toString(),
+                secondPasswordEditText.text.toString())
+        }
+    } else {
+        usernameEditText.afterTextChanged {
             viewModel.loginDataChanged(usernameEditText.text.toString(), passwordEditText.text.toString())
         }
 
+        passwordEditText.afterTextChanged {
+            viewModel.loginDataChanged(usernameEditText.text.toString(), passwordEditText.text.toString())
+        }
+    }
+
+    passwordEditText.apply {
         /*setOnEditorActionListener { _, actionId, _ ->
-            when (actionId) {
-                EditorInfo.IME_ACTION_DONE ->
-                    viewModel.login(username.text.toString(), password.text.toString())
-            }
-            false
-        }*/
+                when (actionId) {
+                    EditorInfo.IME_ACTION_DONE ->
+                        viewModel.login(username.text.toString(), password.text.toString())
+                }
+                false
+            }*/
 
         /*login.setOnClickListener {
             loading.visibility = View.VISIBLE

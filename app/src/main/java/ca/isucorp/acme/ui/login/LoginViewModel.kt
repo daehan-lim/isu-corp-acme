@@ -40,6 +40,25 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
         _loginFormState.value = LoginFormState(isDataValid = true)
     }
 
+    fun signupDataChanged(username: String, password: String, secondPassword: String) {
+        val usernameErrorId = usernameError(username)
+        if (usernameErrorId != null) {
+            _loginFormState.value = LoginFormState(usernameError = usernameErrorId)
+            return
+        }
+        val passwordErrorId = passwordError(password)
+        if(passwordErrorId != null) {
+            _loginFormState.value = LoginFormState(passwordError = passwordErrorId)
+            return
+        }
+        val secondPasswordErrorId = secondPasswordError(password, secondPassword)
+        if(secondPasswordErrorId != null) {
+            _loginFormState.value = LoginFormState(secondPasswordError = secondPasswordErrorId)
+            return
+        }
+        _loginFormState.value = LoginFormState(isDataValid = true)
+    }
+
     /**
      * Returns the id of the string resource containing the error in the username field or null if the field is valid
      * @param username The username input by the user.
@@ -64,6 +83,18 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
         }
         if(password.length < 8) {
             return R.string.password_short_error
+        }
+        return null
+    }
+
+    private fun secondPasswordError(password: String, secondPassword: String): Int? {
+        passwordError(secondPassword).apply {
+            if(this != null) {
+                return this
+            }
+        }
+        if(password != secondPassword) {
+            return R.string.password_not_match
         }
         return null
     }

@@ -28,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
         toolBarTitle.text = getString(R.string.create_account)
         toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
 
-        validateUserFields(binding.layoutActivitySignUpContent, this, viewModel)
+        validateUserFields(binding.layoutActivitySignUpContent, this, viewModel, isSignUpScreen = true)
 
     }
 
