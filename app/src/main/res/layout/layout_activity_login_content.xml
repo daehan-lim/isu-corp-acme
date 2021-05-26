@@ -93,6 +93,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/button_login_text_size"
         style="@style/button_login"
+        app:backgroundTint="@color/primaryDarkColor"
         />
 
     <TextView
