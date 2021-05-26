@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="activity_horizontal_margin">36dp</dimen>
+    <dimen name="activity_vertical_margin">36dp</dimen>
     <dimen name="activity_login_edit_text_size">23sp</dimen>
     <dimen name="activity_login_app_name_text_size">72sp</dimen>
     <dimen name="button_login_text_size">22sp</dimen>
@@ -10,4 +12,6 @@
     <dimen name="text_register_size">30sp</dimen>
     <dimen name="toolbar_text_size">30sp</dimen>
     <dimen name="button_back_size">39dp</dimen>
+    <dimen name="layout_sign_up_margin_top">50dp</dimen>
+    <dimen name="sign_up_text_input_margin_top">10dp</dimen>
 </resources>

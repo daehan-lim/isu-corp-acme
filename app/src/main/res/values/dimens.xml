@@ -11,7 +11,9 @@
     <dimen name="text_input_user_name_margin_top">20dp</dimen>
     <dimen name="text_register_margin_top">4dp</dimen>
     <dimen name="text_or_size">17sp</dimen>
-    <dimen name="text_register_size">20sp</dimen>
+    <dimen name="text_register_size">19sp</dimen>
     <dimen name="toolbar_text_size">21sp</dimen>
     <dimen name="button_back_size">29dp</dimen>
+    <dimen name="layout_sign_up_margin_top">20dp</dimen>
+    <dimen name="sign_up_text_input_margin_top">10dp</dimen>
 </resources>
