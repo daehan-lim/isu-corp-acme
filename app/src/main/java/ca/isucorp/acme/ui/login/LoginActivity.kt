@@ -10,6 +10,7 @@ import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityLoginBinding
 import ca.isucorp.acme.util.afterTextChanged
 import ca.isucorp.acme.util.underlineText
+import ca.isucorp.acme.util.validateUserFields
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -33,55 +34,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, SignUpActivity::class.java))
         }
 
-        val usernameTextInput = binding.layoutActivityLoginContent.findViewById<TextInputLayout>(R.id.text_input_user_name)
-        val passwordTextInput = binding.layoutActivityLoginContent.findViewById<TextInputLayout>(R.id.text_input_password)
-        val usernameEditText = binding.layoutActivityLoginContent.findViewById<TextInputEditText>(R.id.edit_user_name)
-        val passwordEditText = binding.layoutActivityLoginContent.findViewById<TextInputEditText>(R.id.edit_password)
-
-        viewModel.loginFormState.observe(this@LoginActivity, Observer {
-            val loginState = it ?: return@Observer
-
-            // disable login button unless both username / password are valid
-            binding.layoutActivityLoginContent.findViewById<MaterialButton>(R.id.button_login).isEnabled = loginState.isDataValid
-
-            usernameTextInput.error = when(loginState.usernameError) {
-                null -> null
-                else -> getString(loginState.usernameError)
-            }
-
-            passwordTextInput.error = when(loginState.passwordError) {
-                null -> null
-                else -> getString(loginState.passwordError)
-            }
-        })
-
-        usernameEditText.afterTextChanged {
-            viewModel.loginDataChanged(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
-            )
-        }
-
-        passwordEditText.apply {
-            afterTextChanged {
-                viewModel.loginDataChanged(usernameEditText.text.toString(), passwordEditText.text.toString())
-            }
-
-            /*setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        viewModel.login(username.text.toString(), password.text.toString())
-                }
-                false
-            }*/
-
-            /*login.setOnClickListener {
-                loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
-            }*/
-        }
-
-
-
+        validateUserFields(binding.layoutActivityLoginContent, this, viewModel)
     }
 }
