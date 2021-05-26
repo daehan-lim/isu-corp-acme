@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="activity_login_edit_text_size">15sp</dimen>
+    <dimen name="activity_login_app_name_text_size">38sp</dimen>
+    <dimen name="activity_login_app_name_margin_bottom">20dp</dimen>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ACME</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+</resources>
