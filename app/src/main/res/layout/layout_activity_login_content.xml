@@ -93,7 +93,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/button_login_text_size"
         style="@style/button_login"
-        app:backgroundTint="@color/primaryDarkColor"
+        app:backgroundTint="@color/primaryColor"
         />
 
     <TextView
@@ -119,7 +119,7 @@
         android:layout_marginTop="@dimen/text_register_margin_top"
         android:textSize="@dimen/text_register_size"
         android:textStyle="bold"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/primaryColor"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
