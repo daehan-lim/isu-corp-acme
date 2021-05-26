@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_green"
             tools:text="@string/create_account"
             android:textSize="@dimen/toolbar_text_size"
             android:fontFamily="@font/montserrat_bold"
