@@ -11,17 +11,17 @@ open class DbAccessViewModel(application: Application) : AndroidViewModel(applic
 
     protected open val database = AcmeDatabase.getDatabase(application)
 
-    protected open val _error = MutableLiveData<Boolean>().apply {
+    protected open val _isError = MutableLiveData<Boolean>().apply {
         this.value = false
     }
-    open val error: LiveData<Boolean>
-        get() = _error
+    open val isError: LiveData<Boolean>
+        get() = _isError
 
     val viewModelJob = Job()
     open val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     open fun handledError() {
-        _error.value = false
+        _isError.value = false
     }
 
     override fun onCleared() {

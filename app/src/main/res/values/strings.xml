@@ -9,4 +9,8 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="register">Register</string>
     <string name="user_name_allowed_digits">áéíóúÁÉÍÓÚabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_</string>
+    <string name="username_empty_error">Username should be empty</string>
+    <string name="password_empty_error">Password should not be empty</string>
+    <string name="username_short_error">Username should be more than 4 characters</string>
+    <string name="password_short_error">Password should be more than 8 characters</string>
 </resources>
