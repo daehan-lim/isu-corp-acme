@@ -9,7 +9,19 @@
     app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
     >
 
-    <TextView
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/ic_app_logo"
+        app:layout_constraintDimensionRatio="w,20:7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <!--<TextView
         android:id="@+id/text_app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +31,9 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:fontFamily="@font/sfpro_display_regular" />
+        android:fontFamily="@font/sfpro_display_regular"
+        android:visibility="gone"
+        />-->
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -32,8 +46,7 @@
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_app_name"
-        android:layout_marginTop="@dimen/text_input_user_name_margin_top"
+        app:layout_constraintTop_toBottomOf="@id/logo"
         >
 
         <com.google.android.material.textfield.TextInputEditText
