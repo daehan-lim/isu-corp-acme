@@ -22,7 +22,7 @@
         android:id="@+id/text_input_repeat_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/sign_up_text_input_margin_top"
+        android:layout_marginTop="@dimen/login_sign_up_general_margin_top"
         android:hint="@string/repeat_password"
         app:startIconDrawable="@drawable/ic_outline_lock"
         app:endIconMode="password_toggle"
