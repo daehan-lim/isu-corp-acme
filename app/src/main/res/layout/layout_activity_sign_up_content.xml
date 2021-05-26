@@ -28,7 +28,10 @@
         app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@+id/text_input_password"
         app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/activity_login_edit_text_size"
+            android:maxLength="50"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
