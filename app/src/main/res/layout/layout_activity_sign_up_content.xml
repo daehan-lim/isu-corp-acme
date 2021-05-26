@@ -9,51 +9,14 @@
     >
 
 
-    <com.google.android.material.textfield.TextInputLayout
+    <include
         android:id="@+id/text_input_user_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/ic_baseline_person_outline"
-        android:hint="@string/user_name"
-        app:errorEnabled="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        layout="@layout/text_input_user_name" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:textSize="@dimen/activity_login_edit_text_size"
-            tools:ignore="LabelFor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
+    <include
         android:id="@+id/text_input_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/sign_up_text_input_margin_top"
-        android:hint="@string/password"
-        app:startIconDrawable="@drawable/ic_outline_lock"
-        app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_user_name"
-        app:errorEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
+        layout="@layout/text_input_password" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/activity_login_edit_text_size"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_repeat_password"

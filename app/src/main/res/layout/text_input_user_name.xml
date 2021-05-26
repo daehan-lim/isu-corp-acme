@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text_input_user_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    app:startIconDrawable="@drawable/ic_baseline_person_outline"
+    android:hint="@string/user_name"
+    app:errorEnabled="true"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/logo"
+    tools:showIn="@layout/layout_activity_login_content"
+    app:counterMaxLength="15"
+    app:counterEnabled="true"
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="text"
+        android:textSize="@dimen/activity_login_edit_text_size"
+        android:digits="@string/user_name_allowed_digits"
+        android:maxLength="15"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        tools:ignore="LabelFor" />
+
+</com.google.android.material.textfield.TextInputLayout>
