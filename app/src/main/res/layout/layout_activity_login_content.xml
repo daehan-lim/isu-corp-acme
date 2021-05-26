@@ -82,4 +82,30 @@
         style="@style/button_login"
         />
 
+    <TextView
+        android:id="@+id/text_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        app:layout_constraintTop_toBottomOf="@id/button_login"
+        app:layout_constraintStart_toStartOf="@id/button_login"
+        app:layout_constraintEnd_toEndOf="@id/button_login"
+        android:layout_marginTop="@dimen/text_register_margin_top"
+        android:textSize="@dimen/text_or_size"
+        />
+
+    <TextView
+        android:id="@+id/text_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        app:layout_constraintTop_toBottomOf="@id/text_or"
+        app:layout_constraintStart_toStartOf="@id/button_login"
+        app:layout_constraintEnd_toEndOf="@id/button_login"
+        android:layout_marginTop="@dimen/text_register_margin_top"
+        android:textSize="@dimen/text_register_size"
+        android:textStyle="bold"
+        android:textColor="@color/primaryDarkColor"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
