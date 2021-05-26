@@ -12,4 +12,5 @@
     <dimen name="text_register_margin_top">4dp</dimen>
     <dimen name="text_or_size">17sp</dimen>
     <dimen name="text_register_size">20sp</dimen>
+    <dimen name="toolbar_text_size">21sp</dimen>
 </resources>
