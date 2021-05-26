@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
 
@@ -12,63 +11,10 @@
         tools:context=".ui.LoginActivity">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            app:layout_constraintBottom_toTopOf="@id/text_input_user_name"
-            android:textSize="@dimen/activity_login_app_name_text_size"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/activity_login_app_name_margin_bottom" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_user_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconDrawable="@drawable/ic_baseline_person_outline"
-            android:hint="@string/user_name"
-            app:errorEnabled="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_user_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:textSize="@dimen/activity_login_edit_text_size"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/text_input_user_name"
-            app:layout_constraintEnd_toEndOf="@id/text_input_user_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_user_name"
-            android:hint="@string/password"
-            app:endIconMode="password_toggle"
-            app:startIconDrawable="@drawable/ic_outline_lock"
-            app:errorEnabled="true"
-            android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/activity_login_edit_text_size"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+        <include
+            android:id="@+id/layout_activity_login_content"
+            layout="@layout/layout_activity_login_content"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
