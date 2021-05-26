@@ -19,6 +19,13 @@
         app:contentInsetStartWithNavigation="0dp"
         >
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow__left_back"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"

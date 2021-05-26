@@ -1,6 +1,6 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="29dp"
-    android:height="29dp"
+    android:width="@dimen/button_back_size"
+    android:height="@dimen/button_back_size"
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="@color/dark_green"

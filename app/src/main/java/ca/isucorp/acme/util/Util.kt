@@ -33,7 +33,7 @@ fun goBackWithAnimation(activity: AppCompatActivity, anim: Int?) {
 fun Toolbar.setUpInActivity(activity: AppCompatActivity, goBackAnimation: Int?) {
     activity.setSupportActionBar(this)
     title = ""
-    setNavigationIcon(R.drawable.ic_arrow_circle_left_back)
+    setNavigationIcon(R.drawable.ic_arrow__left_back)
     setNavigationOnClickListener {
         goBackWithAnimation(activity, goBackAnimation)
     }
