@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         signUpTextView.underlineText()
         signUpTextView.setOnClickListener {
             startActivity(Intent(applicationContext, SignUpActivity::class.java))
-            overridePendingTransition(0, R.anim.slide_out_left)
         }
     }
 }
