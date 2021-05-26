@@ -9,7 +9,7 @@
     <dimen name="button_login_text_size">17sp</dimen>
     <dimen name="button_login_vertical_padding">20dp</dimen>
     <dimen name="text_input_user_name_margin_top">20dp</dimen>
-    <dimen name="text_register_margin_top">2dp</dimen>
+    <dimen name="text_register_margin_top">4dp</dimen>
     <dimen name="text_or_size">17sp</dimen>
     <dimen name="text_register_size">20sp</dimen>
 </resources>
