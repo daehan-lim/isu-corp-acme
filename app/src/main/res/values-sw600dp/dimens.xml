@@ -4,4 +4,5 @@
     <dimen name="activity_login_app_name_text_size">72sp</dimen>
     <dimen name="button_login_text_size">22sp</dimen>
     <dimen name="button_login_vertical_padding">15dp</dimen>
+    <dimen name="text_input_user_name_margin_top">30dp</dimen>
 </resources>

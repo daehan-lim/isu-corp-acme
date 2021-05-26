@@ -6,6 +6,7 @@
     <dimen name="activity_login_edit_text_size">15sp</dimen>
     <dimen name="activity_login_app_name_text_size">38sp</dimen>
     <dimen name="activity_login_app_name_margin_bottom">20dp</dimen>
-    <dimen name="button_login_text_size">20sp</dimen>
+    <dimen name="button_login_text_size">17sp</dimen>
     <dimen name="button_login_vertical_padding">10dp</dimen>
+    <dimen name="text_input_user_name_margin_top">10dp</dimen>
 </resources>

@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_app_name"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/text_input_user_name_margin_top"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -71,17 +71,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_login"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="@string/login"
         app:layout_constraintTop_toBottomOf="@id/text_input_password"
         app:layout_constraintStart_toStartOf="@id/text_input_user_name"
         app:layout_constraintEnd_toEndOf="@id/text_input_user_name"
         android:textColor="@color/white"
         android:textSize="@dimen/button_login_text_size"
-        android:paddingTop="@dimen/button_login_vertical_padding"
-        android:paddingBottom="@dimen/button_login_vertical_padding"
+        style="@style/button_login"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

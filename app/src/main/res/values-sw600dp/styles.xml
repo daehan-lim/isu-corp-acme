@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="button_login">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:paddingTop">@dimen/button_login_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/button_login_vertical_padding</item>
+    </style>
+</resources>
