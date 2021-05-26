@@ -1,4 +1,4 @@
-package ca.isucorp.acme.ui
+package ca.isucorp.acme.ui.login
 
 import android.os.Bundle
 import android.text.SpannableString
@@ -21,5 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         signUpTextView = binding.layoutActivityLoginContent.findViewById(R.id.text_sign_up)
         signUpTextView.underlineText()
+
+
     }
 }

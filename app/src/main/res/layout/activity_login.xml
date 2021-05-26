@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
-        tools:context=".ui.LoginActivity">
+        tools:context=".ui.login.LoginActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_top"
