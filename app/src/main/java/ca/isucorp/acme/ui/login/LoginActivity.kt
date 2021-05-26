@@ -1,5 +1,6 @@
 package ca.isucorp.acme.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -21,7 +22,9 @@ class LoginActivity : AppCompatActivity() {
 
         signUpTextView = binding.layoutActivityLoginContent.findViewById(R.id.text_sign_up)
         signUpTextView.underlineText()
-
-
+        signUpTextView.setOnClickListener {
+            startActivity(Intent(applicationContext, SignUpActivity::class.java))
+            overridePendingTransition(0, R.anim.slide_out_left)
+        }
     }
 }
