@@ -21,7 +21,7 @@ interface UserDao {
     suspend fun clearTable()
 
     @Query("SELECT * FROM user_table WHERE user_name = :userName AND password = :password")
-    fun findUser(userName: String, password: String ): LiveData<User?>
+    fun findUser(userName: String, password: String ): User?
 
 
 }

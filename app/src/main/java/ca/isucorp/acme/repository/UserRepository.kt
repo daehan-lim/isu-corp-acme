@@ -16,13 +16,13 @@ class UserRepository(private val database: AcmeDatabase) {
      * happens on the IO dispatcher.
      *
      */
-    suspend fun registerUser(user: User) {
+    suspend fun registerUser(username: String, password: String) {
         withContext(Dispatchers.IO) {
-            database.userDao.insert(user)
+            database.userDao.insert(User(username, password))
         }
     }
 
-    suspend fun findUser(username: String, password: String): LiveData<User?> {
+    suspend fun findUser(username: String, password: String): User? {
         return withContext(Dispatchers.IO) {
             database.userDao.findUser(username, password)
         }
