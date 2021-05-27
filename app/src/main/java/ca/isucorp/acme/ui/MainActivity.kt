@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
-import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
-import ca.isucorp.acme.util.setUpInActivity
+import ca.isucorp.acme.util.increaseMenuItemTextSize
 import java.util.*
 
 
@@ -34,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     private fun showDropdownMenu(menuButton: ImageView?) {
         val popup = PopupMenu(this, menuButton)
         popup.inflate(R.menu.dropdown_menu)
+        increaseMenuItemTextSize(popup, R.id.action_work_ticker)
+        increaseMenuItemTextSize(popup, R.id.action_get_directions)
 
         popup.setOnMenuItemClickListener { item: MenuItem? ->
             when (item!!.itemId) {
@@ -49,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 
         popup.show()
     }
+
+
 
 
 }

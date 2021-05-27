@@ -1,11 +1,14 @@
 package ca.isucorp.acme.util
 
 import android.text.Editable
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.RelativeSizeSpan
 import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.EditText
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -123,4 +126,12 @@ fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewMode
         }
     }
 
+}
+
+fun increaseMenuItemTextSize(popupMenu: PopupMenu, menuItemId: Int) {
+    val menuItem = popupMenu.menu.findItem(menuItemId)
+    val spanString = SpannableString(menuItem.title.toString())
+    val end = spanString.length
+    spanString.setSpan(RelativeSizeSpan(1.5f), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    menuItem.title = spanString
 }
