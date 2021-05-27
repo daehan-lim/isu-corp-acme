@@ -24,4 +24,5 @@
     <string name="sign_in_error_message">You have entered the wrong user name or password. Try again or Sign up</string>
     <string name="work_ticket">Work Ticket</string>
     <string name="get_directions">Get Directions</string>
+    <string name="view_ticket">View Ticket</string>
 </resources>
