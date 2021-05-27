@@ -18,6 +18,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/list_background_grey"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         >
@@ -36,7 +45,7 @@
             android:textStyle="bold"
             tools:text="Water Heater Installation"
             android:fontFamily="@font/sfpro_display_regular"
-            android:layout_marginEnd="7dp"
+            android:layout_marginEnd="8dp"
             />
 
         <ImageView
@@ -102,15 +111,21 @@
 
         <TextView
             android:id="@+id/text_time"
-            tools:text="12/24/16 11:35 AM"
+            tools:text="24 Dec 2016, 11:35 AM"
             app:layout_constraintStart_toEndOf="@id/image_time"
             app:layout_constraintEnd_toEndOf="@+id/text_client"
             app:layout_constraintTop_toTopOf="@id/image_time"
             style="@style/list_item_ticket_general_text"
             />
 
-
         <View
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            app:layout_constraintTop_toBottomOf="@id/text_time"
+            />
+
+
+        <!--<View
             android:id="@+id/list_item_dividing_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -118,7 +133,15 @@
             android:background="#CBCBCB"
             app:layout_constraintTop_toBottomOf="@+id/text_time"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/list_background_grey"
+            app:layout_constraintTop_toBottomOf="@id/list_item"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
