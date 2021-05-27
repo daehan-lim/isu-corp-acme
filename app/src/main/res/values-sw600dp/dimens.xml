@@ -15,7 +15,8 @@
     <dimen name="layout_sign_up_margin_top">50dp</dimen>
     <dimen name="login_sign_up_general_margin_top">20dp</dimen>
     <dimen name="main_app_bar_separation_margin">35dp</dimen>
-    <dimen name="bar_image_logo_height">90dp</dimen>
+    <dimen name="bar_image_logo_height">110dp</dimen>
+    <dimen name="action_bar_size">100dp</dimen>
     <dimen name="ic_calendar_size">33dp</dimen>
     <dimen name="ic_calendar_sync_size">38dp</dimen>
     <dimen name="icon_add_ticket_size">38dp</dimen>

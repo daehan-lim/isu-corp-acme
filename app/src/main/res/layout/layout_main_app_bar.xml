@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="@dimen/ic_menu_margin_end"
                 app:srcCompat="@drawable/ic_menu"
                 tools:visibility="visible"
                 tools:ignore="ContentDescription" />
