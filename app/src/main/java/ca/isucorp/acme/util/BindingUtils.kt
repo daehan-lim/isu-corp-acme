@@ -1,5 +1,6 @@
 package ca.isucorp.acme.util
 
+import android.graphics.Paint
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -34,6 +35,7 @@ fun TextView.setDate(item: Ticket?) {
 fun TextView.setPhoneText(item: Ticket?) {
     item?.let {
         text = item.phone
+        paintFlags = Paint.UNDERLINE_TEXT_FLAG
     }
 }
 

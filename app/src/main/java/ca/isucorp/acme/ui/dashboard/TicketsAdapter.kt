@@ -27,7 +27,6 @@ class TicketsAdapter(private val callListener: CallListener,
             binding.ticket = item
             binding.viewDetailsListener = viewDetailsListener
             binding.callListener = callListener
-//            binding.callListener.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             binding.executePendingBindings()
         }
 
