@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<data>
+        <variable
+            name="office"
+            type="cu.desoft.gasmanufacturado.model.ComercialOffice" />
+        <variable
+            name="phoneTextViewListener"
+            type="cu.desoft.gasmanufacturado.features.offices.ComercialOfficesAdapter.PhoneTextViewListener" />
+        <variable
+            name="emailListener"
+            type="cu.desoft.gasmanufacturado.features.offices.ComercialOfficesAdapter.EmailListener" />
+    </data>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        >
+
+
+        <TextView
+            android:id="@+id/text_client"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_view_ticket"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_client_size"
+            android:textStyle="bold"
+            tools:text="Water Heater Installation"
+            android:fontFamily="@font/sfpro_display_regular"
+            android:layout_marginEnd="7dp"
+            />
+
+        <ImageView
+            android:id="@+id/button_view_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_ticket"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/white"
+            app:srcCompat="@drawable/ic_arrow_right_circle"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/address_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/text_client"
+            app:layout_constraintTop_toBottomOf="@+id/text_client"
+            app:srcCompat="@drawable/ic_baseline_location_on_24"
+            tools:ignore="ContentDescription"
+            />
+
+        <TextView
+            android:id="@+id/address_text_view"
+            app:layout_constraintEnd_toEndOf="@+id/text_client"
+            app:layout_constraintStart_toEndOf="@+id/address_icon"
+            app:layout_constraintTop_toTopOf="@id/address_icon"
+            tools:text="11 Westnight Ave Toronto On, N7L 1X1"
+            style="@style/list_item_ticket_general_text" />
+
+        <ImageView
+            android:id="@+id/phone_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/list_item_ticket_icon_margin_top"
+            app:layout_constraintStart_toStartOf="@+id/text_client"
+            app:layout_constraintTop_toBottomOf="@id/address_text_view"
+            app:srcCompat="@drawable/ic_baseline_local_phone_24"
+            tools:ignore="ContentDescription" />
+
+
+        <TextView
+            android:id="@+id/phone_text_view"
+            app:layout_constraintStart_toEndOf="@+id/phone_icon"
+            app:layout_constraintTop_toTopOf="@+id/phone_icon"
+            app:layout_constraintEnd_toEndOf="@+id/text_client"
+            tools:text="(048) 77-3015, 75-0199"
+            style="@style/list_item_ticket_general_text"
+            />
+
+        <ImageView
+            android:id="@+id/image_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/list_item_ticket_icon_margin_top"
+            app:layout_constraintStart_toStartOf="@+id/text_client"
+            app:layout_constraintTop_toBottomOf="@id/phone_icon"
+            app:srcCompat="@drawable/ic_time"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/text_time"
+            tools:text="12/24/16 11:35 AM"
+            app:layout_constraintStart_toEndOf="@id/image_time"
+            app:layout_constraintEnd_toEndOf="@+id/text_client"
+            app:layout_constraintTop_toTopOf="@id/image_time"
+            style="@style/list_item_ticket_general_text"
+            />
+
+
+        <View
+            android:id="@+id/list_item_dividing_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#CBCBCB"
+            app:layout_constraintTop_toBottomOf="@+id/text_time"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
