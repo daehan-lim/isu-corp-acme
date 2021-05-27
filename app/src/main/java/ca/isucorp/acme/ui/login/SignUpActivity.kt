@@ -23,7 +23,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.layoutSignupAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = binding.layoutSimpleAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.create_account)
         toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)

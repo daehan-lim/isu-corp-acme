@@ -10,7 +10,7 @@
         tools:context=".MainActivity">
 
         <include
-            android:id="@+id/layout_app_bar"
+            android:id="@+id/layout_main_app_bar"
             layout="@layout/layout_main_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/layout_app_bar"
+            app:layout_constraintTop_toBottomOf="@id/layout_main_app_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
