@@ -25,4 +25,14 @@
     <string name="work_ticket">Work Ticket</string>
     <string name="get_directions">Get Directions</string>
     <string name="view_ticket">View Ticket</string>
+    <string name="client_name">Client Name</string>
+    <string name="address">Address</string>
+    <string name="select_date">Select date</string>
+    <string name="scheduled_date">Scheduled Date</string>
+    <string name="select_date_helper">Select the ticket\'s scheduled date and time</string>
+    <string name="phone">Phone Number</string>
+    <string name="save">Save</string>
+    <string name="notes">Notes</string>
+    <string name="reasons_for_call">Reasons for Call</string>
+    <string name="new_ticket">New Ticket</string>
 </resources>

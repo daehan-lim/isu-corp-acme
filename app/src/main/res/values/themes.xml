@@ -22,4 +22,9 @@
 
     <style name="Theme.ACME.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+    </style>
+
 </resources>
