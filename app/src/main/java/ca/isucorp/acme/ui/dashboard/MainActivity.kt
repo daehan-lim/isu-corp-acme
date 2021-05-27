@@ -1,4 +1,4 @@
-package ca.isucorp.acme.ui
+package ca.isucorp.acme.ui.dashboard
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -13,7 +13,7 @@ import ca.isucorp.acme.util.increaseMenuItemTextSize
 import java.util.*
 
 
-const val PHONE_PERMISSION_CODE = 102
+const val PHONE_PERMISSION_CODE = 101
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var isTabletSize: Boolean = false

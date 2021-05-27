@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityLoginBinding
-import ca.isucorp.acme.ui.MainActivity
+import ca.isucorp.acme.ui.dashboard.MainActivity
 import ca.isucorp.acme.util.underlineText
 import ca.isucorp.acme.util.validateUserFields
 import com.afollestad.materialdialogs.MaterialDialog
