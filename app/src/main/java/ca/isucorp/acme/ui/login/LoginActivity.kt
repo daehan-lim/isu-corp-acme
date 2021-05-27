@@ -4,12 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityLoginBinding
+import ca.isucorp.acme.ui.MainActivity
 import ca.isucorp.acme.util.underlineText
 import ca.isucorp.acme.util.validateUserFields
+import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -30,5 +33,27 @@ class LoginActivity : AppCompatActivity() {
         }
 
         validateUserFields(binding.layoutActivityLoginContent, this, viewModel)
+
+        val usernameEditText = binding.layoutActivityLoginContent.findViewById<TextInputEditText>(R.id.edit_user_name)
+        val passwordEditText = binding.layoutActivityLoginContent.findViewById<TextInputEditText>(R.id.edit_password)
+
+        binding.layoutActivityLoginContent.findViewById<MaterialButton>(R.id.button_login).setOnClickListener {
+            viewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
+        }
+
+        viewModel.isSigningSuccessful.observe(this, {
+            if(it) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            } else {
+                MaterialDialog(this)
+                    .title(text = getString(R.string.sign_in_error))
+                    .message(text = getString(R.string.sign_in_error_message))
+                    .positiveButton(R.string.accept) {}
+                    .show()
+            }
+        })
     }
 }

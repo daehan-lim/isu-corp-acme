@@ -15,9 +15,11 @@
     <string name="password_short_error">Password should be more than 8 characters</string>
     <string name="password_not_match">Passwords do not match</string>
     <string name="sign_up_successful">Sign up successful</string>
-    <string name="sign_up_successful_message">Your account was created succesfully. Log in to use ACME</string>
+    <string name="sign_up_successful_message">Your account was created successfully. Log in with your profile</string>
     <string name="accept">OK</string>
     <string name="cancel">Cancel</string>
     <string name="sign_up_error">Sign up failed</string>
     <string name="sign_up_error_message">There was an error creating your account. Please, try again.</string>
+    <string name="sign_in_error">Sign in failed</string>
+    <string name="sign_in_error_message">You have entered the wrong user name or password. Try again or Sign up</string>
 </resources>

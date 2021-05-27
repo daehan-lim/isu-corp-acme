@@ -1,22 +1,14 @@
 package ca.isucorp.acme.ui.login
 
-import android.Manifest
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivitySignUpBinding
-import ca.isucorp.acme.ui.MainActivity
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -45,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
             viewModel.register(usernameEditText.text.toString(), passwordEditText.text.toString())
         }
 
-        viewModel.isSignupSuccessful.observe(this, {
+        viewModel.isSigningSuccessful.observe(this, {
             if(it) {
                 MaterialDialog(this)
                     .title(text = getString(R.string.sign_up_successful))

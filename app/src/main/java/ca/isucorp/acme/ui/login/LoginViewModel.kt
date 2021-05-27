@@ -23,8 +23,8 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
     private val _loginFormState = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginFormState
 
-    private val _isSignupSuccessful = MutableLiveData<Boolean>()
-    val isSignupSuccessful: LiveData<Boolean> = _isSignupSuccessful
+    private val _isSigningSuccessful = MutableLiveData<Boolean>()
+    val isSigningSuccessful: LiveData<Boolean> = _isSigningSuccessful
 
 
     fun loginDataChanged(username: String, password: String) {
@@ -105,10 +105,22 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
             coroutineScope.launch {
                 userRepository.registerUser(username, password)
                 val registeredUser = userRepository.findUser(username, password)
-                _isSignupSuccessful.value = registeredUser != null
+                _isSigningSuccessful.value = registeredUser != null
             }
         } catch (e: Exception) {
-            _isSignupSuccessful.value = false
+            _isSigningSuccessful.value = false
+        }
+    }
+
+
+    fun login(username: String, password: String) {
+        try {
+            coroutineScope.launch {
+                val registeredUser = userRepository.findUser(username, password)
+                _isSigningSuccessful.value = registeredUser != null
+            }
+        } catch (e: Exception) {
+            _isSigningSuccessful.value = false
         }
     }
 
