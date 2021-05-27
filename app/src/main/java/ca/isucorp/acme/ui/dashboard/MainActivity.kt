@@ -1,4 +1,4 @@
-package ca.isucorp.acme.ui
+package ca.isucorp.acme.ui.dashboard
 
 import android.os.Bundle
 import android.view.MenuItem

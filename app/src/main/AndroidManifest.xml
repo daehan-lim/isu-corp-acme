@@ -19,7 +19,7 @@
         </activity>
 
         <activity android:name=".ui.login.SignUpActivity" />
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.dashboard.MainActivity" />
 
     </application>
 
