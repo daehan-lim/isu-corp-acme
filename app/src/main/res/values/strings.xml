@@ -9,7 +9,7 @@
     <string name="repeat_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="user_name_allowed_digits">áéíóúÁÉÍÓÚabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_</string>
-    <string name="username_empty_error">Username should be empty</string>
+    <string name="username_empty_error">Username should not be empty</string>
     <string name="password_empty_error">Password should not be empty</string>
     <string name="username_short_error">Username should be more than 4 characters</string>
     <string name="password_short_error">Password should be more than 8 characters</string>
@@ -22,4 +22,6 @@
     <string name="sign_up_error_message">There was an error creating your account. Please, try again.</string>
     <string name="sign_in_error">Sign in failed</string>
     <string name="sign_in_error_message">You have entered the wrong user name or password. Try again or Sign up</string>
+    <string name="work_ticket">Work Ticket</string>
+    <string name="get_directions">Get Directions</string>
 </resources>

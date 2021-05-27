@@ -1,10 +1,17 @@
 package ca.isucorp.acme.ui
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
+import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
+import ca.isucorp.acme.util.setUpInActivity
 import java.util.*
 
 
@@ -16,12 +23,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
-/*//        setSupportActionBar(binding.layoutAppBar)
-        supportActionBar?.elevation = 0F
-        supportActionBar?.title = getString(R.string.app_name)*/
+        val toolbar = binding.layoutAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val menuButton = toolbar.findViewById<ImageView>(R.id.button_menu)
+        menuButton.setOnClickListener {
+            showDropdownMenu(menuButton)
+        }
     }
 
+    private fun showDropdownMenu(menuButton: ImageView?) {
+        val popup = PopupMenu(this, menuButton)
+        popup.inflate(R.menu.dropdown_menu)
+
+        popup.setOnMenuItemClickListener { item: MenuItem? ->
+            when (item!!.itemId) {
+                R.id.action_work_ticker -> {
+                    Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                }
+                R.id.action_get_directions -> {
+                    Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
+
+        popup.show()
+    }
 
 
 }

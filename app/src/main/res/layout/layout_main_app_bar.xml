@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_signup_app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:theme="@style/Theme.ACME.AppBarOverlay">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:popupTheme="@style/Theme.ACME.PopupOverlay"
+        app:contentInsetStartWithNavigation="0dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/button_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/ic_calendar_margin_start"
+                app:srcCompat="@drawable/ic_calendar_green"
+                tools:visibility="visible"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/button_sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_calendar"
+                android:layout_marginStart="@dimen/main_app_bar_separation_margin"
+                app:srcCompat="@drawable/ic_calendar_sync"
+                tools:visibility="visible"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/bar_image_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/bar_image_logo_height"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_app_logo"
+                tools:visibility="visible"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/button_new_ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_menu"
+                app:srcCompat="@drawable/ic_add_note"
+                tools:visibility="visible"
+                android:layout_marginEnd="@dimen/main_app_bar_separation_margin"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/button_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="12dp"
+                app:srcCompat="@drawable/ic_menu"
+                tools:visibility="visible"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+</com.google.android.material.appbar.AppBarLayout>
