@@ -9,6 +9,7 @@ import ca.isucorp.acme.R
 import ca.isucorp.acme.database.model.User
 import ca.isucorp.acme.repository.UserRepository
 import ca.isucorp.acme.ui.DbAccessViewModel
+import kotlinx.coroutines.launch
 
 
 class LoginViewModel(application: Application) : DbAccessViewModel(application) {
@@ -22,8 +23,8 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
     private val _loginFormState = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginFormState
 
-    private val _userNameError = MutableLiveData<String?>()
-    val userNameError: LiveData<String?> = _userNameError
+    private val _isSignupSuccessful = MutableLiveData<Boolean>()
+    val isSignupSuccessful: LiveData<Boolean> = _isSignupSuccessful
 
 
     fun loginDataChanged(username: String, password: String) {
@@ -99,6 +100,17 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
         return null
     }
 
+    fun register(username: String, password: String) {
+        try {
+            coroutineScope.launch {
+                userRepository.registerUser(username, password)
+                val registeredUser = userRepository.findUser(username, password)
+                _isSignupSuccessful.value = registeredUser != null
+            }
+        } catch (e: Exception) {
+            _isSignupSuccessful.value = false
+        }
+    }
 
 
     /**

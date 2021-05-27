@@ -17,7 +17,7 @@ open class DbAccessViewModel(application: Application) : AndroidViewModel(applic
     open val isError: LiveData<Boolean>
         get() = _isError
 
-    val viewModelJob = Job()
+    private val viewModelJob = Job()
     open val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     open fun handledError() {
