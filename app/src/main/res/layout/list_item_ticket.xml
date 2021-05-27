@@ -99,7 +99,6 @@
             android:id="@+id/phone_text_view"
             app:layout_constraintStart_toEndOf="@+id/phone_icon"
             app:layout_constraintTop_toTopOf="@+id/phone_icon"
-            app:layout_constraintEnd_toEndOf="@+id/text_client"
             tools:text="(048) 77-3015, 75-0199"
             style="@style/list_item_ticket_general_text"
             android:onClick="@{() -> callListener.onClick(ticket)}"
