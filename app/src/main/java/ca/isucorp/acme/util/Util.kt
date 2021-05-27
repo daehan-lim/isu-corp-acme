@@ -18,12 +18,35 @@ import ca.isucorp.acme.ui.login.LoginViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.util.*
 
 
 /**
  * Default animation id for pressing back button in Activity
  */
 const val DEFAULT_GO_BACK_ANIMATION = R.anim.slide_out_right
+
+/**
+ * English Locale used as a global constant for the whole project
+ */
+val ENGLISH_US_LOCALE = Locale("en", "US")
+
+/**
+ * Date pattern to use with Date objects showing the date (in one or two characters), month (in three characters) and the whole year
+ * Example: 5 Jan 2021
+ */
+const val DAY_SHORT_MONTH_YEAR_PATTERN = "d MMM yyyy"
+
+/**
+ * Pattern to use with Date objects showing hour (in one or two characters), minute and time period
+ * Example: 05:25 PM
+ */
+const val TIME_PATTERN = "h:mm a"
+
+/**
+ * Pattern to show date and time combining DAY_SHORT_MONTH_YEAR_PATTERN and TIME_PATTERN
+ */
+const val DATE_AND_TIME_PATTERN = "$DAY_SHORT_MONTH_YEAR_PATTERN, $TIME_PATTERN"
 
 /**
  * Sets a span to underline the TextView's text

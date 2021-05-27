@@ -31,4 +31,5 @@
     <dimen name="ic_arrow_right_circle_size">40dp</dimen>
     <dimen name="list_item_ticket_text_margin_start">8dp</dimen>
     <dimen name="ic_menu_margin_end">12dp</dimen>
+    <dimen name="list_item_horizontal_margin">13dp</dimen>
 </resources>
