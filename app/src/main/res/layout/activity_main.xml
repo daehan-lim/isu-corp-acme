@@ -26,7 +26,7 @@
             app:layout_constraintTop_toBottomOf="@id/layout_main_app_bar"
             android:layout_marginTop="100dp"
             android:orientation="vertical"
-            tools:visibility="visible"
+            tools:visibility="gone"
             android:visibility="gone"
             >
 
@@ -78,7 +78,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            tools:visibility="gone"
+            tools:visibility="visible"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/layout_main_app_bar"
@@ -88,8 +88,6 @@
             android:background="@color/list_background_grey"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_item_ticket"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             />
