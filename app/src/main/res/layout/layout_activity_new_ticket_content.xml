@@ -32,7 +32,6 @@
             android:layout_height="match_parent"
             android:inputType="textPersonName"
             android:textSize="@dimen/default_edit_text_size"
-            android:digits="@string/client_name_allowed_digits"
             android:maxLength="50"
             android:singleLine="true"
             android:imeOptions="actionNext"

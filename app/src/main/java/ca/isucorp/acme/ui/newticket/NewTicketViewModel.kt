@@ -14,6 +14,7 @@ import ca.isucorp.acme.util.TIME_PATTERN
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 class NewTicketViewModel(application: Application) : DbAccessViewModel(application) {
 
@@ -117,6 +118,11 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
         }
         if(clientName.length < 4) {
             return R.string.client_name_short_error
+        }
+        val pattern = Pattern.compile("[^A-Za-zÀ-ú ]")
+        val matcher = pattern.matcher(clientName)
+        if (matcher.find()) {
+            return R.string.client_name_invalid
         }
         return null
     }

@@ -18,7 +18,6 @@ import ca.isucorp.acme.util.increaseMenuItemTextSize
 import java.util.*
 
 
-const val PHONE_PERMISSION_CODE = 101
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
