@@ -39,4 +39,6 @@
     <dimen name="address_icon_size">28dp</dimen>
     <dimen name="ic_phone_size">24dp</dimen>
     <dimen name="ic_time_size">19dp</dimen>
+    <dimen name="no_results_text_size">19sp</dimen>
+    <dimen name="no_results_explanation_text_size">17sp</dimen>
 </resources>

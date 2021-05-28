@@ -71,11 +71,15 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.tickets.observe(this, {
             if(it.isNotEmpty()) {
-                binding.layoutNoResults.visibility = View.GONE
+                binding.noResultsAnimation.visibility = View.GONE
+                binding.noResultsTextView.visibility = View.GONE
+                binding.noResultsExplanationTextView.visibility = View.GONE
                 binding.recyclerView.visibility = View.VISIBLE
                 adapter.submitList(it)
             } else {
-                binding.layoutNoResults.visibility = View.VISIBLE
+                binding.noResultsAnimation.visibility = View.VISIBLE
+                binding.noResultsTextView.visibility = View.VISIBLE
+                binding.noResultsExplanationTextView.visibility = View.VISIBLE
                 binding.recyclerView.visibility = View.GONE
             }
         })
