@@ -61,10 +61,10 @@
             android:id="@+id/edit_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:textSize="@dimen/default_edit_text_size"
             android:maxLength="300"
-            android:singleLine="true"
+            android:maxLines="3"
             android:imeOptions="actionNext"
             tools:ignore="LabelFor" />
 
