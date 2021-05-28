@@ -44,19 +44,18 @@ class SignUpActivity : AppCompatActivity() {
                     .message(text = getString(R.string.sign_up_successful_message))
                     .cancelable(false)
                     .positiveButton(R.string.accept) {
-                        /*val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)*/
                         finish()
                     }
                     .show()
-
-            } else {
+                viewModel.handledSignup()
+            } /* //In a real-life project, database error should be handled further.
+            else {
                 MaterialDialog(this)
                     .title(text = getString(R.string.sign_up_error))
                     .message(text = getString(R.string.sign_up_error_message))
                     .positiveButton(R.string.accept) {}
                     .show()
-            }
+            }*/
         })
 
     }

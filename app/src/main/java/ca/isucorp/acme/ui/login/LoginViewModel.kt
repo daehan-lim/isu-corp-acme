@@ -101,27 +101,32 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
     }
 
     fun register(username: String, password: String) {
-        try {
-            coroutineScope.launch {
+        coroutineScope.launch {
+            try {
                 userRepository.registerUser(username, password)
                 val registeredUser = userRepository.findUser(username, password)
                 _isSigningSuccessful.value = registeredUser != null
+            } catch (e: Exception) {
+                _isSigningSuccessful.value = false
             }
-        } catch (e: Exception) {
-            _isSigningSuccessful.value = false
         }
     }
 
 
     fun login(username: String, password: String) {
-        try {
-            coroutineScope.launch {
+        coroutineScope.launch {
+            try {
                 val registeredUser = userRepository.findUser(username, password)
                 _isSigningSuccessful.value = registeredUser != null
+            } catch (e: Exception) {
+                _isSigningSuccessful.value = false
             }
-        } catch (e: Exception) {
-            _isSigningSuccessful.value = false
         }
+    }
+
+
+    fun handledSignup() {
+        _isSigningSuccessful.value = false
     }
 
 
