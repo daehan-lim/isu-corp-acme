@@ -20,7 +20,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     private val _dateText = MutableLiveData<String>()
     val dateText: LiveData<String> = _dateText
 
-    private var date: String? = null
+    private var dateString: String? = null
 
     private val userRepository = UserRepository(database)
 
@@ -28,7 +28,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     val user: LiveData<User?>
         get() = _user
 
-    private val calendar = Calendar.getInstance()
+    private val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
     /*private val _loginFormState = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginFormState*/
@@ -38,17 +38,29 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
 
 
     fun setDate(timeInMillis: Long) {
-        calendar.timeInMillis = timeInMillis
+        val date = getDateInCurrentTimeZone(timeInMillis)
         val dateStringParser = SimpleDateFormat(DAY_SHORT_MONTH_YEAR_PATTERN, Locale.ENGLISH)
-        date = dateStringParser.format(calendar.time)
-        _dateText.value = "$date, 12:00 PM"
+        dateString = dateStringParser.format(date)
+        _dateText.value = "$dateString, 12:00 PM"
+    }
+
+    /**
+     * Get Date object given dateInMillis, regardless of daylight savings time
+     * @param dateInMillis The date in milliseconds
+     */
+    private fun getDateInCurrentTimeZone(dateInMillis: Long): Date {
+        // Get the offset from our timezone and UTC.
+        val timeZoneUTC = TimeZone.getDefault()
+        // It will be negative, so that's the -1
+        val offsetFromUTC = timeZoneUTC.getOffset(calendar.timeInMillis) * -1
+        return Date(dateInMillis + offsetFromUTC)
     }
 
     fun setTime(hour: Int, minute: Int) {
         calendar[Calendar.HOUR_OF_DAY] = hour
         calendar[Calendar.MINUTE] = minute
         val dateStringParser = SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH)
-        _dateText.value = "$date, ${dateStringParser.format(calendar.time)}"
+        _dateText.value = "$dateString, ${dateStringParser.format(calendar.time)}"
     }
 
 /*fun loginDataChanged(username: String, password: String) {
