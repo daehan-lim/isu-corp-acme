@@ -26,10 +26,6 @@ import java.util.*
  */
 const val DEFAULT_GO_BACK_ANIMATION = R.anim.slide_out_right
 
-/**
- * English Locale used as a global constant for the whole project
- */
-val ENGLISH_US_LOCALE = Locale("en", "US")
 
 /**
  * Date pattern to use with Date objects showing the date (in one or two characters), month (in three characters) and the whole year

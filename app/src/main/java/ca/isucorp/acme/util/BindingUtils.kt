@@ -4,7 +4,6 @@ import android.graphics.Paint
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import ca.isucorp.acme.R
 import ca.isucorp.acme.database.model.Ticket
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,7 +25,7 @@ fun TextView.setAddress(item: Ticket?) {
 @BindingAdapter("date")
 fun TextView.setDate(item: Ticket?) {
     item?.let {
-        val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, ENGLISH_US_LOCALE)
+        val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, Locale.ENGLISH)
         text = dateStringParser.format(item.date)
     }
 }
