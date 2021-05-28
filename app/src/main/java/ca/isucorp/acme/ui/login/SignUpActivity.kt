@@ -8,8 +8,6 @@ import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivitySignUpBinding
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -23,22 +21,19 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.layoutSimpleAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        val toolBarTitle = binding.layoutSimpleAppBar.toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.create_account)
-        toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
+        binding.layoutSimpleAppBar.toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
 
-        validateUserFields(binding.layoutActivitySignUpContent, this, viewModel, isSignUpScreen = true)
+        validateUserFields(binding.layoutActivitySignUpContent.root, this, viewModel, isSignUpScreen = true)
 
-        val usernameEditText = binding.layoutActivitySignUpContent.findViewById<TextInputEditText>(R.id.edit_user_name)
-        val passwordEditText = binding.layoutActivitySignUpContent.findViewById<TextInputEditText>(R.id.edit_password)
-
-        binding.layoutActivitySignUpContent.findViewById<MaterialButton>(R.id.button_login).setOnClickListener {
-            viewModel.register(usernameEditText.text.toString(), passwordEditText.text.toString())
+        binding.layoutActivitySignUpContent.buttonLogin.setOnClickListener {
+            viewModel.register(binding.layoutActivitySignUpContent.textInputUserName.editUserName.text.toString(),
+                binding.layoutActivitySignUpContent.textInputPassword.editPassword.text.toString())
         }
 
         viewModel.isSigningSuccessful.observe(this, {
-            if(it == true) {
+            if (it == true) {
                 MaterialDialog(this)
                     .title(text = getString(R.string.sign_up_successful))
                     .message(text = getString(R.string.sign_up_successful_message))

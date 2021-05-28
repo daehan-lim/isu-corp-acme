@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.layoutMainAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = binding.layoutMainAppBar.toolbar
         setSupportActionBar(toolbar)
 
         val hamburgerMenuIcon = toolbar.findViewById<ImageView>(R.id.button_menu)

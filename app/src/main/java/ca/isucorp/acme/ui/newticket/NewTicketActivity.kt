@@ -44,21 +44,21 @@ class NewTicketActivity : AppCompatActivity() {
         binding = ActivityNewTicketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        selectDateTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_select_date)
-        selectDateEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_select_date)
-        saveButton = binding.layoutActivityNewTicketContent.findViewById(R.id.button_save)
-        clientNameTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_client_name)
-        clientNameEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_client_name)
-        addressTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_address)
-        addressEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_address)
-        phoneTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_phone)
-        phoneEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_phone)
-        notesTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_notes)
-        notesEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_notes)
-        reasonsForCallTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_reasons)
-        reasonsForCallEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_reasons)
+        selectDateTextInput = binding.layoutActivityNewTicketContent.textInputSelectDate
+        selectDateEditText = binding.layoutActivityNewTicketContent.editSelectDate
+        saveButton = binding.layoutActivityNewTicketContent.buttonSave
+        clientNameTextInput = binding.layoutActivityNewTicketContent.textInputClientName
+        clientNameEditText = binding.layoutActivityNewTicketContent.editClientName
+        addressTextInput = binding.layoutActivityNewTicketContent.textInputAddress
+        addressEditText = binding.layoutActivityNewTicketContent.editAddress
+        phoneTextInput = binding.layoutActivityNewTicketContent.textInputPhone
+        phoneEditText = binding.layoutActivityNewTicketContent.editPhone
+        notesTextInput = binding.layoutActivityNewTicketContent.textInputNotes
+        notesEditText = binding.layoutActivityNewTicketContent.editNotes
+        reasonsForCallTextInput = binding.layoutActivityNewTicketContent.textInputReasons
+        reasonsForCallEditText = binding.layoutActivityNewTicketContent.editReasons
 
-        val toolbar = binding.layoutSimpleAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = binding.layoutSimpleAppBar.toolbar
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.new_ticket)
         toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
