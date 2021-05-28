@@ -11,13 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import ca.isucorp.acme.R
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ActivityMainBinding
-import ca.isucorp.acme.ui.login.SignUpActivity
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointBackward
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
 
 
@@ -52,18 +47,7 @@ class MainActivity : AppCompatActivity() {
             val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
             startActivity(callIntent)
         }, TicketsAdapter.ViewDetailsListener {
-            val calendar = Calendar.getInstance()
-            calendar[Calendar.YEAR] += 40
-            val maxYear = calendar.timeInMillis
-            val constraintsBuilder = CalendarConstraints.Builder()
-                .setValidator(DateValidatorPointForward.now())
-            val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .setTitleText(getString(R.string.select_date))
-                .setCalendarConstraints(constraintsBuilder.build())
-                .setTheme(R.style.MaterialCalendarTheme)
-                .build()
-                .show(supportFragmentManager, "date")
+
         })
         binding.recyclerView.adapter = adapter
 
