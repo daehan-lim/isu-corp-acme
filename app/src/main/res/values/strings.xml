@@ -48,4 +48,7 @@
     <string name="no_tickets_to_show">There are no tickets yet</string>
     <string name="add_tickets">Add new tickets and you will see them here</string>
     <string name="client_name_invalid">The name should contain only letters</string>
+    <string name="menu">Menu</string>
+    <string name="ticket_calendar">Due Tickets Calendar</string>
+    <string name="sync_calendar">Sync Ticket dates to your Google Calendar</string>
 </resources>

@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.TooltipCompat
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
-import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ActivityMainBinding
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
     }
 
+
+
     private var isTabletSize: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,17 +37,27 @@ class MainActivity : AppCompatActivity() {
         val toolbar = binding.layoutMainAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        val hamburgerMenuIcon = toolbar.findViewById<ImageView>(R.id.button_menu)
+        val newTicketBarButton = toolbar.findViewById<ImageView>(R.id.button_new_ticket)
+        val calendarButton = toolbar.findViewById<ImageView>(R.id.button_calendar)
+        val calendarSyncButton = toolbar.findViewById<ImageView>(R.id.button_sync_calendar)
+
+        TooltipCompat.setTooltipText(hamburgerMenuIcon, getString(R.string.menu))
+        TooltipCompat.setTooltipText(newTicketBarButton, getString(R.string.new_ticket))
+        TooltipCompat.setTooltipText(calendarButton, getString(R.string.ticket_calendar))
+        TooltipCompat.setTooltipText(calendarSyncButton, getString(R.string.sync_calendar))
+
+
         isTabletSize = resources.getBoolean(R.bool.isTablet)
         if(isTabletSize) {
             toolbar.layoutParams.height = resources.getDimension(R.dimen.action_bar_size).toInt()
         }
 
-        val menuButton = toolbar.findViewById<ImageView>(R.id.button_menu)
-        menuButton.setOnClickListener {
-            showDropdownMenu(menuButton)
+        hamburgerMenuIcon.setOnClickListener {
+            showDropdownMenu(hamburgerMenuIcon)
         }
 
-        toolbar.findViewById<ImageView>(R.id.button_new_ticket).setOnClickListener {
+        newTicketBarButton.setOnClickListener {
             startActivity(Intent(applicationContext, NewTicketActivity::class.java))
         }
 
