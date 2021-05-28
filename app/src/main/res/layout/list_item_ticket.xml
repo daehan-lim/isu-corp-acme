@@ -28,8 +28,8 @@
             app:cardBackgroundColor="@android:color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:cardElevation="6dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="@dimen/list_item_ticket_separation"
+            android:layout_marginEnd="@dimen/list_item_ticket_separation"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,7 +149,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="@dimen/list_item_ticket_separation"
             android:background="@color/list_background_grey"
             app:layout_constraintTop_toBottomOf="@id/cardView"/>
 

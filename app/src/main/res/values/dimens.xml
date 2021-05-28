@@ -36,4 +36,7 @@
     <dimen name="default_edit_text_hint_size">13sp</dimen>
     <dimen name="default_edit_text_counter_size">11sp</dimen>
     <dimen name="list_item_ticket_separation">10dp</dimen>
+    <dimen name="address_icon_size">28dp</dimen>
+    <dimen name="ic_phone_size">24dp</dimen>
+    <dimen name="ic_time_size">19dp</dimen>
 </resources>
