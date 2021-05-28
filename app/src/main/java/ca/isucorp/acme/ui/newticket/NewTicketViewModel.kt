@@ -28,9 +28,6 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     private val _newTicketFormState = MutableLiveData<NewTicketFormState>()
     val newTicketFormState: LiveData<NewTicketFormState> = _newTicketFormState
 
-    private val _isSigningSuccessful = MutableLiveData<Boolean>()
-    val isSigningSuccessful: LiveData<Boolean> = _isSigningSuccessful
-
 
     fun setDate(timeInMillis: Long) {
         val date = getDateInCurrentTimeZone(timeInMillis)

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import ca.isucorp.acme.R
-import ca.isucorp.acme.ui.login.LoginViewModel
+import ca.isucorp.acme.ui.login.LoginSignupViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -85,7 +85,7 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
-fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginViewModel, isSignUpScreen: Boolean = false) {
+fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginSignupViewModel, isSignUpScreen: Boolean = false) {
     val usernameTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_user_name)
     val passwordTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_password)
     val usernameEditText = parentLayout.findViewById<TextInputEditText>(R.id.edit_user_name)
@@ -94,7 +94,7 @@ fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewMode
     var secondPasswordTextInput: TextInputLayout? = null
     var secondPasswordEditText: TextInputEditText? = null
 
-    viewModel.loginFormState.observe(activity, Observer {
+    viewModel.loginSignUpFormState.observe(activity, Observer {
         val loginState = it ?: return@Observer
 
         // disable login button unless both username / password are valid

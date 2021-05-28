@@ -14,8 +14,8 @@ import com.google.android.material.textfield.TextInputEditText
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(this, LoginViewModel.Factory(application)).get(LoginViewModel::class.java)
+    private val viewModel: LoginSignupViewModel by lazy {
+        ViewModelProvider(this, LoginSignupViewModel.Factory(application)).get(LoginSignupViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

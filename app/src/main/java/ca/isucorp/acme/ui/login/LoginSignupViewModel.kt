@@ -12,7 +12,7 @@ import ca.isucorp.acme.ui.DbAccessViewModel
 import kotlinx.coroutines.launch
 
 
-class LoginViewModel(application: Application) : DbAccessViewModel(application) {
+class LoginSignupViewModel(application: Application) : DbAccessViewModel(application) {
 
     private val userRepository = UserRepository(database)
 
@@ -20,8 +20,8 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
     val user: LiveData<User?>
         get() = _user
 
-    private val _loginFormState = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginFormState
+    private val _loginFormState = MutableLiveData<LoginSignUpFormState>()
+    val loginSignUpFormState: LiveData<LoginSignUpFormState> = _loginFormState
 
     private val _isSigningSuccessful = MutableLiveData<Boolean>()
     val isSigningSuccessful: LiveData<Boolean> = _isSigningSuccessful
@@ -30,34 +30,34 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
     fun loginDataChanged(username: String, password: String) {
         val usernameErrorId = usernameError(username)
         if (usernameErrorId != null) {
-            _loginFormState.value = LoginFormState(usernameError = usernameErrorId)
+            _loginFormState.value = LoginSignUpFormState(usernameError = usernameErrorId)
             return
         }
         val passwordErrorId = passwordError(password)
         if(passwordErrorId != null) {
-            _loginFormState.value = LoginFormState(passwordError = passwordErrorId)
+            _loginFormState.value = LoginSignUpFormState(passwordError = passwordErrorId)
             return
         }
-        _loginFormState.value = LoginFormState(isDataValid = true)
+        _loginFormState.value = LoginSignUpFormState(isDataValid = true)
     }
 
     fun signupDataChanged(username: String, password: String, secondPassword: String) {
         val usernameErrorId = usernameError(username)
         if (usernameErrorId != null) {
-            _loginFormState.value = LoginFormState(usernameError = usernameErrorId)
+            _loginFormState.value = LoginSignUpFormState(usernameError = usernameErrorId)
             return
         }
         val passwordErrorId = passwordError(password)
         if(passwordErrorId != null) {
-            _loginFormState.value = LoginFormState(passwordError = passwordErrorId)
+            _loginFormState.value = LoginSignUpFormState(passwordError = passwordErrorId)
             return
         }
         val secondPasswordErrorId = secondPasswordError(password, secondPassword)
         if(secondPasswordErrorId != null) {
-            _loginFormState.value = LoginFormState(secondPasswordError = secondPasswordErrorId)
+            _loginFormState.value = LoginSignUpFormState(secondPasswordError = secondPasswordErrorId)
             return
         }
-        _loginFormState.value = LoginFormState(isDataValid = true)
+        _loginFormState.value = LoginSignUpFormState(isDataValid = true)
     }
 
     /**
@@ -135,9 +135,9 @@ class LoginViewModel(application: Application) : DbAccessViewModel(application) 
      */
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(LoginSignupViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return LoginViewModel(app) as T
+                return LoginSignupViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
