@@ -13,7 +13,7 @@ data class Ticket (
     var address: String,
 
     @ColumnInfo(name = "date")
-    var date: Date,
+    var date: String,
 
     @ColumnInfo(name = "phone")
     var phone: String? = null,

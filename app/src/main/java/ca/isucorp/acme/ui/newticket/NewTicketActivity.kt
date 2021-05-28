@@ -3,14 +3,18 @@ package ca.isucorp.acme.ui.newticket
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityNewTicketBinding
 import ca.isucorp.acme.util.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -18,6 +22,19 @@ import com.google.android.material.timepicker.TimeFormat
 
 class NewTicketActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewTicketBinding
+    private lateinit var selectDateTextInput: TextInputLayout
+    private lateinit var selectDateEditText: MaterialAutoCompleteTextView
+    private lateinit var saveButton: MaterialButton
+    private lateinit var clientNameTextInput: TextInputLayout
+    private lateinit var clientNameEditText: TextInputEditText
+    private lateinit var addressTextInput: TextInputLayout
+    private lateinit var addressEditText: TextInputEditText
+    private lateinit var phoneTextInput: TextInputLayout
+    private lateinit var phoneEditText: TextInputEditText
+    private lateinit var notesTextInput: TextInputLayout
+    private lateinit var notesEditText: TextInputEditText
+    private lateinit var reasonsForCallTextInput: TextInputLayout
+    private lateinit var reasonsForCallEditText: TextInputEditText
     private val viewModel: NewTicketViewModel by lazy {
         ViewModelProvider(this, NewTicketViewModel.Factory(application)).get(NewTicketViewModel::class.java)
     }
@@ -27,8 +44,19 @@ class NewTicketActivity : AppCompatActivity() {
         binding = ActivityNewTicketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val selectDateTextInput = binding.layoutActivityNewTicketContent.findViewById<TextInputLayout>(R.id.text_input_select_date)
-        val selectDateEditText = binding.layoutActivityNewTicketContent.findViewById<MaterialAutoCompleteTextView>(R.id.edit_select_date)
+        selectDateTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_select_date)
+        selectDateEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_select_date)
+        saveButton = binding.layoutActivityNewTicketContent.findViewById(R.id.button_save)
+        clientNameTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_client_name)
+        clientNameEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_client_name)
+        addressTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_address)
+        addressEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_address)
+        phoneTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_phone)
+        phoneEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_phone)
+        notesTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_notes)
+        notesEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_notes)
+        reasonsForCallTextInput = binding.layoutActivityNewTicketContent.findViewById(R.id.text_input_reasons)
+        reasonsForCallEditText = binding.layoutActivityNewTicketContent.findViewById(R.id.edit_reasons)
 
         val toolbar = binding.layoutSimpleAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
@@ -47,37 +75,56 @@ class NewTicketActivity : AppCompatActivity() {
             selectDateEditText.setText(it)
         })
 
-        /*validateUserFields(binding.layoutActivitySignUpContent, this, viewModel, isSignUpScreen = true)
-
-        val usernameEditText = binding.layoutActivitySignUpContent.findViewById<TextInputEditText>(R.id.edit_user_name)
-        val passwordEditText = binding.layoutActivitySignUpContent.findViewById<TextInputEditText>(R.id.edit_password)
-
-        binding.layoutActivitySignUpContent.findViewById<MaterialButton>(R.id.button_login).setOnClickListener {
-            viewModel.register(usernameEditText.text.toString(), passwordEditText.text.toString())
+        saveButton.setOnClickListener {
+            viewModel.addTicket(
+                clientNameEditText.text.toString(),
+                addressEditText.text.toString(),
+                phoneEditText.text.toString(),
+                notesEditText.text.toString(),
+                reasonsForCallEditText.text.toString(),
+            )
         }
 
-        viewModel.isSigningSuccessful.observe(this, {
-            if(it) {
-                MaterialDialog(this)
-                    .title(text = getString(R.string.sign_up_successful))
-                    .message(text = getString(R.string.sign_up_successful_message))
-                    .cancelable(false)
+        viewModel.newTicketFormState.observe(this, Observer {
+            val formState = it ?: return@Observer
+
+            if(formState.isTicketAdded) {
+                val materialDialog = MaterialDialog(this)
+                    .title(text = getString(R.string.ticket_added))
+                    .message(text = getString(R.string.ticket_added_message))
                     .positiveButton(R.string.accept) {
-                        *//*val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)*//*
-                        finish()
+                        resetForm()
                     }
-                    .show()
-
-            } else {
-                MaterialDialog(this)
-                    .title(text = getString(R.string.sign_up_error))
-                    .message(text = getString(R.string.sign_up_error_message))
-                    .positiveButton(R.string.accept) {}
-                    .show()
+                materialDialog.setOnCancelListener {
+                    resetForm()
+                }
+                materialDialog.show()
             }
-        })*/
 
+            clientNameTextInput.error = when(formState.clientNameError) {
+                null -> null
+                else -> getString(formState.clientNameError)
+            }
+            addressTextInput.error = when(formState.addressError) {
+                null -> null
+                else -> getString(formState.addressError)
+            }
+            phoneTextInput.error = when(formState.phoneError) {
+                null -> null
+                else -> getString(formState.phoneError)
+            }
+        })
+
+    }
+
+    private fun resetForm() {
+        clientNameEditText.setText("")
+        addressEditText.setText("")
+        selectDateEditText.setText(getString(R.string.select_date_input))
+        phoneEditText.setText("")
+        notesEditText.setText("")
+        reasonsForCallEditText.setText("")
+        binding.scrollView.smoothScrollTo(0, 0)
     }
 
     private fun showDatePicker() {
@@ -92,11 +139,11 @@ class NewTicketActivity : AppCompatActivity() {
         datePicker.show(supportFragmentManager, "date")
 
         datePicker.addOnPositiveButtonClickListener {
-            viewModel.setDate(it)
+            viewModel.setDate(datePicker.selection!!)
             val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setHour(12)
-                .setMinute(0)
+                .setHour(viewModel.getCurrentHour())
+                .setMinute(viewModel.getCurrentMinute())
                 .setTitleText(getString(R.string.select_time))
                 .build()
             timePicker.show(supportFragmentManager, "time")

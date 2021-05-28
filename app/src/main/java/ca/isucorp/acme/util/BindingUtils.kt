@@ -25,8 +25,9 @@ fun TextView.setAddress(item: Ticket?) {
 @BindingAdapter("date")
 fun TextView.setDate(item: Ticket?) {
     item?.let {
-        val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, Locale.ENGLISH)
-        text = dateStringParser.format(item.date)
+        text = item.date
+        /*val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, Locale.ENGLISH)
+        text = dateStringParser.format(item.date)*/
     }
 }
 

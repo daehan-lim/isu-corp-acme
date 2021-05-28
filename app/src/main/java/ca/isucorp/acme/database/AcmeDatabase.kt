@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ca.isucorp.acme.database.dao.TicketDao
 import ca.isucorp.acme.database.dao.UserDao
+import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Ticket::class], version = 1, exportSchema = false)
 abstract class AcmeDatabase : RoomDatabase() {
 
     abstract val userDao: UserDao
+    abstract val ticketDao: TicketDao
 
     companion object {
         @Volatile

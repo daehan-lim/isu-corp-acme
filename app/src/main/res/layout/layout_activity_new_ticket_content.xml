@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfpro_display_regular"
             android:inputType="none"
-            android:text="@string/scheduled_date"
+            android:text="@string/select_date_input"
             android:textColor="@color/dark_grey"
             tools:ignore="LabelFor"
             android:textSize="@dimen/default_edit_text_size"
@@ -113,7 +113,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_date"
+            android:id="@+id/edit_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="phone"
@@ -197,7 +197,6 @@
         style="@style/button_login"
         app:backgroundTint="@color/primaryColor"
         android:maxLength="15"
-        android:enabled="false"
         />
 
     <View

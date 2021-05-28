@@ -1,13 +1,14 @@
 package ca.isucorp.acme.ui.newticket
 
 import android.app.Application
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.database.model.User
-import ca.isucorp.acme.repository.UserRepository
+import ca.isucorp.acme.repository.TicketRepository
 import ca.isucorp.acme.ui.DbAccessViewModel
 import ca.isucorp.acme.util.DAY_SHORT_MONTH_YEAR_PATTERN
 import ca.isucorp.acme.util.TIME_PATTERN
@@ -22,14 +23,10 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
 
     private var dateString: String? = null
 
-    private val userRepository = UserRepository(database)
+    private val ticketRepository = TicketRepository(database)
 
-    private val _user = MutableLiveData<User?>()
-    val user: LiveData<User?>
-        get() = _user
-
-    /*private val _loginFormState = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginFormState*/
+    private val _newTicketFormState = MutableLiveData<NewTicketFormState>()
+    val newTicketFormState: LiveData<NewTicketFormState> = _newTicketFormState
 
     private val _isSigningSuccessful = MutableLiveData<Boolean>()
     val isSigningSuccessful: LiveData<Boolean> = _isSigningSuccessful
@@ -63,102 +60,93 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
         _dateText.value = "$dateString, ${dateStringParser.format(calendar.time)}"
     }
 
-/*fun loginDataChanged(username: String, password: String) {
-    val usernameErrorId = usernameError(username)
-    if (usernameErrorId != null) {
-        _loginFormState.value = LoginFormState(usernameError = usernameErrorId)
-        return
-    }
-    val passwordErrorId = passwordError(password)
-    if(passwordErrorId != null) {
-        _loginFormState.value = LoginFormState(passwordError = passwordErrorId)
-        return
-    }
-    _loginFormState.value = LoginFormState(isDataValid = true)
-}
-
-fun signupDataChanged(username: String, password: String, secondPassword: String) {
-    val usernameErrorId = usernameError(username)
-    if (usernameErrorId != null) {
-        _loginFormState.value = LoginFormState(usernameError = usernameErrorId)
-        return
-    }
-    val passwordErrorId = passwordError(password)
-    if(passwordErrorId != null) {
-        _loginFormState.value = LoginFormState(passwordError = passwordErrorId)
-        return
-    }
-    val secondPasswordErrorId = secondPasswordError(password, secondPassword)
-    if(secondPasswordErrorId != null) {
-        _loginFormState.value = LoginFormState(secondPasswordError = secondPasswordErrorId)
-        return
-    }
-    _loginFormState.value = LoginFormState(isDataValid = true)
-}*/
-
     /**
-     * Returns the id of the string resource containing the error in the username field or null if the field is valid
-     * @param username The username input by the user.
+     * Returns the current system hour in a 24-hour clock
      */
-    private fun usernameError(username: String): Int? {
-        if(username.isEmpty()) {
-            return R.string.username_empty_error
-        }
-        if(username.length < 4) {
-            return R.string.username_short_error
-        }
-        return null
+    fun getCurrentHour(): Int {
+        return Calendar.getInstance()[Calendar.HOUR_OF_DAY]
     }
 
     /**
-     * Returns the id of the string resource containing the error in the password field or null if the field is valid
-     * @param password The password input by the user.
+     * Returns the current system minute
      */
-    private fun passwordError(password: String): Int? {
-        if(password.isEmpty()) {
-            return R.string.password_empty_error
+    fun getCurrentMinute(): Int {
+        return Calendar.getInstance()[Calendar.MINUTE]
+    }
+
+
+    fun addTicket(clientName: String, address: String, phone: String, notes: String, reasonsForCall: String) {
+        val clientNameErrorId = clientNameError(clientName)
+        if (clientNameErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(clientNameError = clientNameErrorId)
+            return
         }
-        if(password.length < 8) {
-            return R.string.password_short_error
+        val addressErrorId = addressError(address)
+        if(addressErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(addressError = addressErrorId)
+            return
+        }
+        val phoneErrorId = phoneError(phone)
+        if(phoneErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(phoneError = phoneErrorId)
+            return
+        }
+        coroutineScope.launch {
+            try {
+                val id = ticketRepository.addTicket(clientName, address, _dateText.value ?: "", phone, notes, reasonsForCall)
+                val addedTicket = ticketRepository.findTicket(id)
+                if(addedTicket != null) {
+                    _newTicketFormState.value = NewTicketFormState(isTicketAdded = true)
+                } else {
+                    _newTicketFormState.value = NewTicketFormState(isTicketAdded = false)
+                }
+            } catch (e: Exception) {
+                _newTicketFormState.value = NewTicketFormState(isTicketAdded = false)
+            }
+        }
+    }
+
+    /**
+     * Returns the id of the string resource containing the error in the client name field or null if the field is valid
+     * @param clientName The client name input by the user.
+     */
+    private fun clientNameError(clientName: String): Int? {
+        if(clientName.isEmpty()) {
+            return R.string.client_name_empty_error
+        }
+        if(clientName.length < 4) {
+            return R.string.client_name_short_error
         }
         return null
     }
 
-    private fun secondPasswordError(password: String, secondPassword: String): Int? {
-        passwordError(secondPassword).apply {
-            if(this != null) {
-                return this
-            }
+    /**
+     * Returns the id of the string resource containing the error in the address field or null if the field is valid
+     * @param address The address input by the user.
+     */
+    private fun addressError(address: String): Int? {
+        if(address.isEmpty()) {
+            return R.string.address_empty_error
         }
-        if(password != secondPassword) {
-            return R.string.password_not_match
+        if(address.length < 4) {
+            return R.string.address_short_error
         }
         return null
     }
 
-    fun register(username: String, password: String) {
-        try {
-            coroutineScope.launch {
-                userRepository.registerUser(username, password)
-                val registeredUser = userRepository.findUser(username, password)
-                _isSigningSuccessful.value = registeredUser != null
-            }
-        } catch (e: Exception) {
-            _isSigningSuccessful.value = false
+    /**
+     * Returns the id of the string resource containing the error in the phone field or null if the field is valid
+     * @param phone The phone input by the user.
+     */
+    private fun phoneError(phone: String): Int? {
+        if(phone.isNotEmpty() && !Patterns.PHONE.matcher(phone).matches()) {
+            return R.string.wrong_phone
         }
+        return null
     }
 
 
-    fun login(username: String, password: String) {
-        try {
-            coroutineScope.launch {
-                val registeredUser = userRepository.findUser(username, password)
-                _isSigningSuccessful.value = registeredUser != null
-            }
-        } catch (e: Exception) {
-            _isSigningSuccessful.value = false
-        }
-    }
+
 
 
     /**
