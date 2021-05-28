@@ -13,6 +13,7 @@
     <string name="username_empty_error">Username should not be empty</string>
     <string name="client_name_empty_error">Client name should not be empty</string>
     <string name="address_empty_error">Address should not be empty</string>
+    <string name="date_empty_error">Date should not be empty</string>
     <string name="password_empty_error">Password should not be empty</string>
     <string name="username_short_error">Username should be more than 4 characters</string>
     <string name="client_name_short_error">Client name should be more than 4 characters</string>

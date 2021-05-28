@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
-import ca.isucorp.acme.database.model.User
 import ca.isucorp.acme.repository.TicketRepository
 import ca.isucorp.acme.ui.DbAccessViewModel
 import ca.isucorp.acme.util.DAY_SHORT_MONTH_YEAR_PATTERN
@@ -25,8 +24,8 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
 
     private val ticketRepository = TicketRepository(database)
 
-    private val _newTicketFormState = MutableLiveData<NewTicketFormState>()
-    val newTicketFormState: LiveData<NewTicketFormState> = _newTicketFormState
+    private val _newTicketFormState = MutableLiveData<NewTicketFormState?>()
+    val newTicketFormState: LiveData<NewTicketFormState?> = _newTicketFormState
 
 
     fun setDate(timeInMillis: Long) {
@@ -83,6 +82,11 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
             _newTicketFormState.value = NewTicketFormState(addressError = addressErrorId)
             return
         }
+        val dateErrorId = dateError(_dateText.value ?: "")
+        if(dateErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(dateError = dateErrorId)
+            return
+        }
         val phoneErrorId = phoneError(phone)
         if(phoneErrorId != null) {
             _newTicketFormState.value = NewTicketFormState(phoneError = phoneErrorId)
@@ -119,6 +123,17 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
 
     /**
      * Returns the id of the string resource containing the error in the address field or null if the field is valid
+     * @param date The address input by the user.
+     */
+    private fun dateError(date: String): Int? {
+        if(date.isEmpty()) {
+            return R.string.date_empty_error
+        }
+        return null
+    }
+
+    /**
+     * Returns the id of the string resource containing the error in the address field or null if the field is valid
      * @param address The address input by the user.
      */
     private fun addressError(address: String): Int? {
@@ -143,6 +158,9 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     }
 
 
+    fun handledNewTicket() {
+        _newTicketFormState.value = null
+    }
 
 
 

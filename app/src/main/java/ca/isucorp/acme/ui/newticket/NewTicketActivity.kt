@@ -99,7 +99,10 @@ class NewTicketActivity : AppCompatActivity() {
                     resetForm()
                 }
                 materialDialog.show()
+                return@Observer
             }
+
+            binding.scrollView.smoothScrollTo(0, 0)
 
             clientNameTextInput.error = when(formState.clientNameError) {
                 null -> null
@@ -108,6 +111,10 @@ class NewTicketActivity : AppCompatActivity() {
             addressTextInput.error = when(formState.addressError) {
                 null -> null
                 else -> getString(formState.addressError)
+            }
+            selectDateTextInput.error = when(formState.dateError) {
+                null -> null
+                else -> getString(formState.dateError)
             }
             phoneTextInput.error = when(formState.phoneError) {
                 null -> null
@@ -118,11 +125,17 @@ class NewTicketActivity : AppCompatActivity() {
     }
 
     private fun resetForm() {
+        viewModel.handledNewTicket()
+
         clientNameEditText.setText("")
         addressEditText.setText("")
         selectDateEditText.setText(getString(R.string.select_date_input))
         phoneEditText.setText("")
         notesEditText.setText("")
+        clientNameTextInput.error = null
+        addressTextInput.error = null
+        selectDateTextInput.error = null
+        phoneTextInput.error = null
         reasonsForCallEditText.setText("")
         binding.scrollView.smoothScrollTo(0, 0)
     }
