@@ -30,7 +30,7 @@
         app:errorEnabled="true"
         app:counterEnabled="true"
         app:counterMaxLength="50"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Theme.ACME.TextInputLayoutStyle"
 
         >
 

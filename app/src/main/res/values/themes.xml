@@ -27,5 +27,11 @@
         <item name="colorPrimary">@color/primaryColor</item>
     </style>
 
+    <style name="Theme.ACME.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextInputHint</item>
+        <item name="helperTextTextAppearance">@style/TextInputHint</item>
+        <item name="counterTextAppearance">@style/TextInputCounter</item>
+    </style>
+
 
 </resources>

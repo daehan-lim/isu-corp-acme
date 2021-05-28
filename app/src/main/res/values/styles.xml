@@ -21,4 +21,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="TextInputHint" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/default_edit_text_hint_size</item>
+    </style>
+
+    <style name="TextInputCounter" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/default_edit_text_counter_size</item>
+    </style>
 </resources>

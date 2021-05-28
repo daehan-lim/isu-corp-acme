@@ -5,7 +5,7 @@
     android:id="@+id/text_input_user_name"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    style="@style/Theme.ACME.TextInputLayoutStyle"
     app:startIconDrawable="@drawable/ic_baseline_person_outline"
     android:hint="@string/user_name"
     app:errorEnabled="true"
