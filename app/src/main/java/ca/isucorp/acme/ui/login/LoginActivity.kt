@@ -42,17 +42,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
         viewModel.isSigningSuccessful.observe(this, {
-            if(it) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+            if(it != null) {
+                viewModel.handledSigning()
+                if (it == true) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
 
-            } else {
-                MaterialDialog(this)
-                    .title(text = getString(R.string.sign_in_error))
-                    .message(text = getString(R.string.sign_in_error_message))
-                    .positiveButton(R.string.accept) {}
-                    .show()
+                } else {
+                    MaterialDialog(this)
+                        .title(text = getString(R.string.sign_in_error))
+                        .message(text = getString(R.string.sign_in_error_message))
+                        .positiveButton(R.string.accept) {}
+                        .show()
+                }
             }
         })
     }

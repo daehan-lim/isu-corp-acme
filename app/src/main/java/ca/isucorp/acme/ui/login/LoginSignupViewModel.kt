@@ -23,8 +23,8 @@ class LoginSignupViewModel(application: Application) : DbAccessViewModel(applica
     private val _loginFormState = MutableLiveData<LoginSignUpFormState>()
     val loginSignUpFormState: LiveData<LoginSignUpFormState> = _loginFormState
 
-    private val _isSigningSuccessful = MutableLiveData<Boolean>()
-    val isSigningSuccessful: LiveData<Boolean> = _isSigningSuccessful
+    private val _isSigningSuccessful = MutableLiveData<Boolean?>()
+    val isSigningSuccessful: LiveData<Boolean?> = _isSigningSuccessful
 
 
     fun loginDataChanged(username: String, password: String) {
@@ -125,8 +125,8 @@ class LoginSignupViewModel(application: Application) : DbAccessViewModel(applica
     }
 
 
-    fun handledSignup() {
-        _isSigningSuccessful.value = false
+    fun handledSigning() {
+        _isSigningSuccessful.value = null
     }
 
 

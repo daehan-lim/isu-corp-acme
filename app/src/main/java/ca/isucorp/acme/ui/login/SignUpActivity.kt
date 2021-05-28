@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         viewModel.isSigningSuccessful.observe(this, {
-            if(it) {
+            if(it == true) {
                 MaterialDialog(this)
                     .title(text = getString(R.string.sign_up_successful))
                     .message(text = getString(R.string.sign_up_successful_message))
@@ -47,7 +47,6 @@ class SignUpActivity : AppCompatActivity() {
                         finish()
                     }
                     .show()
-                viewModel.handledSignup()
             } /* //In a real-life project, database error should be handled further.
             else {
                 MaterialDialog(this)
