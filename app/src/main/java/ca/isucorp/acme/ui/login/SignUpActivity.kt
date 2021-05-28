@@ -14,8 +14,8 @@ import com.google.android.material.textfield.TextInputEditText
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(this, LoginViewModel.Factory(application)).get(LoginViewModel::class.java)
+    private val viewModel: LoginSignupViewModel by lazy {
+        ViewModelProvider(this, LoginSignupViewModel.Factory(application)).get(LoginSignupViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.layoutSignupAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = binding.layoutSimpleAppBar.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.create_account)
         toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
@@ -38,25 +38,23 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         viewModel.isSigningSuccessful.observe(this, {
-            if(it) {
+            if(it == true) {
                 MaterialDialog(this)
                     .title(text = getString(R.string.sign_up_successful))
                     .message(text = getString(R.string.sign_up_successful_message))
                     .cancelable(false)
                     .positiveButton(R.string.accept) {
-                        /*val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)*/
                         finish()
                     }
                     .show()
-
-            } else {
+            } /* //In a real-life project, database error should be handled further.
+            else {
                 MaterialDialog(this)
                     .title(text = getString(R.string.sign_up_error))
                     .message(text = getString(R.string.sign_up_error_message))
                     .positiveButton(R.string.accept) {}
                     .show()
-            }
+            }*/
         })
 
     }

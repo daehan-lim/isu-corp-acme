@@ -3,17 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<data>
+    <data>
         <variable
-            name="office"
-            type="cu.desoft.gasmanufacturado.model.ComercialOffice" />
+            name="ticket"
+            type="ca.isucorp.acme.database.model.Ticket" />
         <variable
-            name="phoneTextViewListener"
-            type="cu.desoft.gasmanufacturado.features.offices.ComercialOfficesAdapter.PhoneTextViewListener" />
+            name="callListener"
+            type="ca.isucorp.acme.ui.dashboard.TicketsAdapter.CallListener" />
         <variable
-            name="emailListener"
-            type="cu.desoft.gasmanufacturado.features.offices.ComercialOfficesAdapter.EmailListener" />
-    </data>-->
+            name="viewDetailsListener"
+            type="ca.isucorp.acme.ui.dashboard.TicketsAdapter.ViewDetailsListener" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,10 +27,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/list_item_horizontal_margin"
+        android:paddingEnd="@dimen/list_item_horizontal_margin"
+        android:onClick="@{() -> viewDetailsListener.onClick(ticket)}"
         >
-
 
         <TextView
             android:id="@+id/text_client"
@@ -45,7 +45,8 @@
             android:textStyle="bold"
             tools:text="Water Heater Installation"
             android:fontFamily="@font/sfpro_display_regular"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="10dp"
+            app:clientName="@{ticket}"
             />
 
         <ImageView
@@ -77,7 +78,9 @@
             app:layout_constraintStart_toEndOf="@+id/address_icon"
             app:layout_constraintTop_toTopOf="@id/address_icon"
             tools:text="11 Westnight Ave Toronto On, N7L 1X1"
-            style="@style/list_item_ticket_general_text" />
+            style="@style/list_item_ticket_general_text"
+            app:address="@{ticket}"
+            />
 
         <ImageView
             android:id="@+id/phone_icon"
@@ -87,6 +90,8 @@
             app:layout_constraintStart_toStartOf="@+id/text_client"
             app:layout_constraintTop_toBottomOf="@id/address_text_view"
             app:srcCompat="@drawable/ic_baseline_local_phone_24"
+            android:onClick="@{() -> callListener.onClick(ticket)}"
+            app:phoneVisibility="@{ticket}"
             tools:ignore="ContentDescription" />
 
 
@@ -94,9 +99,11 @@
             android:id="@+id/phone_text_view"
             app:layout_constraintStart_toEndOf="@+id/phone_icon"
             app:layout_constraintTop_toTopOf="@+id/phone_icon"
-            app:layout_constraintEnd_toEndOf="@+id/text_client"
             tools:text="(048) 77-3015, 75-0199"
             style="@style/list_item_ticket_general_text"
+            android:onClick="@{() -> callListener.onClick(ticket)}"
+            app:phoneText="@{ticket}"
+            app:phoneVisibility="@{ticket}"
             />
 
         <ImageView
@@ -116,6 +123,7 @@
             app:layout_constraintEnd_toEndOf="@+id/text_client"
             app:layout_constraintTop_toTopOf="@id/image_time"
             style="@style/list_item_ticket_general_text"
+            app:date="@{ticket}"
             />
 
         <View

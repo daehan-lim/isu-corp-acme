@@ -14,16 +14,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import ca.isucorp.acme.R
-import ca.isucorp.acme.ui.login.LoginViewModel
+import ca.isucorp.acme.ui.login.LoginSignupViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.util.*
 
 
 /**
  * Default animation id for pressing back button in Activity
  */
 const val DEFAULT_GO_BACK_ANIMATION = R.anim.slide_out_right
+
+
+/**
+ * Date pattern to use with Date objects showing the date (in one or two characters), month (in three characters) and the whole year
+ * Example: 5 Jan 2021
+ */
+const val DAY_SHORT_MONTH_YEAR_PATTERN = "d MMM yyyy"
+
+/**
+ * Pattern to use with Date objects showing hour (in one or two characters), minute and time period
+ * Example: 05:25 PM
+ */
+const val TIME_PATTERN = "h:mm a"
+
+/**
+ * Pattern to show date and time combining DAY_SHORT_MONTH_YEAR_PATTERN and TIME_PATTERN
+ */
+const val DATE_AND_TIME_PATTERN = "$DAY_SHORT_MONTH_YEAR_PATTERN, $TIME_PATTERN"
 
 /**
  * Sets a span to underline the TextView's text
@@ -66,7 +85,7 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
-fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginViewModel, isSignUpScreen: Boolean = false) {
+fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginSignupViewModel, isSignUpScreen: Boolean = false) {
     val usernameTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_user_name)
     val passwordTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_password)
     val usernameEditText = parentLayout.findViewById<TextInputEditText>(R.id.edit_user_name)
@@ -75,7 +94,7 @@ fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewMode
     var secondPasswordTextInput: TextInputLayout? = null
     var secondPasswordEditText: TextInputEditText? = null
 
-    viewModel.loginFormState.observe(activity, Observer {
+    viewModel.loginSignUpFormState.observe(activity, Observer {
         val loginState = it ?: return@Observer
 
         // disable login button unless both username / password are valid

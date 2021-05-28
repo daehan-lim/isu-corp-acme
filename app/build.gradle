@@ -63,6 +63,7 @@ dependencies {
 
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
 
-
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 }

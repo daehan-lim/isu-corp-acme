@@ -13,7 +13,12 @@
         <item name="android:layout_marginStart">@dimen/list_item_ticket_text_margin_start</item>
         <item name="android:visibility">visible</item>
         <item name="android:fontFamily">@font/sfpro_display_regular</item>
+    </style>
 
+    <style name="date_autocomplete_layout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/primaryColor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>
