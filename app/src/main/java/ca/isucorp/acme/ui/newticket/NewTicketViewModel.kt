@@ -49,19 +49,6 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
         calendar[Calendar.MINUTE] = minute
         val dateStringParser = SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH)
         _dateText.value = "$date, ${dateStringParser.format(calendar.time)}"
-        /*
-        var hourString = hour.toString()
-        var timePeriod = "AM"
-        if(hour < 10) {
-            hourString = "0$hourString"
-        } else if(hour >= 12) {
-            timePeriod = "PM"
-        }
-        val minuteString = when(minute < 10) {
-            true -> "0$minute"
-            else -> minute.toString()
-        }
-        _dateText.value = "$date, $hourString:$minuteString $timePeriod"*/
     }
 
 /*fun loginDataChanged(username: String, password: String) {

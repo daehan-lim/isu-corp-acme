@@ -16,8 +16,6 @@
         <item name="md_corner_radius">16dp</item>
         <item name="md_font_title">@font/sfpro_display_regular</item>
         <item name="md_font_body">@font/sfpro_display_regular</item>
-
-        <item name="materialTimePickerTheme">@style/MaterialTimePickerTheme</item>
     </style>
 
     <style name="Theme.ACME.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -29,9 +27,5 @@
         <item name="colorPrimary">@color/primaryColor</item>
     </style>
 
-    <style name="MaterialTimePickerTheme" parent="ThemeOverlay.MaterialComponents.TimePicker">
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimary">@color/primaryColor</item>
-    </style>
 
 </resources>
