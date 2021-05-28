@@ -88,8 +88,8 @@
             android:background="@color/list_background_grey"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_item_ticket"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/list_item_ticket_separation"
+            android:paddingBottom="@dimen/list_item_ticket_separation"
             />
 
 
