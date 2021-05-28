@@ -18,9 +18,9 @@
     <dimen name="action_bar_size">100dp</dimen>
     <dimen name="ic_calendar_size">33dp</dimen>
     <dimen name="ic_calendar_input_end_size">29dp</dimen>
-    <dimen name="ic_calendar_sync_size">38dp</dimen>
-    <dimen name="icon_add_ticket_size">38dp</dimen>
-    <dimen name="ic_menu_size">32dp</dimen>
+    <dimen name="ic_calendar_sync_size">42dp</dimen>
+    <dimen name="icon_add_ticket_size">39dp</dimen>
+    <dimen name="ic_menu_size">34dp</dimen>
     <dimen name="ic_calendar_margin_start">8dp</dimen>
     <dimen name="text_client_size">22sp</dimen>
     <dimen name="text_address_size">19sp</dimen>

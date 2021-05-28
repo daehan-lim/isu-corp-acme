@@ -66,8 +66,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button_menu"
-                app:srcCompat="@drawable/ic_add_note"
+                app:srcCompat="@drawable/ic_add_square"
                 tools:visibility="visible"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="@dimen/main_app_bar_separation_margin"
                 tools:ignore="ContentDescription" />
 
@@ -80,6 +81,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/ic_menu_margin_end"
                 app:srcCompat="@drawable/ic_menu"
+                android:layout_marginTop="2dp"
                 tools:visibility="visible"
                 tools:ignore="ContentDescription" />
 
