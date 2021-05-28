@@ -9,6 +9,7 @@
     <string name="repeat_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="user_name_allowed_digits">áéíóúÁÉÍÓÚabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_</string>
+    <string name="client_name_allowed_digits">áéíóúÁÉÍÓÚabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_ </string>
     <string name="username_empty_error">Username should not be empty</string>
     <string name="client_name_empty_error">Client name should not be empty</string>
     <string name="address_empty_error">Address should not be empty</string>
@@ -43,4 +44,6 @@
     <string name="wrong_phone">Write a valid phone number</string>
     <string name="ticket_added">Ticket added succesfully</string>
     <string name="ticket_added_message">Your ticket was added correctly. You can now add another ticket or go back to the dashboard</string>
+    <string name="no_tickets_to_show">There are no tickets yet</string>
+    <string name="add_tickets">Add new tickets and you will see them here</string>
 </resources>

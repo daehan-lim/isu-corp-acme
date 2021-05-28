@@ -2,23 +2,22 @@ package ca.isucorp.acme.ui.dashboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ListItemTicketBinding
 
-class TicketsAdapter(private val callListener: CallListener,
-                     private val viewDetailsListener: ViewDetailsListener) : RecyclerView.Adapter<TicketsAdapter.ViewHolder>() {
+class TicketsAdapter(private val callListener: CallListener, private val viewDetailsListener: ViewDetailsListener)
+    : ListAdapter<Ticket, TicketsAdapter.ViewHolder>(TicketDiffCallback()) {
 
-    var data = listOf<Ticket?>()
-
-    override fun getItemCount() = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         viewHolder.bind(item, callListener, viewDetailsListener)
     }
 
@@ -48,5 +47,15 @@ class TicketsAdapter(private val callListener: CallListener,
         fun onClick(ticket: Ticket) = viewDetailsListener(ticket)
     }
 
+    class TicketDiffCallback: DiffUtil.ItemCallback<Ticket>() {
+        override fun areItemsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
+            return  oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
+            return  oldItem == newItem
+        }
+
+    }
 
 }

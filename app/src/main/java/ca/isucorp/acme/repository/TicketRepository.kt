@@ -1,5 +1,6 @@
 package ca.isucorp.acme.repository
 
+import androidx.lifecycle.LiveData
 import ca.isucorp.acme.database.AcmeDatabase
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
@@ -8,6 +9,8 @@ import kotlinx.coroutines.withContext
 
 class TicketRepository(private val database: AcmeDatabase) {
 
+
+    val tickets = database.ticketDao.getAllTickets()
 
     /**
      * Register a new ticket in the app
@@ -26,4 +29,5 @@ class TicketRepository(private val database: AcmeDatabase) {
             database.ticketDao.findTicket(id)
         }
     }
+
 }
