@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content">
 
                 <include
-                    android:id="@+id/layout_activity_sign_up_content"
+                    android:id="@+id/layout_activity_new_ticket_content"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     layout="@layout/layout_activity_new_ticket_content"
