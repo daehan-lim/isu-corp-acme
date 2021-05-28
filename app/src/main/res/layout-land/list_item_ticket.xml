@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="ticket"
+            type="ca.isucorp.acme.database.model.Ticket" />
+        <variable
+            name="callListener"
+            type="ca.isucorp.acme.ui.dashboard.TicketsAdapter.CallListener" />
+        <variable
+            name="viewDetailsListener"
+            type="ca.isucorp.acme.ui.dashboard.TicketsAdapter.ViewDetailsListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/list_background_grey"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:cardElevation="6dp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/list_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/white"
+                android:paddingStart="@dimen/list_item_horizontal_margin"
+                android:paddingEnd="@dimen/list_item_horizontal_margin"
+                android:onClick="@{() -> viewDetailsListener.onClick(ticket)}"
+                >
+
+                <TextView
+                    android:id="@+id/text_client"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_view_ticket"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_client_size"
+                    android:textStyle="bold"
+                    tools:text="Water Heater Installation"
+                    android:fontFamily="@font/sfpro_display_regular"
+                    android:layout_marginEnd="15dp"
+                    app:clientName="@{ticket}"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_view_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_ticket"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:ignore="ContentDescription" />
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/button_view_ticket"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/view_ticket"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    app:srcCompat="@drawable/ic_arrow_right_circle"-->
+<!--                    tools:ignore="ContentDescription" />-->
+
+                <ImageView
+                    android:id="@+id/address_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="@+id/text_client"
+                    app:layout_constraintTop_toBottomOf="@+id/text_client"
+                    app:srcCompat="@drawable/ic_baseline_location_on_24"
+                    tools:ignore="ContentDescription"
+                    />
+
+                <TextView
+                    android:id="@+id/address_text_view"
+                    app:layout_constraintEnd_toEndOf="@+id/text_client"
+                    app:layout_constraintStart_toEndOf="@+id/address_icon"
+                    app:layout_constraintTop_toTopOf="@id/address_icon"
+                    tools:text="11 Westnight Ave Toronto On, N7L 1X1"
+                    style="@style/list_item_ticket_general_text"
+                    app:address="@{ticket}"
+                    />
+
+                <ImageView
+                    android:id="@+id/phone_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_item_ticket_icon_margin_top"
+                    app:layout_constraintStart_toStartOf="@+id/text_client"
+                    app:layout_constraintTop_toBottomOf="@id/address_text_view"
+                    app:srcCompat="@drawable/ic_baseline_local_phone_24"
+                    android:onClick="@{() -> callListener.onClick(ticket)}"
+                    app:phoneVisibility="@{ticket}"
+                    tools:ignore="ContentDescription" />
+
+
+                <TextView
+                    android:id="@+id/phone_text_view"
+                    app:layout_constraintStart_toEndOf="@+id/phone_icon"
+                    app:layout_constraintTop_toTopOf="@+id/phone_icon"
+                    tools:text="(048) 77-3015, 75-0199"
+                    style="@style/list_item_ticket_general_text"
+                    android:onClick="@{() -> callListener.onClick(ticket)}"
+                    app:phoneText="@{ticket}"
+                    app:phoneVisibility="@{ticket}"
+                    />
+
+                <ImageView
+                    android:id="@+id/image_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_item_ticket_icon_margin_top"
+                    app:layout_constraintStart_toStartOf="@+id/text_client"
+                    app:layout_constraintTop_toBottomOf="@id/phone_icon"
+                    app:srcCompat="@drawable/ic_time"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/text_time"
+                    tools:text="24 Dec 2016, 11:35 AM"
+                    app:layout_constraintStart_toEndOf="@id/image_time"
+                    app:layout_constraintEnd_toEndOf="@+id/text_client"
+                    app:layout_constraintTop_toTopOf="@id/image_time"
+                    style="@style/list_item_ticket_general_text"
+                    app:date="@{ticket}"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_time"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_ticket_separation"
+            android:background="@color/list_background_grey"
+            app:layout_constraintTop_toBottomOf="@id/cardView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
