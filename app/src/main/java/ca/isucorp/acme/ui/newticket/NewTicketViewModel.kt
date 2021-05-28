@@ -28,8 +28,6 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     val user: LiveData<User?>
         get() = _user
 
-    private val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-
     /*private val _loginFormState = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginFormState*/
 
@@ -51,12 +49,14 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     private fun getDateInCurrentTimeZone(dateInMillis: Long): Date {
         // Get the offset from our timezone and UTC.
         val timeZoneUTC = TimeZone.getDefault()
+        val calendar = Calendar.getInstance()
         // It will be negative, so that's the -1
         val offsetFromUTC = timeZoneUTC.getOffset(calendar.timeInMillis) * -1
         return Date(dateInMillis + offsetFromUTC)
     }
 
     fun setTime(hour: Int, minute: Int) {
+        val calendar = Calendar.getInstance()
         calendar[Calendar.HOUR_OF_DAY] = hour
         calendar[Calendar.MINUTE] = minute
         val dateStringParser = SimpleDateFormat(TIME_PATTERN, Locale.ENGLISH)
