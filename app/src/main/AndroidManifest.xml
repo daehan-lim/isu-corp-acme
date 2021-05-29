@@ -26,6 +26,7 @@
         <activity android:name=".ui.dashboard.MainActivity" />
         <activity android:name=".ui.newticket.NewTicketActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.calendar.CalendarActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.directions.GetDirectionsActivity" />
 
     </application>
 

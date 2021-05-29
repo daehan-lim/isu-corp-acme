@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
 import ca.isucorp.acme.ui.calendar.CalendarActivity
+import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
@@ -198,7 +199,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
                     }
                     R.id.action_get_directions -> {
-                        Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
                     }
                 }
                 true

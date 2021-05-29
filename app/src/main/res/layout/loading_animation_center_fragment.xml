@@ -12,7 +12,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:lottie_autoPlay="true"
-    app:lottie_fileName="loading_planet.json"
+    app:lottie_fileName="loading_planet_green.json"
     app:lottie_speed="2.0"
     app:lottie_loop="true"
     tools:visibility="visible"
