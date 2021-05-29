@@ -14,8 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
 import ca.isucorp.acme.ui.calendar.CalendarActivity
+import ca.isucorp.acme.ui.calendar.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
+import com.afollestad.materialdialogs.MaterialDialog
+import java.time.ZoneId
 import java.util.*
 
 
@@ -50,6 +53,32 @@ class MainActivity : AppCompatActivity() {
 
         calendarButton.setOnClickListener {
             startActivity(Intent(applicationContext, CalendarActivity::class.java))
+        }
+
+
+        viewModel.dueTickets.observe(this, {})
+
+        calendarSyncButton.setOnClickListener {
+            viewModel.dueTickets.value?.let {
+                try {
+                    for (ticket in it) {
+                        val timeInMilli = viewModel.toTimeInMilli(ticket.time)
+                        addEventToCalendar(
+                            applicationContext,
+                            getString(R.string.event_title_template, ticket.clientName),
+                            getString(R.string.address_template, ticket.address),
+                            timeInMilli,
+                            timeInMilli
+                        )
+                    }
+                } catch (e: Exception) {
+                    MaterialDialog(this)
+                        .title(text = getString(R.string.sync_error))
+                        .message(text = getString(R.string.sync_error_message))
+                        .positiveButton(R.string.accept) {}
+                        .show()
+                }
+            }
         }
 
         isTabletSize = resources.getBoolean(R.bool.isTablet)

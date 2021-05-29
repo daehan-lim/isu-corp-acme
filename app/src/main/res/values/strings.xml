@@ -50,7 +50,7 @@
     <string name="client_name_invalid">The name should contain only letters</string>
     <string name="menu">Menu</string>
     <string name="ticket_calendar">Due Tickets Calendar</string>
-    <string name="sync_calendar">Sync Ticket dates to your Google Calendar</string>
+    <string name="sync_calendar">Sync due tickets to your devices calendar</string>
     <string name="sunday_short">SUN</string>
     <string name="monday_short">MON</string>
     <string name="tuesday_short">TUE</string>
@@ -59,4 +59,8 @@
     <string name="friday_short">FRI</string>
     <string name="saturday_short">SAT</string>
     <string name="due_tickets">Due Tickets</string>
+    <string name="event_title_template">Ticket scheduled for %s</string>
+    <string name="address_template">Address: %s</string>
+    <string name="sync_error">Sync Error</string>
+    <string name="sync_error_message">Your due tickets could not be synced to your device calendar. Make sure your calendar is correctly set up and try agan</string>
 </resources>
