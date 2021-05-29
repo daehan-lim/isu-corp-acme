@@ -9,4 +9,5 @@ data class DueTicket (
     var clientName: String,
     var address: String,
     var time: LocalDateTime,
+    var id: Long
 )

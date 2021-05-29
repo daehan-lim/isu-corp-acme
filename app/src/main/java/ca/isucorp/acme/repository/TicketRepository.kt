@@ -28,7 +28,7 @@ class TicketRepository(private val database: AcmeDatabase) {
             val ticketDate = dateStringParser.parse(ticket.date)
             val nowDate = Date()
             if(!ticketDate!!.before(nowDate)) {
-                dueTickets.add(DueTicket(ticket.clientName, ticket.address, time = convertToLocalDateTime(ticketDate)))
+                dueTickets.add(DueTicket(ticket.clientName, ticket.address, convertToLocalDateTime(ticketDate), ticket.id!!))
             }
         }
         dueTickets

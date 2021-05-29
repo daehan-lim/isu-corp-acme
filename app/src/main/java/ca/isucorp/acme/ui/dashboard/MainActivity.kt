@@ -115,14 +115,15 @@ class MainActivity : AppCompatActivity() {
             if(viewModel.dueTickets.value?.isNotEmpty() == true) {
                 val dueTickets = viewModel.dueTickets.value!!
                 try {
-                    for (ticket in dueTickets) {
-                        val timeInMilli = viewModel.toTimeInMilli(ticket.time)
+                    for (dueTicket in dueTickets) {
+                        val timeInMilli = viewModel.toTimeInMilli(dueTicket.time)
                         addEventToCalendar(
                             applicationContext,
-                            getString(R.string.event_title_template, ticket.clientName),
-                            getString(R.string.address_template, ticket.address),
+                            getString(R.string.event_title_template, dueTicket.clientName),
+                            getString(R.string.address_template, dueTicket.address),
                             timeInMilli,
-                            timeInMilli
+                            timeInMilli,
+                            dueTicket.id.toString()
                         )
                     }
                     MaterialDialog(this)
