@@ -75,4 +75,9 @@
     <string name="connect_to_internet">Check your internet connection and try again by refreshing this screen</string>
     <string name="permission_location_rationale">Permission is needed to access your location and get directions on the map</string>
     <string name="location_permission_needed">Location permission needed</string>
+    <string name="overview">Overview</string>
+    <string name="work_details">Work Details</string>
+    <string name="purchasing">Purchasing</string>
+    <string name="finishing_up">Finishing Up</string>
+    <string name="camera" />
 </resources>

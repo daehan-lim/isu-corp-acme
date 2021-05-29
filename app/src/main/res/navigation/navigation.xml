@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/nav_overview">
+
+    <fragment
+        android:id="@+id/nav_overview"
+        android:name="ca.isucorp.acme.ui.workticket.OverviewFragment"
+        tools:layout="@layout/fragment_overview" />
+    <fragment
+        android:id="@+id/nav_work_details"
+        android:name="ca.isucorp.acme.ui.workticket.OverviewFragment"
+        tools:layout="@layout/fragment_overview" />
+    <fragment
+        android:id="@+id/nav_purchasing"
+        android:name="ca.isucorp.acme.ui.workticket.OverviewFragment"
+        tools:layout="@layout/fragment_overview" />
+    <fragment
+        android:id="@+id/nav_finishing_up"
+        android:name="ca.isucorp.acme.ui.workticket.OverviewFragment"
+        tools:layout="@layout/fragment_overview" />
+
+    <fragment
+        android:id="@+id/nav_camera"
+        android:name="ca.isucorp.acme.ui.workticket.OverviewFragment"
+        tools:layout="@layout/fragment_overview" />
+
+</navigation>

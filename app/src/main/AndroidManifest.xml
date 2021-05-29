@@ -30,6 +30,7 @@
         <activity android:name=".ui.calendar.CalendarActivity" android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".ui.directions.GetDirectionsActivity" />
+        <activity android:name=".ui.workticket.WorkTicketActivity"/>
 
     </application>
 

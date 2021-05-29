@@ -22,6 +22,7 @@ import ca.isucorp.acme.ui.calendar.CalendarActivity
 import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
+import ca.isucorp.acme.ui.workticket.WorkTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
                 startActivity(callIntent)
             }, TicketsAdapter.ViewDetailsListener {
-
+                startActivity(Intent(applicationContext, WorkTicketActivity::class.java))
             })
             binding.recyclerView.adapter = adapter
 

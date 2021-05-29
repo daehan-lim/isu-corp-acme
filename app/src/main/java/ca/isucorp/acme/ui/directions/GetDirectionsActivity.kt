@@ -44,6 +44,8 @@ class GetDirectionsActivity : AppCompatActivity() {
 
         isTabletSize = resources.getBoolean(R.bool.isTablet)
 
+        isTabletSize = false //remove
+
         val toolbar = binding.layoutSimpleAppBar.toolbar
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.get_directions)
@@ -61,6 +63,7 @@ class GetDirectionsActivity : AppCompatActivity() {
             settings.loadWithOverviewMode = false
             settings.useWideViewPort = false
             settings.domStorageEnabled = true
+
 
             if(!isTabletSize) {
                 settings.loadWithOverviewMode = true

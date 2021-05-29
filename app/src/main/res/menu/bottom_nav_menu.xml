@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_overview"
+        android:icon="@drawable/ic_overview"
+        android:title="@string/overview" />
+
+    <item
+        android:id="@+id/nav_work_details"
+        android:icon="@drawable/ic_work_details"
+        android:title="@string/work_details" />
+
+    <item
+        android:id="@+id/nav_purchasing"
+        android:icon="@drawable/ic_purchase"
+        android:title="@string/purchasing" />
+
+    <item
+        android:id="@+id/nav_finishing_up"
+        android:icon="@drawable/ic_finishing_up"
+        android:title="@string/finishing_up" />
+
+    <item
+        android:id="@+id/nav_camera"
+        android:icon="@drawable/ic_baseline_camera"
+        android:title="@string/camera" />
+
+</menu>
