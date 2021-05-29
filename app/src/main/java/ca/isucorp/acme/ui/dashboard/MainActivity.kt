@@ -18,14 +18,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
-import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.ui.calendar.CalendarActivity
-import ca.isucorp.acme.ui.calendar.addEventToCalendar
+import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
-import java.time.ZoneId
 import java.util.*
 
 const val WRITE_TO_CALENDAR_PERMISSION_CODE = 100

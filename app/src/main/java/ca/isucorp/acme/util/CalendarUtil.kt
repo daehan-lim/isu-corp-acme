@@ -1,4 +1,4 @@
-package ca.isucorp.acme.ui.calendar
+package ca.isucorp.acme.util
 
 import android.content.ContentValues
 import android.content.Context
