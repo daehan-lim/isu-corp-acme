@@ -71,4 +71,6 @@
     <string name="sync_sucesssful_message">Your due tickets were added to your device calendar.</string>
     <string name="sync_with_calendar">Sync with device calendar?</string>
     <string name="sync_with_calendar_message">This will add your due tickets to your device calendar. Are you sure you want to sync?</string>
+    <string name="no_connection">Connection Failed</string>
+    <string name="connect_to_internet">Check your internet connection and try again by refreshing this screen</string>
 </resources>
