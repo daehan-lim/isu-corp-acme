@@ -1,20 +1,19 @@
 package ca.isucorp.acme.ui.calendar
 
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityCalendarBinding
 import ca.isucorp.acme.databinding.CalendarPerMonthHeaderBinding
 import ca.isucorp.acme.databinding.ItemCalendarDayBinding
+import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
-import ca.isucorp.acme.util.generateFlights
 import ca.isucorp.acme.util.setUpInActivity
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -32,14 +31,18 @@ import java.util.*
 
 class CalendarActivity : AppCompatActivity() {
 
+    private val viewModel: CalendarViewModel by lazy {
+        ViewModelProvider(this, CalendarViewModel.Factory(application)).get(CalendarViewModel::class.java)
+    }
+
     private var selectedDate: LocalDate? = null
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
 
     private val eventsAdapter = EventsAdapter()
 
-    private val dueTicketsByDate = generateFlights().groupBy { it.time.toLocalDate() }
-
     private lateinit var binding: ActivityCalendarBinding
+
+    private lateinit var dueTicketsByDate: Map<LocalDate, List<DueTicket>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,114 +53,118 @@ class CalendarActivity : AppCompatActivity() {
         toolBarTitle.text = getString(R.string.due_tickets)
         binding.layoutSimpleAppBar.toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
 
-        binding.recyclerEvents.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-        binding.recyclerEvents.adapter = eventsAdapter
-        eventsAdapter.notifyDataSetChanged()
+        viewModel.dueTickets.observe(this, {
+            dueTicketsByDate = it
+            binding.recyclerEvents.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            binding.recyclerEvents.adapter = eventsAdapter
+            eventsAdapter.notifyDataSetChanged()
 
-        val daysOfWeek = daysOfWeekFromLocale()
-        val currentMonth = YearMonth.now()
-        binding.calendarView.setup(currentMonth, currentMonth.plusMonths(120), daysOfWeek.first())
-        binding.calendarView.scrollToMonth(currentMonth)
+            val daysOfWeek = daysOfWeekFromLocale()
+            val currentMonth = YearMonth.now()
+            binding.calendarView.setup(currentMonth, currentMonth.plusMonths(120), daysOfWeek.first())
+            binding.calendarView.scrollToMonth(currentMonth)
 
-        class DayViewContainer(view: View) : ViewContainer(view) {
-            lateinit var day: CalendarDay // Will be set when this container is bound.
-            val binding = ItemCalendarDayBinding.bind(view)
-            init {
-                view.setOnClickListener {
+            class DayViewContainer(view: View) : ViewContainer(view) {
+                lateinit var day: CalendarDay // Will be set when this container is bound.
+                val binding = ItemCalendarDayBinding.bind(view)
+                init {
+                    view.setOnClickListener {
+                        if (day.owner == DayOwner.THIS_MONTH) {
+                            if (selectedDate != day.date) {
+                                val oldDate = selectedDate
+                                selectedDate = day.date
+                                val binding = this@CalendarActivity.binding
+                                binding.calendarView.notifyDateChanged(day.date)
+                                oldDate?.let { binding.calendarView.notifyDateChanged(it) }
+                                updateAdapterForDate(day.date)
+                            }
+                        }
+                    }
+                }
+            }
+
+            binding.calendarView.dayBinder = object : DayBinder<DayViewContainer> {
+                override fun create(view: View) = DayViewContainer(view)
+                override fun bind(container: DayViewContainer, day: CalendarDay) {
+                    container.day = day
+                    val textView = container.binding.textDayOfMonth
+                    textView.text = day.date.dayOfMonth.toString()
+
+                    container.binding.viewFirstEvent.background = null
+                    container.binding.viewSecondEvent.background = null
+
                     if (day.owner == DayOwner.THIS_MONTH) {
-                        if (selectedDate != day.date) {
-                            val oldDate = selectedDate
-                            selectedDate = day.date
-                            val binding = this@CalendarActivity.binding
-                            binding.calendarView.notifyDateChanged(day.date)
-                            oldDate?.let { binding.calendarView.notifyDateChanged(it) }
-                            updateAdapterForDate(day.date)
+                        textView.setTextColorRes(R.color.primaryColor)
+                        container.binding.layoutCalendarDay.setBackgroundResource(
+                            if (selectedDate == day.date) {
+                                R.drawable.bg_selected
+                            } else {
+                                0
+                            })
+
+                        val tickets = dueTicketsByDate[day.date]
+                        if (tickets != null) {
+                            if (tickets.count() == 1) {
+                                container.binding.viewSecondEvent.setBackgroundColor(
+                                    binding.root.context.getColorCompat(R.color.secondaryColor))
+                            } else {
+                                container.binding.viewFirstEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.secondaryColor))
+                                container.binding.viewSecondEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.calendar_event_indicator))
+                            }
                         }
+                    } else {
+                        textView.setTextColorRes(R.color.disabled_grey)
+                        container.binding.layoutCalendarDay.background = null
                     }
                 }
             }
-        }
 
-        binding.calendarView.dayBinder = object : DayBinder<DayViewContainer> {
-            override fun create(view: View) = DayViewContainer(view)
-            override fun bind(container: DayViewContainer, day: CalendarDay) {
-                container.day = day
-                val textView = container.binding.textDayOfMonth
-                textView.text = day.date.dayOfMonth.toString()
+            class MonthViewContainer(view: View) : ViewContainer(view) {
+                val legendLayout = CalendarPerMonthHeaderBinding.bind(view).legendLayout.root
+            }
+            binding.calendarView.monthHeaderBinder = object :
+                MonthHeaderFooterBinder<MonthViewContainer> {
+                override fun create(view: View) = MonthViewContainer(view)
+                override fun bind(container: MonthViewContainer, month: CalendarMonth) {
+                    // Setup each header day text if we have not done that already.
+                    if (container.legendLayout.tag == null) {
+                        container.legendLayout.tag = month.yearMonth
+                        container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
+                            tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                                .uppercase(Locale.ENGLISH)
+                            tv.setTextColorRes(R.color.primaryDarkColor)
 
-                container.binding.viewFirstEvent.background = null
-                container.binding.viewSecondEvent.background = null
-
-                if (day.owner == DayOwner.THIS_MONTH) {
-                    textView.setTextColorRes(R.color.primaryColor)
-                    container.binding.layoutCalendarDay.setBackgroundResource(
-                        if (selectedDate == day.date) {
-                            R.drawable.bg_selected
-                        } else {
-                            0
-                        })
-
-                    val tickets = dueTicketsByDate[day.date]
-                    if (tickets != null) {
-                        if (tickets.count() == 1) {
-                            container.binding.viewSecondEvent.setBackgroundColor(
-                                binding.root.context.getColorCompat(R.color.secondaryColor))
-                        } else {
-                            container.binding.viewFirstEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.secondaryColor))
-                            container.binding.viewSecondEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.calendar_event_indicator))
                         }
+                        month.yearMonth
                     }
-                } else {
-                    textView.setTextColorRes(R.color.disabled_grey)
-                    container.binding.layoutCalendarDay.background = null
                 }
             }
-        }
 
-        class MonthViewContainer(view: View) : ViewContainer(view) {
-            val legendLayout = CalendarPerMonthHeaderBinding.bind(view).legendLayout.root
-        }
-        binding.calendarView.monthHeaderBinder = object :
-            MonthHeaderFooterBinder<MonthViewContainer> {
-            override fun create(view: View) = MonthViewContainer(view)
-            override fun bind(container: MonthViewContainer, month: CalendarMonth) {
-                // Setup each header day text if we have not done that already.
-                if (container.legendLayout.tag == null) {
-                    container.legendLayout.tag = month.yearMonth
-                    container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
-                        tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
-                            .uppercase(Locale.ENGLISH)
-                        tv.setTextColorRes(R.color.primaryDarkColor)
+            binding.calendarView.monthScrollListener = { month ->
+                val title = "${monthTitleFormatter.format(month.yearMonth)} ${month.yearMonth.year}"
+                binding.monthYearText.text = title
 
-                    }
-                    month.yearMonth
+                selectedDate?.let {
+                    // Clear selection if we scroll to a new month.
+                    selectedDate = null
+                    binding.calendarView.notifyDateChanged(it)
+                    updateAdapterForDate(null)
                 }
             }
-        }
 
-        binding.calendarView.monthScrollListener = { month ->
-            val title = "${monthTitleFormatter.format(month.yearMonth)} ${month.yearMonth.year}"
-            binding.monthYearText.text = title
-
-            selectedDate?.let {
-                // Clear selection if we scroll to a new month.
-                selectedDate = null
-                binding.calendarView.notifyDateChanged(it)
-                updateAdapterForDate(null)
+            binding.buttonNextMonth.setOnClickListener {
+                binding.calendarView.findFirstVisibleMonth()?.let {
+                    binding.calendarView.smoothScrollToMonth(it.yearMonth.next)
+                }
             }
-        }
 
-        binding.buttonNextMonth.setOnClickListener {
-            binding.calendarView.findFirstVisibleMonth()?.let {
-                binding.calendarView.smoothScrollToMonth(it.yearMonth.next)
+            binding.buttonPreviousMonth.setOnClickListener {
+                binding.calendarView.findFirstVisibleMonth()?.let {
+                    binding.calendarView.smoothScrollToMonth(it.yearMonth.previous)
+                }
             }
-        }
+        })
 
-        binding.buttonPreviousMonth.setOnClickListener {
-            binding.calendarView.findFirstVisibleMonth()?.let {
-                binding.calendarView.smoothScrollToMonth(it.yearMonth.previous)
-            }
-        }
     }
 
     private fun updateAdapterForDate(date: LocalDate?) {

@@ -1,5 +1,8 @@
 package ca.isucorp.acme.util
 
+import android.content.ContentValues
+import android.content.Context
+import android.provider.CalendarContract
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
@@ -14,12 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import ca.isucorp.acme.R
-import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.ui.login.LoginSignupViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import java.time.YearMonth
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 
@@ -157,26 +162,10 @@ fun increaseMenuItemTextSize(popupMenu: PopupMenu, menuItemId: Int) {
     menuItem.title = spanString
 }
 
-fun generateFlights(): List<DueTicket> {
-    val list = mutableListOf<DueTicket>()
-    val currentMonth = YearMonth.now()
-
-    val currentMonth17 = currentMonth.atDay(17)
-    list.add(DueTicket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8",
-        "date", time = currentMonth17.atTime(14, 0)))
-    list.add(DueTicket("Water Heater Installation", "11 Westnight Ave Toronto",
-        "date", time = currentMonth17.atTime(14, 0)))
-    list.add(DueTicket("Drain Cleaning", "Espada #4345 entre San M",
-        "date", time = currentMonth17.atTime(14, 0)))
-
-    val currentMonth22 = currentMonth.atDay(22)
-    list.add(DueTicket("4", "BB", "date", time = currentMonth22.atTime(2, 34)))
-    list.add(DueTicket("5", "BB", "date", time = currentMonth22.atTime(2, 34)))
-
-    list.add(
-        DueTicket("AA", "BB", "date", time = currentMonth.plusMonths(1).
-    atDay(9).atTime(20, 15))
-    )
-
-    return list
+fun convertToLocalDateTime(dateString: String): LocalDateTime {
+    val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, Locale.ENGLISH)
+    val date = dateStringParser.parse(dateString)
+    return Instant.ofEpochMilli(date?.time ?: Calendar.getInstance().timeInMillis)
+        .atZone(ZoneId.systemDefault())
+        .toLocalDateTime()
 }
