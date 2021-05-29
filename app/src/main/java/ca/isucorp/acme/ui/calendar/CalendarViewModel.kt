@@ -1,20 +1,11 @@
 package ca.isucorp.acme.ui.calendar
 
 import android.app.Application
-import android.util.Patterns
 import androidx.lifecycle.*
-import ca.isucorp.acme.R
-import ca.isucorp.acme.database.model.User
 import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.repository.TicketRepository
 import ca.isucorp.acme.ui.DbAccessViewModel
-import ca.isucorp.acme.util.DAY_SHORT_MONTH_YEAR_PATTERN
-import ca.isucorp.acme.util.TIME_PATTERN
-import ca.isucorp.acme.util.convertToLocalDateTime
-import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.*
 
 class CalendarViewModel(application: Application) : DbAccessViewModel(application) {
 

@@ -162,9 +162,7 @@ fun increaseMenuItemTextSize(popupMenu: PopupMenu, menuItemId: Int) {
     menuItem.title = spanString
 }
 
-fun convertToLocalDateTime(dateString: String): LocalDateTime {
-    val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, Locale.ENGLISH)
-    val date = dateStringParser.parse(dateString)
+fun convertToLocalDateTime(date: Date?): LocalDateTime {
     return Instant.ofEpochMilli(date?.time ?: Calendar.getInstance().timeInMillis)
         .atZone(ZoneId.systemDefault())
         .toLocalDateTime()
