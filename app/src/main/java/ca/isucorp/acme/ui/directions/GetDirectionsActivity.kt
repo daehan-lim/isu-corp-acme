@@ -8,9 +8,7 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityGetDirectionsBinding
 import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
@@ -24,12 +22,15 @@ const val SEARCH_URL = BASE_URL + SEARCH_ENDPOINT
 class GetDirectionsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetDirectionsBinding
     private var connectionOk = true
+    private var isTabletSize = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGetDirectionsBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        isTabletSize = resources.getBoolean(R.bool.isTablet)
 
         val toolbar = binding.layoutSimpleAppBar.toolbar
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
@@ -44,9 +45,22 @@ class GetDirectionsActivity : AppCompatActivity() {
     private fun setUpWebView() {
         binding.webView.apply {
             settings.javaScriptEnabled = true
-            settings.loadWithOverviewMode = true
-            settings.useWideViewPort = true
+            settings.loadWithOverviewMode = false
+            settings.useWideViewPort = false
             settings.domStorageEnabled = true
+
+            if(!isTabletSize) {
+                settings.loadWithOverviewMode = true
+                settings.useWideViewPort = true
+            } else {
+                settings.setSupportZoom(true)
+                settings.builtInZoomControls = true
+                settings.displayZoomControls = false
+                this.scrollBarStyle = WebView.SCROLLBARS_OUTSIDE_OVERLAY
+                this.isScrollbarFadingEnabled = false
+                setDesktopMode()
+            }
+
 
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -105,6 +119,24 @@ class GetDirectionsActivity : AppCompatActivity() {
 
             this.loadUrl(BASE_URL)
         }
+    }
+
+    private fun setDesktopMode() {
+        var newUserAgent = binding.webView.settings.userAgentString
+        try {
+            val ua = binding.webView.settings.userAgentString
+            val androidOSString = binding.webView.settings.userAgentString.substring(
+                ua.indexOf("("),
+                ua.indexOf(")") + 1
+            )
+            newUserAgent = binding.webView.settings.userAgentString.replace(
+                androidOSString,
+                "(X11; Linux x86_64)"
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        binding.webView.settings.userAgentString = newUserAgent
     }
 
     override fun onBackPressed() {
