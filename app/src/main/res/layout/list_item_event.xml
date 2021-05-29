@@ -10,157 +10,52 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/itemFlightDateText"
+            android:id="@+id/due_date"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#5D4037"
+            android:background="@color/list_background_grey"
             android:gravity="center"
             android:lineSpacingExtra="2.5dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="13sp"
+            android:fontFamily="@font/sfpro_display_regular"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.143"
-            tools:text="THU\nJUN 30\n14:00" />
+            app:layout_constraintWidth_percent="0.243"
+            tools:text="THU\nJUN 30\n14:00 AM" />
 
-        <!--Colored view dividers-->
-        <View
-            android:layout_width="1.3dp"
-            android:layout_height="0dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/itemFlightDateText"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="0.7dp"
-            android:layout_height="0dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemFlightDateText"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <FrameLayout
-            android:id="@+id/itemFlightDepartureImage"
+        <TextView
+            android:id="@+id/due_ticket_client"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/itemFlightDateText"
-            app:layout_constraintDimensionRatio="W,1:1"
-            app:layout_constraintStart_toEndOf="@id/itemFlightDateText"
-            app:layout_constraintTop_toTopOf="@id/itemFlightDateText">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical|end" />
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/itemFlightDepartureLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/itemFlightDepartureImage"
-            app:layout_constraintDimensionRatio="W,2:1"
-            app:layout_constraintStart_toEndOf="@id/itemFlightDepartureImage"
-            app:layout_constraintTop_toTopOf="@id/itemFlightDepartureImage">
-
-            <TextView
-                android:fontFamily="sans-serif-black"
-                android:id="@+id/itemDepartureAirportCodeText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                tools:text="LOS" />
-
-            <TextView
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/itemDepartureAirportCityText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                tools:text="Lagos" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/itemFlightDestinationImage"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/itemFlightDepartureLayout"
-            app:layout_constraintDimensionRatio="W,1:1"
-            app:layout_constraintStart_toEndOf="@id/itemFlightDepartureLayout"
-            app:layout_constraintTop_toTopOf="@id/itemFlightDepartureLayout">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical|end" />
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/itemFlightDestinationLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/itemFlightDestinationImage"
-            app:layout_constraintDimensionRatio="W,2:1"
-            app:layout_constraintStart_toEndOf="@id/itemFlightDestinationImage"
-            app:layout_constraintTop_toTopOf="@id/itemFlightDestinationImage">
-
-            <TextView
-                android:fontFamily="sans-serif-black"
-                android:id="@+id/itemDestinationAirportCodeText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                tools:text="ABV" />
-
-            <TextView
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/itemDestinationAirportCityText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                tools:text="Abuja" />
-        </LinearLayout>
-
-        <!--Departure/Destination dividers-->
-        <View
-            android:layout_width="1.3dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/itemFlightDepartureLayout"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="0.7dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/itemFlightDestinationImage"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--Edge dividers-->
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/due_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/due_ticket_address"
+            android:layout_marginStart="10dp"
+            android:text="Jessica Green"
+            android:textSize="@dimen/item_event_text_size"
+            />
+
+        <TextView
+            android:id="@+id/due_ticket_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/due_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/due_ticket_client"
+            app:layout_constraintBottom_toBottomOf="@id/due_date"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:text="37 Greennight Cres Waterloo, ON N2R 4K8"
+            android:textSize="@dimen/item_event_text_size"
+            />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

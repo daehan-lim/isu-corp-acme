@@ -102,10 +102,10 @@ class CalendarActivity : AppCompatActivity() {
                     if (tickets != null) {
                         if (tickets.count() == 1) {
                             container.binding.viewSecondEvent.setBackgroundColor(
-                                binding.root.context.getColorCompat(R.color.primaryColor))
+                                binding.root.context.getColorCompat(R.color.secondaryColor))
                         } else {
                             container.binding.viewFirstEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.secondaryColor))
-                            container.binding.viewSecondEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.primaryDarkColor))
+                            container.binding.viewSecondEvent.setBackgroundColor(binding.root.context.getColorCompat(R.color.calendar_event_indicator))
                         }
                     }
                 } else {
@@ -128,7 +128,7 @@ class CalendarActivity : AppCompatActivity() {
                     container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
                         tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
                             .uppercase(Locale.ENGLISH)
-                        tv.setTextColorRes(R.color.primaryLightColor)
+                        tv.setTextColorRes(R.color.primaryDarkColor)
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
                     }
                     month.yearMonth

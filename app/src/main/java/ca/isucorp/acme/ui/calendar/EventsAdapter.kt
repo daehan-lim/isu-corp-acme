@@ -12,7 +12,7 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     val tickets = mutableListOf<DueTicket>()
 
-    private val formatter = DateTimeFormatter.ofPattern("EEE'\n'dd MMM'\n'HH:mm")
+    private val formatter = DateTimeFormatter.ofPattern("EEE'\n'dd MMM'\n'HH:mm a")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         return EventsViewHolder(
@@ -30,19 +30,12 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dueTicket: DueTicket) {
-            binding.itemFlightDateText.apply {
-                val currentMonth = YearMonth.now()
-                val currentMonth17 = currentMonth.atDay(17)
-                currentMonth17.atTime(14, 0)
-                text = formatter.format(currentMonth17.atTime(14, 0))
-                setBackgroundColor(itemView.context.getColorCompat(R.color.black))
+            binding.dueDate.apply {
+                text = formatter.format(dueTicket.time)
             }
 
-            binding.itemDepartureAirportCodeText.text = dueTicket.clientName
-            binding.itemDepartureAirportCityText.text = dueTicket.address
-
-            binding.itemDestinationAirportCodeText.text = dueTicket.clientName
-            binding.itemDestinationAirportCityText.text = dueTicket.address
+            binding.dueTicketClient.text = dueTicket.clientName
+            binding.dueTicketAddress.text = dueTicket.address
         }
     }
 }

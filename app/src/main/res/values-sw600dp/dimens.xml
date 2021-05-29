@@ -42,4 +42,5 @@
     <dimen name="no_results_text_size">29sp</dimen>
     <dimen name="no_results_explanation_text_size">26sp</dimen>
     <dimen name="ic_change_month_horizontal_margin">20dp</dimen>
+    <dimen name="item_event_text_size">19sp</dimen>
 </resources>

@@ -162,16 +162,19 @@ fun generateFlights(): List<DueTicket> {
     val currentMonth = YearMonth.now()
 
     val currentMonth17 = currentMonth.atDay(17)
-    list.add(DueTicket("Cliente 1", "BB", "date", time = currentMonth17.atTime(14, 0)))
-    list.add(DueTicket("2", "BB", "date", time = currentMonth17.atTime(14, 0)))
-    list.add(DueTicket("3", "BB", "date", time = currentMonth17.atTime(14, 0)))
+    list.add(DueTicket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8",
+        "date", time = currentMonth17.atTime(14, 0)))
+    list.add(DueTicket("Water Heater Installation", "11 Westnight Ave Toronto",
+        "date", time = currentMonth17.atTime(14, 0)))
+    list.add(DueTicket("Drain Cleaning", "Espada #4345 entre San M",
+        "date", time = currentMonth17.atTime(14, 0)))
 
     val currentMonth22 = currentMonth.atDay(22)
     list.add(DueTicket("4", "BB", "date", time = currentMonth22.atTime(2, 34)))
     list.add(DueTicket("5", "BB", "date", time = currentMonth22.atTime(2, 34)))
 
     list.add(
-        DueTicket("AA", "BB", "date", time = currentMonth.minusMonths(1).
+        DueTicket("AA", "BB", "date", time = currentMonth.plusMonths(1).
     atDay(9).atTime(20, 15))
     )
 
