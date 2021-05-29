@@ -28,4 +28,13 @@
     <style name="TextInputCounter" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">@dimen/default_edit_text_counter_size</item>
     </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/design_bottom_navigation_text_size1</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/design_bottom_navigation_active_text_size1</item>
+    </style>
+
 </resources>
