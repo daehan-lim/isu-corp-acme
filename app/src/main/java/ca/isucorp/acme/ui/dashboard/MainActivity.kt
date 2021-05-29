@@ -13,6 +13,7 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
+import ca.isucorp.acme.ui.calendar.CalendarActivity
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
 import java.util.*
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity() {
         TooltipCompat.setTooltipText(calendarButton, getString(R.string.ticket_calendar))
         TooltipCompat.setTooltipText(calendarSyncButton, getString(R.string.sync_calendar))
 
+        calendarButton.setOnClickListener {
+            startActivity(Intent(applicationContext, CalendarActivity::class.java))
+        }
 
         isTabletSize = resources.getBoolean(R.bool.isTablet)
         if(isTabletSize) {

@@ -41,4 +41,5 @@
     <dimen name="ic_time_size">19dp</dimen>
     <dimen name="no_results_text_size">19sp</dimen>
     <dimen name="no_results_explanation_text_size">17sp</dimen>
+    <dimen name="ic_change_month_horizontal_margin">16dp</dimen>
 </resources>

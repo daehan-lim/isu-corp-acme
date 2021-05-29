@@ -51,4 +51,12 @@
     <string name="menu">Menu</string>
     <string name="ticket_calendar">Due Tickets Calendar</string>
     <string name="sync_calendar">Sync Ticket dates to your Google Calendar</string>
+    <string name="sunday_short">SUN</string>
+    <string name="monday_short">MON</string>
+    <string name="tuesday_short">TUE</string>
+    <string name="wednesday_short">WED</string>
+    <string name="thrusday_short">THU</string>
+    <string name="friday_short">FRI</string>
+    <string name="saturday_short">SAT</string>
+    <string name="due_tickets">Due Tickets</string>
 </resources>

@@ -14,10 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import ca.isucorp.acme.R
+import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.ui.login.LoginSignupViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.time.YearMonth
 import java.util.*
 
 
@@ -153,4 +155,25 @@ fun increaseMenuItemTextSize(popupMenu: PopupMenu, menuItemId: Int) {
     val end = spanString.length
     spanString.setSpan(RelativeSizeSpan(1.5f), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     menuItem.title = spanString
+}
+
+fun generateFlights(): List<DueTicket> {
+    val list = mutableListOf<DueTicket>()
+    val currentMonth = YearMonth.now()
+
+    val currentMonth17 = currentMonth.atDay(17)
+    list.add(DueTicket("Cliente 1", "BB", "date", time = currentMonth17.atTime(14, 0)))
+    list.add(DueTicket("2", "BB", "date", time = currentMonth17.atTime(14, 0)))
+    list.add(DueTicket("3", "BB", "date", time = currentMonth17.atTime(14, 0)))
+
+    val currentMonth22 = currentMonth.atDay(22)
+    list.add(DueTicket("4", "BB", "date", time = currentMonth22.atTime(2, 34)))
+    list.add(DueTicket("5", "BB", "date", time = currentMonth22.atTime(2, 34)))
+
+    list.add(
+        DueTicket("AA", "BB", "date", time = currentMonth.minusMonths(1).
+    atDay(9).atTime(20, 15))
+    )
+
+    return list
 }
