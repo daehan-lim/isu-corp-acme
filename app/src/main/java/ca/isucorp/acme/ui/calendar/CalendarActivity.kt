@@ -14,6 +14,7 @@ import ca.isucorp.acme.databinding.CalendarPerMonthHeaderBinding
 import ca.isucorp.acme.databinding.ItemCalendarDayBinding
 import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
+import ca.isucorp.acme.util.goBackWithAnimation
 import ca.isucorp.acme.util.setUpInActivity
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -171,5 +172,10 @@ class CalendarActivity : AppCompatActivity() {
         eventsAdapter.tickets.clear()
         eventsAdapter.tickets.addAll(dueTicketsByDate[date].orEmpty())
         eventsAdapter.notifyDataSetChanged()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        goBackWithAnimation(this, DEFAULT_GO_BACK_ANIMATION)
     }
 }
