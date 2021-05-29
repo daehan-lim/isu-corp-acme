@@ -1,29 +1,38 @@
 package ca.isucorp.acme.ui.dashboard
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.TooltipCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
+import ca.isucorp.acme.model.DueTicket
 import ca.isucorp.acme.ui.calendar.CalendarActivity
 import ca.isucorp.acme.ui.calendar.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
 import java.time.ZoneId
 import java.util.*
 
-
+const val WRITE_TO_CALENDAR_PERMISSION_CODE = 100
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private var calendarPermissionWasRequested = false
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
@@ -59,9 +68,56 @@ class MainActivity : AppCompatActivity() {
         viewModel.dueTickets.observe(this, {})
 
         calendarSyncButton.setOnClickListener {
-            viewModel.dueTickets.value?.let {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_DENIED) {
+                requestCalendarPermission()
+            } else {
+                syncToCalendar()
+            }
+        }
+
+            isTabletSize = resources.getBoolean(R.bool.isTablet)
+            if(isTabletSize) {
+                toolbar.layoutParams.height = resources.getDimension(R.dimen.action_bar_size).toInt()
+            }
+
+            hamburgerMenuIcon.setOnClickListener {
+                showDropdownMenu(hamburgerMenuIcon)
+            }
+
+            newTicketBarButton.setOnClickListener {
+                startActivity(Intent(applicationContext, NewTicketActivity::class.java))
+            }
+
+            val adapter = TicketsAdapter(TicketsAdapter.CallListener {
+                val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
+                startActivity(callIntent)
+            }, TicketsAdapter.ViewDetailsListener {
+
+            })
+            binding.recyclerView.adapter = adapter
+
+            viewModel.tickets.observe(this, {
+                if(it.isNotEmpty()) {
+                    binding.noResultsAnimation.visibility = View.GONE
+                    binding.noResultsTextView.visibility = View.GONE
+                    binding.noResultsExplanationTextView.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    adapter.submitList(it)
+                } else {
+                    binding.noResultsAnimation.visibility = View.VISIBLE
+                    binding.noResultsTextView.visibility = View.VISIBLE
+                    binding.noResultsExplanationTextView.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                }
+            })
+
+        }
+
+        private fun syncToCalendar() {
+            if(viewModel.dueTickets.value?.isNotEmpty() == true) {
+                val dueTickets = viewModel.dueTickets.value!!
                 try {
-                    for (ticket in it) {
+                    for (ticket in dueTickets) {
                         val timeInMilli = viewModel.toTimeInMilli(ticket.time)
                         addEventToCalendar(
                             applicationContext,
@@ -71,6 +127,11 @@ class MainActivity : AppCompatActivity() {
                             timeInMilli
                         )
                     }
+                    MaterialDialog(this)
+                        .title(text = getString(R.string.sync_sucesssful))
+                        .message(text = getString(R.string.sync_sucesssful_message))
+                        .positiveButton(R.string.accept) {}
+                        .show()
                 } catch (e: Exception) {
                     MaterialDialog(this)
                         .title(text = getString(R.string.sync_error))
@@ -78,98 +139,69 @@ class MainActivity : AppCompatActivity() {
                         .positiveButton(R.string.accept) {}
                         .show()
                 }
-            }
-        }
-
-        isTabletSize = resources.getBoolean(R.bool.isTablet)
-        if(isTabletSize) {
-            toolbar.layoutParams.height = resources.getDimension(R.dimen.action_bar_size).toInt()
-        }
-
-        hamburgerMenuIcon.setOnClickListener {
-            showDropdownMenu(hamburgerMenuIcon)
-        }
-
-        newTicketBarButton.setOnClickListener {
-            startActivity(Intent(applicationContext, NewTicketActivity::class.java))
-        }
-
-        val adapter = TicketsAdapter(TicketsAdapter.CallListener {
-            val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
-            startActivity(callIntent)
-        }, TicketsAdapter.ViewDetailsListener {
-
-        })
-        binding.recyclerView.adapter = adapter
-
-        viewModel.tickets.observe(this, {
-            if(it.isNotEmpty()) {
-                binding.noResultsAnimation.visibility = View.GONE
-                binding.noResultsTextView.visibility = View.GONE
-                binding.noResultsExplanationTextView.visibility = View.GONE
-                binding.recyclerView.visibility = View.VISIBLE
-                adapter.submitList(it)
             } else {
-                binding.noResultsAnimation.visibility = View.VISIBLE
-                binding.noResultsTextView.visibility = View.VISIBLE
-                binding.noResultsExplanationTextView.visibility = View.VISIBLE
-                binding.recyclerView.visibility = View.GONE
+                MaterialDialog(this)
+                    .title(text = getString(R.string.not_synced))
+                    .message(text = getString(R.string.no_due_tickets))
+                    .positiveButton(R.string.accept) {}
+                    .show()
             }
-        })
-
-        /*adapter.data = listOf(
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Sink Repair", "37 Greennight Cres Waterloo, ON N2R 4K8", "28 May 2021, 5:43 AM", "519 733 8727"),
-            Ticket("Water Heater Installation", "11 Westnight Ave Toronto On, N7L 1X1", "28 May 2021, 5:43 AM","542 332 4932"),
-            Ticket("Drain Cleaning", "7 Hedgestill Street Guelph, ON N2D 7L0", "28 May 2021, 5:43 AM", "519 733 8727"),
-        )*/
-    }
-
-    private fun showDropdownMenu(menuButton: ImageView?) {
-        val popup = PopupMenu(this, menuButton)
-        popup.inflate(R.menu.dropdown_menu)
-
-        if(isTabletSize) {
-            increaseMenuItemTextSize(popup, R.id.action_work_ticker)
-            increaseMenuItemTextSize(popup, R.id.action_get_directions)
         }
 
-        popup.setOnMenuItemClickListener { item: MenuItem? ->
-            when (item!!.itemId) {
-                R.id.action_work_ticker -> {
-                    Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
-                }
-                R.id.action_get_directions -> {
-                    Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
-                }
+        private fun requestCalendarPermission() {
+            calendarPermissionWasRequested = true
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR), WRITE_TO_CALENDAR_PERMISSION_CODE)
             }
-            true
         }
 
-        popup.show()
+        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            if (requestCode == WRITE_TO_CALENDAR_PERMISSION_CODE) {
+                if(calendarPermissionWasRequested) {
+                    calendarPermissionWasRequested = false
+                    if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        syncToCalendar()
+                    } else {
+                        val snackbar = Snackbar.make(this.findViewById(android.R.id.content),
+                            getString(R.string.calendar_permission_denied_explanation), Snackbar.LENGTH_LONG)
+                            .setAction(R.string.allow) {
+                                requestCalendarPermission()
+                            }
+                            .setActionTextColor(ContextCompat.getColor(applicationContext, R.color.snackbar_action))
+                        snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 4
+                        snackbar.show()
+//                    Toast.makeText(requireContext(), getString(R.string.sms_permission_denied_explanation), Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        private fun showDropdownMenu(menuButton: ImageView?) {
+            val popup = PopupMenu(this, menuButton)
+            popup.inflate(R.menu.dropdown_menu)
+
+            if(isTabletSize) {
+                increaseMenuItemTextSize(popup, R.id.action_work_ticker)
+                increaseMenuItemTextSize(popup, R.id.action_get_directions)
+            }
+
+            popup.setOnMenuItemClickListener { item: MenuItem? ->
+                when (item!!.itemId) {
+                    R.id.action_work_ticker -> {
+                        Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.action_get_directions -> {
+                        Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
+
+            popup.show()
+        }
+
+
+
+
     }
-
-
-
-
-}

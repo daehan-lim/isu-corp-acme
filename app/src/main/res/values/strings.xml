@@ -63,4 +63,10 @@
     <string name="address_template">Address: %s</string>
     <string name="sync_error">Sync Error</string>
     <string name="sync_error_message">Your due tickets could not be synced to your device calendar. Make sure your calendar is correctly set up and try agan</string>
+    <string name="calendar_permission_denied_explanation">ACME needs permission to access your calendar in order to sync your due tickets</string>
+    <string name="allow">Allow</string>
+    <string name="not_synced">Not synced</string>
+    <string name="no_due_tickets">You have no due tickets</string>
+    <string name="sync_sucesssful">Sync Successful</string>
+    <string name="sync_sucesssful_message">Your due tickets were added to your device calendar.</string>
 </resources>
