@@ -21,7 +21,7 @@
         <activity android:name=".ui.login.SignUpActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.dashboard.MainActivity" />
         <activity android:name=".ui.newticket.NewTicketActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".ui.calendar.CalendarActivity" />
+        <activity android:name=".ui.calendar.CalendarActivity" android:screenOrientation="portrait" />
 
     </application>
 
