@@ -8,10 +8,13 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityGetDirectionsBinding
 import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
+import ca.isucorp.acme.util.goBackWithAnimation
 import ca.isucorp.acme.util.setUpInActivity
 
 const val BASE_URL = "https://www.google.com/maps"
@@ -101,6 +104,18 @@ class GetDirectionsActivity : AppCompatActivity() {
             }
 
             this.loadUrl(BASE_URL)
+        }
+    }
+
+    override fun onBackPressed() {
+        if(binding.webView.canGoBack()) {
+            binding.noConnectionLayout.noConnectionLayout.visibility = View.GONE
+            binding.webView.visibility = View.GONE
+            binding.loadingAnimation.loadingAnimation.visibility = View.VISIBLE
+            binding.webView.goBack()
+        } else {
+            super.onBackPressed()
+            goBackWithAnimation(this, DEFAULT_GO_BACK_ANIMATION)
         }
     }
 }
