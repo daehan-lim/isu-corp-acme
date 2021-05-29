@@ -39,8 +39,8 @@
             app:layout_constraintStart_toEndOf="@+id/button_previous_month"
             app:layout_constraintEnd_toStartOf="@+id/button_next_month"
             app:layout_constraintTop_toTopOf="@+id/button_previous_month"
-            android:text="May 2021"
-            android:textSize="18sp"
+            tools:text="May 2021"
+            android:textSize="@dimen/month_year_text_size"
             android:fontFamily="@font/sfpro_display_regular"
             android:textColor="@color/black" />
 

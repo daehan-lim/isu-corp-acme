@@ -18,7 +18,7 @@
             android:gravity="center"
             android:lineSpacingExtra="2.5dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="@dimen/due_date_text_size"
             android:fontFamily="@font/sfpro_display_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toEndOf="@+id/due_date"
             app:layout_constraintTop_toTopOf="@id/due_ticket_client"
             android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/ic_baseline_person_outline"
+            app:srcCompat="@drawable/ic_client_name_calendar"
             tools:ignore="ContentDescription"
             />
 
@@ -59,8 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             app:layout_constraintStart_toStartOf="@id/name_icon"
+            app:layout_constraintEnd_toEndOf="@id/name_icon"
             app:layout_constraintTop_toTopOf="@id/due_ticket_address"
-            app:srcCompat="@drawable/ic_baseline_location_on_24_grey"
+            app:srcCompat="@drawable/ic_address_calendar"
             tools:ignore="ContentDescription"
             />
 
@@ -77,6 +78,12 @@
             android:textSize="@dimen/item_event_text_size"
             />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/due_date"
+            android:layout_marginTop="@dimen/item_event_separator"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

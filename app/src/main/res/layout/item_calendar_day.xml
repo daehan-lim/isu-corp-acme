@@ -23,23 +23,23 @@
                 android:layout_marginEnd="4dp"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="@dimen/calendar_text_day_size"
                 tools:text="24" />
 
             <View
                 android:id="@+id/view_first_event"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/calendar_event_view_height"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="18dp"
+                android:layout_marginBottom="@dimen/first_event_view_margin_bottom"
                 android:background="@color/primaryColor" />
 
             <View
                 android:id="@+id/view_second_event"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="@dimen/calendar_event_view_height"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/second_event_view_margin_bottom"
                 android:background="@color/secondaryColor" />
 
         </FrameLayout>

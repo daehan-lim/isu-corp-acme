@@ -12,7 +12,7 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     val tickets = mutableListOf<DueTicket>()
 
-    private val formatter = DateTimeFormatter.ofPattern("EEE'\n'dd MMM'\n'HH:mm a")
+    private val formatter = DateTimeFormatter.ofPattern("EEE'\n'dd MMM'\n'hh:mm a")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         return EventsViewHolder(

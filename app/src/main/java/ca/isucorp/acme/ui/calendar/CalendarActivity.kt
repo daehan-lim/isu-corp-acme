@@ -52,7 +52,6 @@ class CalendarActivity : AppCompatActivity() {
 
         binding.recyclerEvents.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
         binding.recyclerEvents.adapter = eventsAdapter
-        binding.recyclerEvents.addItemDecoration(DividerItemDecoration(applicationContext, RecyclerView.VERTICAL))
         eventsAdapter.notifyDataSetChanged()
 
         val daysOfWeek = daysOfWeekFromLocale()
@@ -129,7 +128,7 @@ class CalendarActivity : AppCompatActivity() {
                         tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
                             .uppercase(Locale.ENGLISH)
                         tv.setTextColorRes(R.color.primaryDarkColor)
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+
                     }
                     month.yearMonth
                 }

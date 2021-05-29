@@ -14,7 +14,7 @@
         android:gravity="center"
         android:text="@string/sunday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
     <TextView
         android:id="@+id/legendText2"
@@ -24,7 +24,7 @@
         android:gravity="center"
         android:text="@string/monday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
     <TextView
         android:id="@+id/legendText3"
@@ -34,7 +34,7 @@
         android:gravity="center"
         android:text="@string/tuesday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
     <TextView
         android:id="@+id/legendText4"
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text="@string/wednesday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
     <TextView
         android:id="@+id/legendText5"
@@ -54,7 +54,7 @@
         android:gravity="center"
         android:text="@string/thrusday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
     <TextView
         android:id="@+id/legendText6"
@@ -64,7 +64,7 @@
         android:gravity="center"
         android:text="@string/friday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
     <TextView
         android:id="@+id/legendText7"
@@ -74,6 +74,6 @@
         android:gravity="center"
         android:text="@string/saturday_short"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/header_day_of_week_text_size" />
 
 </LinearLayout>
