@@ -37,8 +37,6 @@
             <include
                 android:id="@+id/no_connection_layout"
                 layout="@layout/layout_no_connection"
-                android:visibility="gone"
-                tools:visibility="visible"
                 />
 
             <WebView
