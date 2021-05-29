@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
         <include
             android:id="@+id/layout_simple_app_bar"
@@ -15,16 +17,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/button_previous_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layout_simple_app_bar"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/ic_change_month_horizontal_margin"
             android:layout_marginTop="15dp"
             app:srcCompat="@drawable/ic_arrow_thin_left"
-            tools:visibility="visible"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -47,28 +52,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/ic_change_month_horizontal_margin"
             app:srcCompat="@drawable/ic_arrow_thin_right"
-            tools:visibility="visible"
             tools:ignore="ContentDescription" />
 
-        <com.kizitonwose.calendarview.CalendarView
-            android:id="@+id/calendar_view"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/month_year_text"
-            app:cv_dayViewResource="@layout/item_calendar_day"
-            app:cv_monthHeaderResource="@layout/calendar_per_month_header"
-            app:cv_orientation="horizontal"
-            app:cv_outDateStyle="endOfGrid"
-            app:cv_scrollMode="paged" />
+            >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_events"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/calendar_view"
-            android:nestedScrollingEnabled="false"
-            tools:targetApi="lollipop" />
+            <com.kizitonwose.calendarview.CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:cv_dayViewResource="@layout/item_calendar_day"
+                app:cv_monthHeaderResource="@layout/calendar_per_month_header"
+                app:cv_orientation="horizontal"
+                app:cv_outDateStyle="endOfGrid"
+                app:cv_scrollMode="paged" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:targetApi="lollipop" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </layout>
