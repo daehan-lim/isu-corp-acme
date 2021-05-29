@@ -1,25 +1,37 @@
 package ca.isucorp.acme.ui.directions
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.webkit.GeolocationPermissions
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityGetDirectionsBinding
 import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
 import ca.isucorp.acme.util.goBackWithAnimation
 import ca.isucorp.acme.util.setUpInActivity
+import com.afollestad.materialdialogs.MaterialDialog
 
 const val BASE_URL = "https://www.google.com/maps"
 const val SEARCH_ENDPOINT = "/search/"
 const val SEARCH_URL = BASE_URL + SEARCH_ENDPOINT
 
+const val LOCATION_PERMISSION_CODE = 101
 class GetDirectionsActivity : AppCompatActivity() {
+    private var mGeoLocationCallback: GeolocationPermissions.Callback? = null
+    private var mGeoLocationRequestOrigin: String? = null
     private lateinit var binding: ActivityGetDirectionsBinding
     private var connectionOk = true
     private var isTabletSize = false
@@ -38,6 +50,7 @@ class GetDirectionsActivity : AppCompatActivity() {
         toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
 
         setUpWebView()
+
 
     }
 
@@ -61,6 +74,37 @@ class GetDirectionsActivity : AppCompatActivity() {
                 setDesktopMode()
             }
 
+
+            webChromeClient = object : WebChromeClient() {
+                override fun onGeolocationPermissionsShowPrompt(origin: String, callback: GeolocationPermissions.Callback) {
+                    mGeoLocationRequestOrigin = null
+                    mGeoLocationCallback = null
+                    if (ContextCompat.checkSelfPermission(this@GetDirectionsActivity, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                        // Should we show an explanation
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this@GetDirectionsActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                            MaterialDialog(this@GetDirectionsActivity)
+                                .title(text = getString(R.string.location_permission_needed))
+                                .message(text = getString(R.string.permission_location_rationale))
+                                .positiveButton(R.string.accept) {
+                                    mGeoLocationRequestOrigin = origin
+                                    mGeoLocationCallback = callback
+                                    requestLocationPermission()
+                                }
+                                .show()
+
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            mGeoLocationRequestOrigin = origin
+                            mGeoLocationCallback = callback
+                            requestLocationPermission()
+                        }
+                    } else {
+                        // Tell the WebView that permission has been granted
+                        callback.invoke(origin, true, false)
+                    }
+                }
+            }
 
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -121,6 +165,13 @@ class GetDirectionsActivity : AppCompatActivity() {
         }
     }
 
+    private fun requestLocationPermission() {
+        ActivityCompat.requestPermissions(
+            this@GetDirectionsActivity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE
+        )
+    }
+
     private fun setDesktopMode() {
         var newUserAgent = binding.webView.settings.userAgentString
         try {
@@ -148,6 +199,22 @@ class GetDirectionsActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
             goBackWithAnimation(this, DEFAULT_GO_BACK_ANIMATION)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            LOCATION_PERMISSION_CODE -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted
+                    mGeoLocationCallback?.invoke(mGeoLocationRequestOrigin, true, false)
+                } else {
+                    // permission denied. functionality that depends on this permission.
+                    mGeoLocationCallback?.invoke(mGeoLocationRequestOrigin, false, false)
+                }
+            }
         }
     }
 }
