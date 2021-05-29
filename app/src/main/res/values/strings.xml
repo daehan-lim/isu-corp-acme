@@ -69,4 +69,6 @@
     <string name="no_due_tickets">You have no due tickets</string>
     <string name="sync_sucesssful">Sync Successful</string>
     <string name="sync_sucesssful_message">Your due tickets were added to your device calendar.</string>
+    <string name="sync_with_calendar">Sync with device calendar?</string>
+    <string name="sync_with_calendar_message">This will add your due tickets to your device calendar. Are you sure you want to sync?</string>
 </resources>

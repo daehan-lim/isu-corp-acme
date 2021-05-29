@@ -66,11 +66,18 @@ class MainActivity : AppCompatActivity() {
         viewModel.dueTickets.observe(this, {})
 
         calendarSyncButton.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_DENIED) {
-                requestCalendarPermission()
-            } else {
-                syncToCalendar()
-            }
+            MaterialDialog(this)
+                .title(text = getString(R.string.sync_with_calendar))
+                .message(text = getString(R.string.sync_with_calendar_message))
+                .positiveButton(R.string.accept) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_DENIED) {
+                        requestCalendarPermission()
+                    } else {
+                        syncToCalendar()
+                    }
+                }
+                .negativeButton(R.string.cancel){}
+                .show()
         }
 
             isTabletSize = resources.getBoolean(R.bool.isTablet)
