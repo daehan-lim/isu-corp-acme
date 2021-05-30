@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.isucorp.acme.R
+import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ActivityWorkTicketBinding
 import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
 import ca.isucorp.acme.ui.directions.GetDirectionsActivity
@@ -37,6 +38,8 @@ class WorkTicketActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = ""
 
+        val ticket = intent?.getSerializableExtra(EXTRA_TICKET) as Ticket
+
         val editTicketButton = toolbar.findViewById<ImageView>(R.id.button_edit_ticket)
         val dropdownMenuButton = toolbar.findViewById<ImageView>(R.id.button_menu)
         val backMenuButton = toolbar.findViewById<ImageView>(R.id.back_menu_button)
@@ -59,10 +62,13 @@ class WorkTicketActivity : AppCompatActivity() {
             popup.setOnMenuItemClickListener { item: MenuItem? ->
                 when (item!!.itemId) {
                     R.id.action_dashboard -> {
-                        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show()
+                        finish()
+                        goBackWithAnimation(this, DEFAULT_GO_BACK_ANIMATION)
                     }
                     R.id.action_get_directions -> {
-                        startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
+                        startActivity(Intent(applicationContext, GetDirectionsActivity::class.java).apply {
+                            putExtra(EXTRA_ADDRESS, ticket.address)
+                        })
                     }
                 }
                 true
@@ -70,10 +76,11 @@ class WorkTicketActivity : AppCompatActivity() {
             popup.show()
         }
 
+
         editTicketButton.setOnClickListener {
             finish()
             startActivity(Intent(applicationContext, EditTicketActivity::class.java).apply {
-                putExtra(EXTRA_TICKET, intent?.getSerializableExtra(EXTRA_TICKET))
+                putExtra(EXTRA_TICKET, ticket)
             })
         }
 
