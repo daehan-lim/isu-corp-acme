@@ -16,20 +16,23 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
-class NewTicketViewModel(application: Application) : DbAccessViewModel(application) {
+open class NewTicketViewModel(application: Application) : DbAccessViewModel(application) {
 
-    private val _dateText = MutableLiveData<String>()
-    val dateText: LiveData<String> = _dateText
+    protected open val _dateText = MutableLiveData<String>()
+    open val dateText: LiveData<String>
+        get() = _dateText
 
-    private var dateString: String? = null
+    protected open var dateString: String? = null
 
-    private val ticketRepository = TicketRepository(database)
+    protected open val ticketRepository: TicketRepository
+        get() = TicketRepository(database)
 
-    private val _newTicketFormState = MutableLiveData<NewTicketFormState?>()
-    val newTicketFormState: LiveData<NewTicketFormState?> = _newTicketFormState
+    protected open val _newTicketFormState = MutableLiveData<NewTicketFormState?>()
+    open val newTicketFormState: LiveData<NewTicketFormState?>
+        get() = _newTicketFormState
 
 
-    fun setDate(timeInMillis: Long) {
+    open fun setDate(timeInMillis: Long) {
         val date = getDateInCurrentTimeZone(timeInMillis)
         val dateStringParser = SimpleDateFormat(DAY_SHORT_MONTH_YEAR_PATTERN, Locale.ENGLISH)
         dateString = dateStringParser.format(date)
@@ -40,7 +43,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
      * Get Date object given dateInMillis, regardless of daylight savings time
      * @param dateInMillis The date in milliseconds
      */
-    private fun getDateInCurrentTimeZone(dateInMillis: Long): Date {
+    protected open fun getDateInCurrentTimeZone(dateInMillis: Long): Date {
         // Get the offset from our timezone and UTC.
         val timeZoneUTC = TimeZone.getDefault()
         val calendar = Calendar.getInstance()
@@ -49,7 +52,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
         return Date(dateInMillis + offsetFromUTC)
     }
 
-    fun setTime(hour: Int, minute: Int) {
+    open fun setTime(hour: Int, minute: Int) {
         val calendar = Calendar.getInstance()
         calendar[Calendar.HOUR_OF_DAY] = hour
         calendar[Calendar.MINUTE] = minute
@@ -60,14 +63,14 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
     /**
      * Returns the current system hour in a 24-hour clock
      */
-    fun getCurrentHour(): Int {
+    open fun getCurrentHour(): Int {
         return Calendar.getInstance()[Calendar.HOUR_OF_DAY]
     }
 
     /**
      * Returns the current system minute
      */
-    fun getCurrentMinute(): Int {
+    open fun getCurrentMinute(): Int {
         return Calendar.getInstance()[Calendar.MINUTE]
     }
 
@@ -112,7 +115,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
      * Returns the id of the string resource containing the error in the client name field or null if the field is valid
      * @param clientName The client name input by the user.
      */
-    private fun clientNameError(clientName: String): Int? {
+    protected open fun clientNameError(clientName: String): Int? {
         if(clientName.isEmpty()) {
             return R.string.client_name_empty_error
         }
@@ -131,7 +134,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
      * Returns the id of the string resource containing the error in the address field or null if the field is valid
      * @param date The address input by the user.
      */
-    private fun dateError(date: String): Int? {
+    protected open fun dateError(date: String): Int? {
         if(date.isEmpty()) {
             return R.string.date_empty_error
         }
@@ -142,7 +145,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
      * Returns the id of the string resource containing the error in the address field or null if the field is valid
      * @param address The address input by the user.
      */
-    private fun addressError(address: String): Int? {
+    protected open fun addressError(address: String): Int? {
         if(address.isEmpty()) {
             return R.string.address_empty_error
         }
@@ -156,7 +159,7 @@ class NewTicketViewModel(application: Application) : DbAccessViewModel(applicati
      * Returns the id of the string resource containing the error in the phone field or null if the field is valid
      * @param phone The phone input by the user.
      */
-    private fun phoneError(phone: String): Int? {
+    protected open fun phoneError(phone: String): Int? {
         if(phone.isNotEmpty() && !Patterns.PHONE.matcher(phone).matches()) {
             return R.string.wrong_phone
         }

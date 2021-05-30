@@ -20,21 +20,22 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 
 
-class NewTicketActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityNewTicketBinding
-    private lateinit var selectDateTextInput: TextInputLayout
-    private lateinit var selectDateEditText: MaterialAutoCompleteTextView
-    private lateinit var saveButton: MaterialButton
-    private lateinit var clientNameTextInput: TextInputLayout
-    private lateinit var clientNameEditText: TextInputEditText
-    private lateinit var addressTextInput: TextInputLayout
-    private lateinit var addressEditText: TextInputEditText
-    private lateinit var phoneTextInput: TextInputLayout
-    private lateinit var phoneEditText: TextInputEditText
-    private lateinit var notesTextInput: TextInputLayout
-    private lateinit var notesEditText: TextInputEditText
-    private lateinit var reasonsForCallTextInput: TextInputLayout
-    private lateinit var reasonsForCallEditText: TextInputEditText
+open class NewTicketActivity : AppCompatActivity() {
+    protected lateinit var binding: ActivityNewTicketBinding
+    protected lateinit var selectDateTextInput: TextInputLayout
+    protected lateinit var selectDateEditText: MaterialAutoCompleteTextView
+    protected lateinit var saveButton: MaterialButton
+    protected lateinit var clientNameTextInput: TextInputLayout
+    protected lateinit var clientNameEditText: TextInputEditText
+    protected lateinit var addressTextInput: TextInputLayout
+    protected lateinit var addressEditText: TextInputEditText
+    protected lateinit var phoneTextInput: TextInputLayout
+    protected lateinit var phoneEditText: TextInputEditText
+    protected lateinit var notesTextInput: TextInputLayout
+    protected lateinit var notesEditText: TextInputEditText
+    protected lateinit var reasonsForCallTextInput: TextInputLayout
+    protected lateinit var reasonsForCallEditText: TextInputEditText
+
     private val viewModel: NewTicketViewModel by lazy {
         ViewModelProvider(this, NewTicketViewModel.Factory(application)).get(NewTicketViewModel::class.java)
     }
@@ -44,6 +45,27 @@ class NewTicketActivity : AppCompatActivity() {
         binding = ActivityNewTicketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        val toolbar = binding.layoutSimpleAppBar.toolbar
+        val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        toolBarTitle.text = getString(R.string.new_ticket)
+        toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
+
+        initialize()
+
+        saveButton.setOnClickListener {
+            viewModel.addTicket(
+                clientNameEditText.text.toString(),
+                addressEditText.text.toString(),
+                phoneEditText.text.toString(),
+                notesEditText.text.toString(),
+                reasonsForCallEditText.text.toString(),
+            )
+        }
+
+    }
+
+    protected open fun initialize() {
         selectDateTextInput = binding.layoutActivityNewTicketContent.textInputSelectDate
         selectDateEditText = binding.layoutActivityNewTicketContent.editSelectDate
         saveButton = binding.layoutActivityNewTicketContent.buttonSave
@@ -58,11 +80,6 @@ class NewTicketActivity : AppCompatActivity() {
         reasonsForCallTextInput = binding.layoutActivityNewTicketContent.textInputReasons
         reasonsForCallEditText = binding.layoutActivityNewTicketContent.editReasons
 
-        val toolbar = binding.layoutSimpleAppBar.toolbar
-        val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
-        toolBarTitle.text = getString(R.string.new_ticket)
-        toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
-
         selectDateEditText.setOnClickListener {
             showDatePicker()
         }
@@ -75,20 +92,11 @@ class NewTicketActivity : AppCompatActivity() {
             selectDateEditText.setText(it)
         })
 
-        saveButton.setOnClickListener {
-            viewModel.addTicket(
-                clientNameEditText.text.toString(),
-                addressEditText.text.toString(),
-                phoneEditText.text.toString(),
-                notesEditText.text.toString(),
-                reasonsForCallEditText.text.toString(),
-            )
-        }
 
         viewModel.newTicketFormState.observe(this, Observer {
             val formState = it ?: return@Observer
 
-            if(formState.isTicketAdded) {
+            if (formState.isTicketAdded) {
                 val materialDialog = MaterialDialog(this)
                     .title(text = getString(R.string.ticket_added))
                     .message(text = getString(R.string.ticket_added_message))
@@ -104,27 +112,27 @@ class NewTicketActivity : AppCompatActivity() {
 
             binding.scrollView.smoothScrollTo(0, 0)
 
-            clientNameTextInput.error = when(formState.clientNameError) {
+            clientNameTextInput.error = when (formState.clientNameError) {
                 null -> null
                 else -> getString(formState.clientNameError)
             }
-            addressTextInput.error = when(formState.addressError) {
+            addressTextInput.error = when (formState.addressError) {
                 null -> null
                 else -> getString(formState.addressError)
             }
-            selectDateTextInput.error = when(formState.dateError) {
+            selectDateTextInput.error = when (formState.dateError) {
                 null -> null
                 else -> getString(formState.dateError)
             }
-            phoneTextInput.error = when(formState.phoneError) {
+            phoneTextInput.error = when (formState.phoneError) {
                 null -> null
                 else -> getString(formState.phoneError)
             }
         })
-
     }
 
-    private fun resetForm() {
+
+    protected fun resetForm() {
         viewModel.handledNewTicket()
 
         clientNameEditText.setText("")
@@ -140,7 +148,7 @@ class NewTicketActivity : AppCompatActivity() {
         binding.scrollView.smoothScrollTo(0, 0)
     }
 
-    private fun showDatePicker() {
+    protected fun showDatePicker() {
         val constraintsBuilder = CalendarConstraints.Builder()
             .setValidator(DateValidatorPointForward.now())
         val datePicker = MaterialDatePicker.Builder.datePicker()
