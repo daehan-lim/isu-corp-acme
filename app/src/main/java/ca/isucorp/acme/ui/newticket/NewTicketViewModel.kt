@@ -39,6 +39,10 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
         _dateText.value = "$dateString, 12:00 PM"
     }
 
+    open fun setDate(date: String) {
+        _dateText.value = date
+    }
+
     /**
      * Get Date object given dateInMillis, regardless of daylight savings time
      * @param dateInMillis The date in milliseconds

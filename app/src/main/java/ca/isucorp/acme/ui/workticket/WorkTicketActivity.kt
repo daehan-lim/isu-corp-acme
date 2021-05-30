@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityWorkTicketBinding
+import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
 import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.ui.editeticket.EditTicketActivity
 import ca.isucorp.acme.util.*
@@ -70,7 +71,9 @@ class WorkTicketActivity : AppCompatActivity() {
         }
 
         editTicketButton.setOnClickListener {
-            startActivity(Intent(applicationContext, EditTicketActivity::class.java))
+            startActivity(Intent(applicationContext, EditTicketActivity::class.java).apply {
+                putExtra(EXTRA_TICKET, intent?.getSerializableExtra(EXTRA_TICKET))
+            })
         }
 
         setBottomImageLogoCenter()

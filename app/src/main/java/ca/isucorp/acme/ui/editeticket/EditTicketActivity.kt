@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
+import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ActivityNewTicketBinding
+import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
@@ -38,7 +40,15 @@ class EditTicketActivity : NewTicketActivity() {
 
         binding.layoutSimpleAppBar.toolbar.findViewById<TextView>(R.id.toolbar_title).text = getString(R.string.edit_ticket)
 
-        
+        val ticket = intent?.getSerializableExtra(EXTRA_TICKET) as Ticket
+        clientNameEditText.setText(ticket.clientName)
+        addressEditText.setText(ticket.address)
+
+        viewModel.setDate(ticket.date)
+
+        phoneEditText.setText(ticket.phone)
+        notesEditText.setText(ticket.notes)
+        reasonsForCallEditText.setText(ticket.reasonsForCall)
 
     }
 
