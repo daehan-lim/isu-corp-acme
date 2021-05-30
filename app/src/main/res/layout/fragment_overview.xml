@@ -157,13 +157,13 @@
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_notes"
+            app:layout_constraintBottom_toBottomOf="@+id/button_get_directions"
             android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="89 Diagnostic Fee. Very Useful. Python is an incredibly versatile, expansive language which, due to its similarity to everyday
 language, is surprisingly easy to learn even for inexperienced programmers."
-            android:lines="4"
             android:scrollbars = "vertical"
             style="@style/overview_normal_text"
-            android:nestedScrollingEnabled="true"
             />
 
         <View
@@ -172,7 +172,7 @@ language, is surprisingly easy to learn even for inexperienced programmers."
             android:layout_height="20dp"
             app:layout_constraintTop_toBottomOf="@id/text_notes"
             android:background="@color/list_background_grey"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
             />
 
         <TextView
