@@ -7,7 +7,6 @@ import android.os.Looper
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -15,14 +14,8 @@ import androidx.navigation.ui.setupWithNavController
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityWorkTicketBinding
 import ca.isucorp.acme.ui.directions.GetDirectionsActivity
+import ca.isucorp.acme.ui.editeticket.EditTicketActivity
 import ca.isucorp.acme.util.*
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
 
 
 class WorkTicketActivity : AppCompatActivity() {
@@ -40,7 +33,8 @@ class WorkTicketActivity : AppCompatActivity() {
         val toolbar = binding.layoutSimpleAppBar.toolbar
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.work_ticket)
-        toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
+        setSupportActionBar(toolbar)
+        title = ""
 
         val editTicketButton = toolbar.findViewById<ImageView>(R.id.button_edit_ticket)
         val dropdownMenuButton = toolbar.findViewById<ImageView>(R.id.button_menu)
