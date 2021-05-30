@@ -77,8 +77,8 @@
         <View
             android:id="@+id/overview_first_divider_view"
             android:layout_width="match_parent"
-            android:layout_height="0.8dp"
-            android:background="@color/disabled_grey"
+            android:layout_height="@dimen/overview_divider_size"
+            android:background="@color/lighter_grey"
             app:layout_constraintTop_toBottomOf="@id/text_scheduled_for"
             android:layout_marginTop="45dp"
             />
@@ -164,6 +164,16 @@
 language, is surprisingly easy to learn even for inexperienced programmers."
             android:scrollbars = "vertical"
             style="@style/overview_normal_text"
+            />
+
+        <View
+            android:id="@+id/overview_vertical_divider_view"
+            android:layout_width="@dimen/overview_divider_size"
+            android:layout_height="0dp"
+            android:background="@color/lighter_grey"
+            app:layout_constraintTop_toBottomOf="@id/overview_first_divider_view"
+            app:layout_constraintBottom_toTopOf="@id/overview_second_divider_view"
+            app:layout_constraintStart_toStartOf="@id/guideline_center"
             />
 
         <View

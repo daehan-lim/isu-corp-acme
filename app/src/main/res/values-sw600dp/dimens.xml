@@ -74,4 +74,5 @@
     <dimen name="overview_notes_size">28dp</dimen>
 
     <dimen name="overview_reason_for_call_text_size">26sp</dimen>
+    <dimen name="overview_divider_size">1.5dp</dimen>
 </resources>

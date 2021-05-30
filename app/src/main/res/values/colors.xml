@@ -26,4 +26,6 @@
     <color name="snackbar_action">#2CB7B9</color>
 
     <color name="no_connection_grey_color">#6A6A6A</color>
+
+    <color name="lighter_grey">#BFBFBF</color>
 </resources>
