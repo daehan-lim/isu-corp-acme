@@ -26,8 +26,6 @@ class OverviewFragment:  Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentOverviewBinding.inflate(layoutInflater)
 
-        binding.textNotes.movementMethod = ScrollingMovementMethod()
-        binding.textNotes.makeScrollableInsideScrollView()
 
         val ticket = activity?.intent?.getSerializableExtra(EXTRA_TICKET) as Ticket
 
@@ -66,6 +64,11 @@ class OverviewFragment:  Fragment() {
         binding.textReasonForCall.text = ticket.reasonsForCall
 
         binding.textTicketId.text = getString(R.string.ticket_id_formatted, ticket.id)
+
+        if(binding.textNotes.text.length >= 25) {
+            binding.textNotes.movementMethod = ScrollingMovementMethod()
+            binding.textNotes.makeScrollableInsideScrollView()
+        }
         return binding.root
     }
 }
