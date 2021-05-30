@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
@@ -23,7 +22,6 @@ import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.ui.workticket.WorkTicketActivity
-import ca.isucorp.acme.util.increaseMenuItemTextSize
 import ca.isucorp.acme.util.showDropdownMenu
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
@@ -96,7 +94,9 @@ class MainActivity : AppCompatActivity() {
                 popup.setOnMenuItemClickListener { item: MenuItem? ->
                     when (item!!.itemId) {
                         R.id.action_work_ticker -> {
-                            Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
+                                putExtra(EXTRA_TICKET, viewModel.tickets.value?.last())
+                            })
                         }
                         R.id.action_get_directions -> {
                             startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
