@@ -62,4 +62,16 @@
     <dimen name="design_bottom_navigation_margin" tools:override="true">12dp</dimen>
     <dimen name="design_bottom_navigation_active_text_size1">22sp</dimen>
     <dimen name="design_bottom_navigation_text_size1">20sp</dimen>
+
+    <dimen name="fragment_overview_horizontal_margin">46dp</dimen>
+    <dimen name="fragment_overview_heading_margin_top">16dp</dimen>
+    <dimen name="fragment_overview_client_margin_top">10dp</dimen>
+
+    <dimen name="ic_overview_phone_size">31dp</dimen>
+    <dimen name="fragment_overview_heading_text_size">24sp</dimen>
+    <dimen name="overview_normal_text_size">28sp</dimen>
+    <dimen name="text_overview_phone_size">22sp</dimen>
+    <dimen name="overview_notes_size">28dp</dimen>
+
+    <dimen name="overview_reason_for_call_text_size">26sp</dimen>
 </resources>

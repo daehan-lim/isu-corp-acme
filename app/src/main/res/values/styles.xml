@@ -37,4 +37,24 @@
         <item name="android:textSize">@dimen/design_bottom_navigation_active_text_size1</item>
     </style>
 
+    <style name="overview_heading_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/fragment_overview_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/fragment_overview_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/fragment_overview_heading_margin_top</item>
+        <item name="android:fontFamily">@font/sfpro_display_regular</item>
+        <item name="android:textSize">@dimen/fragment_overview_heading_text_size</item>
+    </style>
+
+    <style name="overview_normal_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/fragment_overview_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/fragment_overview_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/fragment_overview_client_margin_top</item>
+        <item name="android:fontFamily">@font/sfpro_display_regular</item>
+        <item name="android:textSize">@dimen/overview_normal_text_size</item>
+    </style>
+
 </resources>
