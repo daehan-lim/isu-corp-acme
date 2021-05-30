@@ -29,6 +29,8 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 const val WRITE_TO_CALENDAR_PERMISSION_CODE = 100
+const val EXTRA_TICKET = "ca.isucorp.acme.ui.dashboard.MainActivity.TICKET"
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -99,7 +101,9 @@ class MainActivity : AppCompatActivity() {
                 val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
                 startActivity(callIntent)
             }, TicketsAdapter.ViewDetailsListener {
-                startActivity(Intent(applicationContext, WorkTicketActivity::class.java))
+                startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
+                    putExtra(EXTRA_TICKET, it)
+                })
             })
             binding.recyclerView.adapter = adapter
 

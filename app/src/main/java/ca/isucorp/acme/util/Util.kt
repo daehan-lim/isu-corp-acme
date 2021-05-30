@@ -51,7 +51,13 @@ const val TIME_PATTERN = "h:mm a"
 /**
  * Pattern to show date and time combining DAY_SHORT_MONTH_YEAR_PATTERN and TIME_PATTERN
  */
-const val DATE_AND_TIME_PATTERN = "$DAY_SHORT_MONTH_YEAR_PATTERN, $TIME_PATTERN"
+const val SHORT_DATE_AND_TIME_PATTERN = "$DAY_SHORT_MONTH_YEAR_PATTERN, $TIME_PATTERN"
+
+/**
+ * Pattern to show full date and time
+ * Example: Saturday, Dec 24, 2016  11:35 AM
+ */
+const val FULL_DATE_AND_TIME_PATTERN = "EEE, MMM d, yyyy  $TIME_PATTERN"
 
 /**
  * Sets a span to underline the TextView's text

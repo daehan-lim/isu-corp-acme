@@ -1,6 +1,7 @@
 package ca.isucorp.acme.database.model
 
 import androidx.room.*
+import java.io.Serializable
 import java.util.*
 
 
@@ -26,4 +27,4 @@ data class Ticket (
 
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null,
-)
+): Serializable
