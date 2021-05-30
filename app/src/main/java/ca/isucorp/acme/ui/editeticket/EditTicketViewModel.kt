@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.database.model.Ticket
-import ca.isucorp.acme.ui.newticket.NewTicketFormState
+import ca.isucorp.acme.ui.newticket.ManageTicketFormState
 
 import ca.isucorp.acme.ui.newticket.NewTicketViewModel
 import kotlinx.coroutines.launch
@@ -19,9 +19,20 @@ class EditTicketViewModel(application: Application) : NewTicketViewModel(applica
         coroutineScope.launch {
             try {
                 ticketRepository.updateTicket(ticket)
-                _newTicketFormState.value = NewTicketFormState(isTicketEdited = true)
+                _manageTicketFormState.value = ManageTicketFormState(isTicketEdited = true)
             } catch (e: Exception) {
-                _newTicketFormState.value = NewTicketFormState(isTicketEdited = false)
+                _manageTicketFormState.value = ManageTicketFormState(isTicketEdited = false)
+            }
+        }
+    }
+
+    fun removeTicket(id: Long) {
+        coroutineScope.launch {
+            try {
+                ticketRepository.removeTicket(id)
+                _manageTicketFormState.value = ManageTicketFormState(isTicketRemoved = true)
+            } catch (e: Exception) {
+                _manageTicketFormState.value = ManageTicketFormState(isTicketRemoved = false)
             }
         }
     }

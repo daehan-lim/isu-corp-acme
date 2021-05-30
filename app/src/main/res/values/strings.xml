@@ -48,6 +48,8 @@
     <string name="ticket_edited">Ticket edited successfully</string>
     <string name="ticket_added_message">Your ticket was added correctly. You can now add another ticket or go back to the dashboard</string>
     <string name="ticket_edited_message">Your ticket was updated correctly.</string>
+    <string name="ticket_removed">Ticket removed successfully</string>
+    <string name="ticket_removed_message">Your ticket was removed correctly.</string>
     <string name="no_tickets_to_show">There are no tickets yet</string>
     <string name="add_tickets">Add new tickets and you will see them here</string>
     <string name="client_name_invalid">The name should contain only letters</string>
@@ -74,6 +76,8 @@
     <string name="sync_sucesssful_message">Your due tickets were added to your device calendar.</string>
     <string name="sync_with_calendar">Sync with device calendar?</string>
     <string name="sync_with_calendar_message">This will add your due tickets to your device calendar. Are you sure you want to sync?</string>
+    <string name="remove_ticker">Delete ticket?</string>
+    <string name="remove_ticker_message">This will remove your ticket permanently. Are you sure you want to delete it?</string>
     <string name="no_connection">Connection Failed</string>
     <string name="connect_to_internet">Check your internet connection and try again by refreshing this screen</string>
     <string name="permission_location_rationale">Permission is needed to access your location and get directions on the map</string>

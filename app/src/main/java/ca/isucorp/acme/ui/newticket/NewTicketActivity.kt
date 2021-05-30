@@ -65,7 +65,7 @@ open class NewTicketActivity : AppCompatActivity() {
                 )
             }
 
-            viewModel.newTicketFormState.observe(this, Observer {
+            viewModel.manageTicketFormState.observe(this, Observer {
                 val formState = it ?: return@Observer
 
                 if (formState.isTicketAdded) {
@@ -90,7 +90,7 @@ open class NewTicketActivity : AppCompatActivity() {
 
     }
 
-    protected open fun updateFieldsWithErrorMessage(formState: NewTicketFormState) {
+    protected open fun updateFieldsWithErrorMessage(formState: ManageTicketFormState) {
         clientNameTextInput.error = when (formState.clientNameError) {
             null -> null
             else -> getString(formState.clientNameError)

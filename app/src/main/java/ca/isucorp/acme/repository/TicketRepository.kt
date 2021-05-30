@@ -54,4 +54,10 @@ class TicketRepository(private val database: AcmeDatabase) {
         }
     }
 
+    suspend fun removeTicket(id: Long) {
+        withContext(Dispatchers.IO) {
+            database.ticketDao.remove(id)
+        }
+    }
+
 }

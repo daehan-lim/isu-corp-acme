@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
+@Suppress("PropertyName")
 open class NewTicketViewModel(application: Application) : DbAccessViewModel(application) {
 
     protected open val _dateText = MutableLiveData<String>()
@@ -27,9 +28,9 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
     protected open val ticketRepository: TicketRepository
         get() = TicketRepository(database)
 
-    protected open val _newTicketFormState = MutableLiveData<NewTicketFormState?>()
-    open val newTicketFormState: LiveData<NewTicketFormState?>
-        get() = _newTicketFormState
+    protected open val _manageTicketFormState = MutableLiveData<ManageTicketFormState?>()
+    open val manageTicketFormState: LiveData<ManageTicketFormState?>
+        get() = _manageTicketFormState
 
 
     open fun setDate(timeInMillis: Long) {
@@ -88,12 +89,12 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
                 val id = ticketRepository.addTicket(clientName, address, _dateText.value ?: "", phone, notes, reasonsForCall)
                 val addedTicket = ticketRepository.findTicket(id)
                 if(addedTicket != null) {
-                    _newTicketFormState.value = NewTicketFormState(isTicketAdded = true)
+                    _manageTicketFormState.value = ManageTicketFormState(isTicketAdded = true)
                 } else {
-                    _newTicketFormState.value = NewTicketFormState(isTicketAdded = false)
+                    _manageTicketFormState.value = ManageTicketFormState(isTicketAdded = false)
                 }
             } catch (e: Exception) {
-                _newTicketFormState.value = NewTicketFormState(isTicketAdded = false)
+                _manageTicketFormState.value = ManageTicketFormState(isTicketAdded = false)
             }
         }
     }
@@ -101,22 +102,22 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
     protected open fun isFormValid(clientName: String, address: String, phone: String): Boolean {
         val clientNameErrorId = clientNameError(clientName)
         if (clientNameErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(clientNameError = clientNameErrorId)
+            _manageTicketFormState.value = ManageTicketFormState(clientNameError = clientNameErrorId)
             return false
         }
         val addressErrorId = addressError(address)
         if (addressErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(addressError = addressErrorId)
+            _manageTicketFormState.value = ManageTicketFormState(addressError = addressErrorId)
             return false
         }
         val dateErrorId = dateError(_dateText.value ?: "")
         if (dateErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(dateError = dateErrorId)
+            _manageTicketFormState.value = ManageTicketFormState(dateError = dateErrorId)
             return false
         }
         val phoneErrorId = phoneError(phone)
         if (phoneErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(phoneError = phoneErrorId)
+            _manageTicketFormState.value = ManageTicketFormState(phoneError = phoneErrorId)
             return false
         }
         return true
@@ -179,7 +180,7 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
 
 
     fun handledNewTicket() {
-        _newTicketFormState.value = null
+        _manageTicketFormState.value = null
     }
 
 
