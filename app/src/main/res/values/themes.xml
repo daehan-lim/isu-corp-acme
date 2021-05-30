@@ -16,6 +16,7 @@
         <item name="md_corner_radius">16dp</item>
         <item name="md_font_title">@font/sfpro_display_regular</item>
         <item name="md_font_body">@font/sfpro_display_regular</item>
+
     </style>
 
     <style name="Theme.ACME.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -25,6 +26,7 @@
     <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimary">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/date_picker_text_size</item>
     </style>
 
     <style name="Theme.ACME.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -32,6 +34,7 @@
         <item name="helperTextTextAppearance">@style/TextInputHint</item>
         <item name="counterTextAppearance">@style/TextInputCounter</item>
     </style>
+
 
 
 </resources>
