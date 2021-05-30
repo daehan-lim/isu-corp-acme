@@ -7,8 +7,10 @@ import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.method.ScrollingMovementMethod
 import android.text.style.RelativeSizeSpan
 import android.text.style.UnderlineSpan
+import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.PopupMenu
@@ -166,4 +168,22 @@ fun convertToLocalDateTime(date: Date?): LocalDateTime {
     return Instant.ofEpochMilli(date?.time ?: Calendar.getInstance().timeInMillis)
         .atZone(ZoneId.systemDefault())
         .toLocalDateTime()
+}
+
+/**
+ * If this [TextView] is placed inside [ScrollView] it will be allowed to scroll inside it
+ */
+fun TextView.makeScrollableInsideScrollView() {
+    movementMethod = ScrollingMovementMethod()
+    setOnTouchListener { v, event ->
+        v.parent.requestDisallowInterceptTouchEvent(true)
+        when (event.action and MotionEvent.ACTION_MASK) {
+            MotionEvent.ACTION_UP -> {
+                v.parent.requestDisallowInterceptTouchEvent(false)
+                //It is required to call performClick() in onTouch event.
+                performClick()
+            }
+        }
+        false
+    }
 }
