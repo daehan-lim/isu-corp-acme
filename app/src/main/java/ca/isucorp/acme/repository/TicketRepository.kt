@@ -42,6 +42,12 @@ class TicketRepository(private val database: AcmeDatabase) {
         }
     }
 
+    suspend fun updateTicket(ticket: Ticket) {
+        withContext(Dispatchers.IO) {
+            database.ticketDao.insert(ticket)
+        }
+    }
+
     suspend fun findTicket(id: Long): Ticket? {
         return withContext(Dispatchers.IO) {
             database.ticketDao.findTicket(id)

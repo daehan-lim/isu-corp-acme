@@ -45,7 +45,9 @@
     <string name="select_time">Select ticket scheduled time</string>
     <string name="wrong_phone">Write a valid phone number</string>
     <string name="ticket_added">Ticket added successfully</string>
+    <string name="ticket_edited">Ticket edited successfully</string>
     <string name="ticket_added_message">Your ticket was added correctly. You can now add another ticket or go back to the dashboard</string>
+    <string name="ticket_edited_message">Your ticket was updated correctly.</string>
     <string name="no_tickets_to_show">There are no tickets yet</string>
     <string name="add_tickets">Add new tickets and you will see them here</string>
     <string name="client_name_invalid">The name should contain only letters</string>

@@ -3,13 +3,27 @@ package ca.isucorp.acme.ui.editeticket
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ca.isucorp.acme.database.model.Ticket
+import ca.isucorp.acme.ui.newticket.NewTicketFormState
 
 import ca.isucorp.acme.ui.newticket.NewTicketViewModel
+import kotlinx.coroutines.launch
 
 class EditTicketViewModel(application: Application) : NewTicketViewModel(application) {
 
-    fun editTicket() {
-
+    fun editTicket(clientName: String, address: String, phone: String, notes: String, reasonsForCall: String, id: Long) {
+        if (!isFormValid(clientName, address, phone)) {
+            return
+        }
+        val ticket = Ticket(clientName, address, _dateText.value ?: "", phone, notes, reasonsForCall, id)
+        coroutineScope.launch {
+            try {
+                ticketRepository.updateTicket(ticket)
+                _newTicketFormState.value = NewTicketFormState(isTicketEdited = true)
+            } catch (e: Exception) {
+                _newTicketFormState.value = NewTicketFormState(isTicketEdited = false)
+            }
+        }
     }
 
 

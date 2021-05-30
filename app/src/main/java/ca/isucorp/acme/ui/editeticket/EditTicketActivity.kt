@@ -4,25 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.database.model.Ticket
-import ca.isucorp.acme.databinding.ActivityNewTicketBinding
 import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
 
 
 class EditTicketActivity : NewTicketActivity() {
@@ -49,6 +38,39 @@ class EditTicketActivity : NewTicketActivity() {
         phoneEditText.setText(ticket.phone)
         notesEditText.setText(ticket.notes)
         reasonsForCallEditText.setText(ticket.reasonsForCall)
+
+        saveButton.setOnClickListener {
+            viewModel.editTicket(
+                clientNameEditText.text.toString(),
+                addressEditText.text.toString(),
+                phoneEditText.text.toString(),
+                notesEditText.text.toString(),
+                reasonsForCallEditText.text.toString(),
+                ticket.id!!
+            )
+        }
+
+        viewModel.newTicketFormState.observe(this, Observer {
+            val formState = it ?: return@Observer
+
+            if (formState.isTicketEdited) {
+                val materialDialog = MaterialDialog(this)
+                    .title(text = getString(R.string.ticket_edited))
+                    .message(text = getString(R.string.ticket_edited_message))
+                    .positiveButton(R.string.accept) {
+                        finish()
+                        goBackWithAnimation(this, DEFAULT_GO_BACK_ANIMATION)
+                    }
+                materialDialog.setOnCancelListener {
+                    finish()
+                    goBackWithAnimation(this, DEFAULT_GO_BACK_ANIMATION)
+                }
+                materialDialog.show()
+                return@Observer
+            }
+
+            updateFieldsWithErrorMessage(formState)
+        })
 
     }
 

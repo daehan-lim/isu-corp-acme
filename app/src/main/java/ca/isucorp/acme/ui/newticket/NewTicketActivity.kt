@@ -37,6 +37,7 @@ open class NewTicketActivity : AppCompatActivity() {
     protected open lateinit var reasonsForCallTextInput: TextInputLayout
     protected open lateinit var reasonsForCallEditText: TextInputEditText
 
+
     protected open val viewModel: NewTicketViewModel by lazy {
         ViewModelProvider(this, NewTicketViewModel.Factory(application)).get(NewTicketViewModel::class.java)
     }
@@ -53,15 +54,59 @@ open class NewTicketActivity : AppCompatActivity() {
 
         initialize()
 
-        saveButton.setOnClickListener {
-            viewModel.addTicket(
-                clientNameEditText.text.toString(),
-                addressEditText.text.toString(),
-                phoneEditText.text.toString(),
-                notesEditText.text.toString(),
-                reasonsForCallEditText.text.toString(),)
+        if(viewModel !is EditTicketViewModel) {
+            saveButton.setOnClickListener {
+                viewModel.addTicket(
+                    clientNameEditText.text.toString(),
+                    addressEditText.text.toString(),
+                    phoneEditText.text.toString(),
+                    notesEditText.text.toString(),
+                    reasonsForCallEditText.text.toString(),
+                )
+            }
+
+            viewModel.newTicketFormState.observe(this, Observer {
+                val formState = it ?: return@Observer
+
+                if (formState.isTicketAdded) {
+                    val materialDialog = MaterialDialog(this)
+                        .title(text = getString(R.string.ticket_added))
+                        .message(text = getString(R.string.ticket_added_message))
+                        .positiveButton(R.string.accept) {
+                            resetForm()
+                        }
+                    materialDialog.setOnCancelListener {
+                        resetForm()
+                    }
+                    materialDialog.show()
+                    return@Observer
+                }
+
+                binding.scrollView.smoothScrollTo(0, 0)
+
+                updateFieldsWithErrorMessage(formState)
+            })
         }
 
+    }
+
+    protected open fun updateFieldsWithErrorMessage(formState: NewTicketFormState) {
+        clientNameTextInput.error = when (formState.clientNameError) {
+            null -> null
+            else -> getString(formState.clientNameError)
+        }
+        addressTextInput.error = when (formState.addressError) {
+            null -> null
+            else -> getString(formState.addressError)
+        }
+        selectDateTextInput.error = when (formState.dateError) {
+            null -> null
+            else -> getString(formState.dateError)
+        }
+        phoneTextInput.error = when (formState.phoneError) {
+            null -> null
+            else -> getString(formState.phoneError)
+        }
     }
 
     protected open fun initialize() {
@@ -89,44 +134,6 @@ open class NewTicketActivity : AppCompatActivity() {
 
         viewModel.dateText.observe(this, {
             selectDateEditText.setText(it)
-        })
-
-
-        viewModel.newTicketFormState.observe(this, Observer {
-            val formState = it ?: return@Observer
-
-            if (formState.isTicketAdded) {
-                val materialDialog = MaterialDialog(this)
-                    .title(text = getString(R.string.ticket_added))
-                    .message(text = getString(R.string.ticket_added_message))
-                    .positiveButton(R.string.accept) {
-                        resetForm()
-                    }
-                materialDialog.setOnCancelListener {
-                    resetForm()
-                }
-                materialDialog.show()
-                return@Observer
-            }
-
-            binding.scrollView.smoothScrollTo(0, 0)
-
-            clientNameTextInput.error = when (formState.clientNameError) {
-                null -> null
-                else -> getString(formState.clientNameError)
-            }
-            addressTextInput.error = when (formState.addressError) {
-                null -> null
-                else -> getString(formState.addressError)
-            }
-            selectDateTextInput.error = when (formState.dateError) {
-                null -> null
-                else -> getString(formState.dateError)
-            }
-            phoneTextInput.error = when (formState.phoneError) {
-                null -> null
-                else -> getString(formState.phoneError)
-            }
         })
     }
 

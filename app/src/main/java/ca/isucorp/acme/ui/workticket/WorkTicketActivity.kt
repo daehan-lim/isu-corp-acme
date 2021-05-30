@@ -71,6 +71,7 @@ class WorkTicketActivity : AppCompatActivity() {
         }
 
         editTicketButton.setOnClickListener {
+            finish()
             startActivity(Intent(applicationContext, EditTicketActivity::class.java).apply {
                 putExtra(EXTRA_TICKET, intent?.getSerializableExtra(EXTRA_TICKET))
             })

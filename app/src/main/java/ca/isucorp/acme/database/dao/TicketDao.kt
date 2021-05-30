@@ -1,10 +1,7 @@
 package ca.isucorp.acme.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
 
@@ -14,6 +11,9 @@ interface TicketDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(ticket: Ticket): Long
+
+    @Update
+    suspend fun update(ticket: Ticket)
 
     @Query("SELECT * FROM ticket_table WHERE id = :id")
     fun findTicket(id: Long): Ticket?

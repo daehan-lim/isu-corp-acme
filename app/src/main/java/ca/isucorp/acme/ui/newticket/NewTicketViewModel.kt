@@ -80,24 +80,7 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
 
 
     fun addTicket(clientName: String, address: String, phone: String, notes: String, reasonsForCall: String) {
-        val clientNameErrorId = clientNameError(clientName)
-        if (clientNameErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(clientNameError = clientNameErrorId)
-            return
-        }
-        val addressErrorId = addressError(address)
-        if(addressErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(addressError = addressErrorId)
-            return
-        }
-        val dateErrorId = dateError(_dateText.value ?: "")
-        if(dateErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(dateError = dateErrorId)
-            return
-        }
-        val phoneErrorId = phoneError(phone)
-        if(phoneErrorId != null) {
-            _newTicketFormState.value = NewTicketFormState(phoneError = phoneErrorId)
+        if (!isFormValid(clientName, address, phone)) {
             return
         }
         coroutineScope.launch {
@@ -113,6 +96,30 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
                 _newTicketFormState.value = NewTicketFormState(isTicketAdded = false)
             }
         }
+    }
+
+    protected open fun isFormValid(clientName: String, address: String, phone: String): Boolean {
+        val clientNameErrorId = clientNameError(clientName)
+        if (clientNameErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(clientNameError = clientNameErrorId)
+            return false
+        }
+        val addressErrorId = addressError(address)
+        if (addressErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(addressError = addressErrorId)
+            return false
+        }
+        val dateErrorId = dateError(_dateText.value ?: "")
+        if (dateErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(dateError = dateErrorId)
+            return false
+        }
+        val phoneErrorId = phoneError(phone)
+        if (phoneErrorId != null) {
+            _newTicketFormState.value = NewTicketFormState(phoneError = phoneErrorId)
+            return false
+        }
+        return true
     }
 
     /**
