@@ -55,7 +55,6 @@
             app:layout_constraintTop_toTopOf="@id/image_phone"
             tools:text="519 733 8727"
             android:fontFamily="@font/sfpro_display_regular"
-            android:textIsSelectable="true"
             android:layout_marginStart="10dp"
             android:textSize="@dimen/text_overview_phone_size"
             />
