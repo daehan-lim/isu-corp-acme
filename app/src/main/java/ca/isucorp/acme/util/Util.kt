@@ -2,6 +2,7 @@ package ca.isucorp.acme.util
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.provider.CalendarContract
 import android.text.Editable
 import android.text.Spannable
@@ -10,15 +11,15 @@ import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.text.style.RelativeSizeSpan
 import android.text.style.UnderlineSpan
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import ca.isucorp.acme.R
+import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.ui.login.LoginSignupViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -79,10 +80,10 @@ fun goBackWithAnimation(activity: AppCompatActivity, anim: Int?) {
 fun Toolbar.setUpInActivity(activity: AppCompatActivity, goBackAnimation: Int?) {
     activity.setSupportActionBar(this)
     title = ""
-    setNavigationIcon(R.drawable.ic_arrow_left_back)
+    /*setNavigationIcon(R.drawable.ic_arrow_left_back)
     setNavigationOnClickListener {
         goBackWithAnimation(activity, goBackAnimation)
-    }
+    }*/
 }
 
 /**
@@ -192,4 +193,15 @@ fun TextView.makeScrollableInsideScrollView() {
         }
         false
     }
+}
+
+fun showDropdownMenu(popup: PopupMenu, activity: AppCompatActivity, isTabletSize: Boolean) {
+    popup.inflate(R.menu.dropdown_menu)
+    if(isTabletSize) {
+        increaseMenuItemTextSize(popup, R.id.action_work_ticker)
+        increaseMenuItemTextSize(popup, R.id.action_get_directions)
+        increaseMenuItemTextSize(popup, R.id.action_dashboard)
+    }
+
+    popup.show()
 }

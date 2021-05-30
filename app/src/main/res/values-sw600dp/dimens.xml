@@ -77,4 +77,5 @@
     <dimen name="overview_divider_size">1.5dp</dimen>
 
     <dimen name="date_picker_text_size">19sp</dimen>
+    <dimen name="ic_edit_toolbar_size">37dp</dimen>
 </resources>

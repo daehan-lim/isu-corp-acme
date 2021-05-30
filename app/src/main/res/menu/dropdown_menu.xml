@@ -5,7 +5,12 @@
         android:id="@+id/action_work_ticker"
         android:title="@string/work_ticket" />
     <item
+        android:id="@+id/action_dashboard"
+        android:visible="false"
+        android:title="@string/dashboard" />
+    <item
         android:id="@+id/action_get_directions"
         android:title="@string/get_directions" />
+
 
 </menu>

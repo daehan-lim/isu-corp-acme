@@ -24,6 +24,7 @@ import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.ui.workticket.WorkTicketActivity
 import ca.isucorp.acme.util.increaseMenuItemTextSize
+import ca.isucorp.acme.util.showDropdownMenu
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -90,7 +91,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             hamburgerMenuIcon.setOnClickListener {
-                showDropdownMenu(hamburgerMenuIcon)
+                val popup = PopupMenu(this, hamburgerMenuIcon)
+                showDropdownMenu(popup, this, isTabletSize)
+                popup.setOnMenuItemClickListener { item: MenuItem? ->
+                    when (item!!.itemId) {
+                        R.id.action_work_ticker -> {
+                            Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.action_get_directions -> {
+                            startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
+                        }
+                    }
+                    true
+                }
+                popup.show()
             }
 
             newTicketBarButton.setOnClickListener {
@@ -189,29 +203,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        private fun showDropdownMenu(menuButton: ImageView?) {
-            val popup = PopupMenu(this, menuButton)
-            popup.inflate(R.menu.dropdown_menu)
-
-            if(isTabletSize) {
-                increaseMenuItemTextSize(popup, R.id.action_work_ticker)
-                increaseMenuItemTextSize(popup, R.id.action_get_directions)
-            }
-
-            popup.setOnMenuItemClickListener { item: MenuItem? ->
-                when (item!!.itemId) {
-                    R.id.action_work_ticker -> {
-                        Toast.makeText(this@MainActivity, item.title, Toast.LENGTH_SHORT).show()
-                    }
-                    R.id.action_get_directions -> {
-                        startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
-                    }
-                }
-                true
-            }
-
-            popup.show()
-        }
 
 
 
