@@ -40,9 +40,10 @@
             android:id="@+id/image_phone"
             android:layout_width="@dimen/ic_overview_phone_size"
             android:layout_height="@dimen/ic_overview_phone_size"
-            app:layout_constraintStart_toStartOf="@id/text_client"
-            app:layout_constraintTop_toTopOf="@id/text_phone"
-            android:layout_marginTop="3dp"
+            app:layout_constraintStart_toEndOf="@id/text_client"
+            app:layout_constraintTop_toTopOf="@id/text_client"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             app:srcCompat="@drawable/ic_phone"
             tools:ignore="ContentDescription" />
 
@@ -51,10 +52,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/image_phone"
-            app:layout_constraintEnd_toEndOf="@id/guideline_center"
-            app:layout_constraintTop_toBottomOf="@id/text_client"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="@dimen/fragment_overview_horizontal_margin"
+            app:layout_constraintTop_toTopOf="@id/image_phone"
             tools:text="519 733 8727"
             android:fontFamily="@font/sfpro_display_regular"
             android:layout_marginStart="10dp"
@@ -86,7 +84,7 @@
             android:layout_height="@dimen/overview_divider_size"
             android:background="@color/lighter_grey"
             app:layout_constraintTop_toBottomOf="@id/text_scheduled_for"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="45dp"
             />
 
         <ImageView
@@ -96,7 +94,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/text_heading_address"
             android:layout_marginStart="@dimen/fragment_overview_horizontal_margin"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="5dp"
             app:srcCompat="@drawable/ic_address_calendar"
             tools:ignore="ContentDescription" />
 
@@ -129,11 +127,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline_center"
             android:textAllCaps="false"
-            app:backgroundTint="@color/primaryColor"
+            app:backgroundTint="@color/primaryLightColor"
             app:cornerRadius="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:textSize="@dimen/button_login_text_size"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             app:icon="@drawable/ic_baseline_location_on_24"
             app:iconGravity="end"
             tools:ignore="ContentDescription" />
@@ -187,7 +187,7 @@ language, is surprisingly easy to learn even for inexperienced programmers."
         <View
             android:id="@+id/overview_second_divider_view"
             android:layout_width="match_parent"
-            android:layout_height="13dp"
+            android:layout_height="20dp"
             app:layout_constraintTop_toBottomOf="@id/text_notes"
             android:background="@color/list_background_grey"
             android:layout_marginTop="25dp"
@@ -214,7 +214,7 @@ language, is surprisingly easy to learn even for inexperienced programmers."
             tools:text="-Customer has noticed extremely low water pressure from the sink\n-Precision tune up\n-Estimate to panel upgrade"
             android:textIsSelectable="true"
             android:textSize="@dimen/overview_reason_for_call_text_size"
-            android:layout_marginStart="13dp"
+            android:layout_marginStart="30dp"
             />
 
         <TextView
