@@ -28,4 +28,6 @@
     <color name="no_connection_grey_color">#6A6A6A</color>
 
     <color name="lighter_grey">#BFBFBF</color>
+
+    <color name="medium_grey">#7D7D7D</color>
 </resources>

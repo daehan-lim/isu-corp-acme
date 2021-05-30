@@ -79,7 +79,7 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="@+id/text_client"
                     app:layout_constraintTop_toBottomOf="@+id/text_client"
-                    app:srcCompat="@drawable/ic_baseline_location_on_24"
+                    app:srcCompat="@drawable/ic_baseline_location_on_24_grey"
                     tools:ignore="ContentDescription"
                     />
 
@@ -101,7 +101,7 @@
                     app:layout_constraintStart_toStartOf="@+id/address_icon"
                     app:layout_constraintEnd_toEndOf="@id/address_icon"
                     app:layout_constraintTop_toBottomOf="@id/address_text_view"
-                    app:srcCompat="@drawable/ic_baseline_local_phone_24"
+                    app:srcCompat="@drawable/ic_baseline_local_phone_grey"
                     android:onClick="@{() -> callListener.onClick(ticket)}"
                     app:phoneVisibility="@{ticket}"
                     tools:ignore="ContentDescription" />
@@ -126,7 +126,7 @@
                     app:layout_constraintTop_toBottomOf="@id/phone_icon"
                     app:layout_constraintStart_toStartOf="@+id/address_icon"
                     app:layout_constraintEnd_toEndOf="@id/address_icon"
-                    app:srcCompat="@drawable/ic_time"
+                    app:srcCompat="@drawable/ic_time_grey"
                     tools:ignore="ContentDescription" />
 
                 <TextView

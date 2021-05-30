@@ -225,8 +225,15 @@ language, is surprisingly easy to learn even for inexperienced programmers."
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/fragment_overview_horizontal_margin"
             tools:text="Ticket #32783"
+            android:textColor="@color/medium_grey"
             android:textIsSelectable="true"
             android:textSize="@dimen/overview_reason_for_call_text_size"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@id/text_ticket_id"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

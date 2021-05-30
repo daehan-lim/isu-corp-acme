@@ -104,10 +104,10 @@
                     android:id="@+id/address_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="@+id/text_client"
                     app:layout_constraintTop_toBottomOf="@+id/text_client"
-                    app:srcCompat="@drawable/ic_baseline_location_on_24"
+                    app:srcCompat="@drawable/ic_baseline_location_on_24_grey"
                     tools:ignore="ContentDescription"
                     />
 
@@ -115,7 +115,8 @@
                     android:id="@+id/address_text_view"
                     app:layout_constraintEnd_toEndOf="@+id/text_client"
                     app:layout_constraintStart_toEndOf="@+id/address_icon"
-                    app:layout_constraintTop_toTopOf="@id/address_icon"
+                    app:layout_constraintTop_toBottomOf="@id/text_client"
+                    android:layout_marginTop="10dp"
                     tools:text="11 Westnight Ave Toronto On, N7L 1X1"
                     style="@style/list_item_ticket_general_text"
                     app:address="@{ticket}"
@@ -129,7 +130,7 @@
                     app:layout_constraintStart_toStartOf="@+id/address_icon"
                     app:layout_constraintEnd_toEndOf="@id/address_icon"
                     app:layout_constraintTop_toBottomOf="@id/address_text_view"
-                    app:srcCompat="@drawable/ic_baseline_local_phone_24"
+                    app:srcCompat="@drawable/ic_baseline_local_phone_grey"
                     android:onClick="@{() -> callListener.onClick(ticket)}"
                     app:phoneVisibility="@{ticket}"
                     tools:ignore="ContentDescription" />
@@ -154,7 +155,7 @@
                     app:layout_constraintTop_toBottomOf="@id/phone_icon"
                     app:layout_constraintStart_toStartOf="@+id/phone_icon"
                     app:layout_constraintEnd_toEndOf="@id/phone_icon"
-                    app:srcCompat="@drawable/ic_time"
+                    app:srcCompat="@drawable/ic_time_grey"
                     tools:ignore="ContentDescription" />
 
                 <TextView
