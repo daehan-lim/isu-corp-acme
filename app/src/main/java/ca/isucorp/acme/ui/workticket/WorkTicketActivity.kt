@@ -30,7 +30,7 @@ class WorkTicketActivity : AppCompatActivity() {
         val navController = findNavController(R.id.myNavHostFragment)
         binding.bottomNavigationView.setupWithNavController(navController)
 
-        val toolbar = binding.layoutSimpleAppBar.toolbar
+        val toolbar = binding.layoutWorkTicketAppBar.toolbar
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.work_ticket)
         setSupportActionBar(toolbar)

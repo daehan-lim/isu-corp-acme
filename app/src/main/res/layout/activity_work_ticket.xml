@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <include
-        android:id="@+id/layout_simple_app_bar"
-        layout="@layout/layout_simple_app_bar"
+        android:id="@+id/layout_work_ticket_app_bar"
+        layout="@layout/layout_work_ticket_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/layout_simple_app_bar"
+        app:layout_constraintTop_toBottomOf="@+id/layout_work_ticket_app_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:navGraph="@navigation/navigation"
         tools:ignore="FragmentTagUsage" />

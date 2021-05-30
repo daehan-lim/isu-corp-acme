@@ -60,7 +60,7 @@
     <dimen name="design_bottom_navigation_height" tools:override="true">80dp</dimen>
     <dimen name="design_bottom_navigation_icon_size" tools:override="true">35dp</dimen>
     <dimen name="design_bottom_navigation_margin" tools:override="true">12dp</dimen>
-    <dimen name="design_bottom_navigation_active_text_size1">22sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size1">21sp</dimen>
     <dimen name="design_bottom_navigation_text_size1">20sp</dimen>
 
     <dimen name="fragment_overview_horizontal_margin">46dp</dimen>
@@ -78,4 +78,6 @@
 
     <dimen name="date_picker_text_size">19sp</dimen>
     <dimen name="ic_edit_toolbar_size">37dp</dimen>
+
+    <dimen name="work_ticket_toolbar_title_margin_start">54dp</dimen>
 </resources>

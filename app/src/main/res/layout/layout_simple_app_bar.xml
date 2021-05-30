@@ -19,17 +19,9 @@
         app:contentInsetStartWithNavigation="0dp"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
         <ImageView
-            android:id="@+id/back_menu_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_arrow_left_back"
             android:visibility="gone"
             tools:visibility="visible"
@@ -38,48 +30,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_gravity="center"
             android:textColor="@color/dark_green"
             tools:text="@string/create_account"
             android:textSize="@dimen/toolbar_text_size"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:id="@+id/toolbar_title" />
-
-            <ImageView
-                android:id="@+id/button_edit_ticket"
-                android:layout_width="@dimen/ic_edit_toolbar_size"
-                android:layout_height="@dimen/ic_edit_toolbar_size"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button_menu"
-                app:srcCompat="@drawable/ic_edit"
-                tools:visibility="visible"
-                android:visibility="gone"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="@dimen/main_app_bar_separation_margin"
-                tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/button_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/ic_menu_margin_end"
-            app:srcCompat="@drawable/ic_menu"
-            android:layout_marginTop="2dp"
-            tools:visibility="visible"
-            android:visibility="gone"
-            tools:ignore="ContentDescription" />
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
