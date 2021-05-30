@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.GeolocationPermissions
@@ -13,12 +12,12 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityGetDirectionsBinding
+import ca.isucorp.acme.ui.workticket.EXTRA_ADDRESS
 import ca.isucorp.acme.util.DEFAULT_GO_BACK_ANIMATION
 import ca.isucorp.acme.util.goBackWithAnimation
 import ca.isucorp.acme.util.setUpInActivity
@@ -35,6 +34,7 @@ class GetDirectionsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetDirectionsBinding
     private var connectionOk = true
     private var isTabletSize = false
+    private lateinit var mapUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,14 @@ class GetDirectionsActivity : AppCompatActivity() {
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
         toolBarTitle.text = getString(R.string.get_directions)
         toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
+
+        val address = intent.getStringExtra(EXTRA_ADDRESS)
+        mapUrl = when(address) {
+            null -> BASE_URL
+            else ->{
+                SEARCH_URL + address
+            }
+        }
 
         setUpWebView()
 
@@ -158,13 +166,13 @@ class GetDirectionsActivity : AppCompatActivity() {
                 if(binding.loadingAnimation.loadingAnimation.visibility == View.GONE) {
                     binding.loadingAnimation.loadingAnimation.visibility = View.VISIBLE
                     binding.noConnectionLayout.noConnectionLayout.visibility = View.GONE
-                    this.loadUrl(BASE_URL)
+                    this.loadUrl(mapUrl)
                 } else {
                     binding.swipeRefreshLayout.isRefreshing = false
                 }
             }
 
-            this.loadUrl(BASE_URL)
+            this.loadUrl(mapUrl)
         }
     }
 
@@ -196,8 +204,6 @@ class GetDirectionsActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if(binding.webView.canGoBack()) {
             binding.noConnectionLayout.noConnectionLayout.visibility = View.GONE
-            binding.webView.visibility = View.GONE
-            binding.loadingAnimation.loadingAnimation.visibility = View.VISIBLE
             binding.webView.goBack()
         } else {
             super.onBackPressed()
