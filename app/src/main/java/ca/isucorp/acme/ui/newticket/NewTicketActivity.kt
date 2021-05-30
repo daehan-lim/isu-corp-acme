@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityNewTicketBinding
+import ca.isucorp.acme.ui.editeticket.EditTicketViewModel
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.button.MaterialButton
@@ -21,22 +22,22 @@ import com.google.android.material.timepicker.TimeFormat
 
 
 open class NewTicketActivity : AppCompatActivity() {
-    protected lateinit var binding: ActivityNewTicketBinding
-    protected lateinit var selectDateTextInput: TextInputLayout
-    protected lateinit var selectDateEditText: MaterialAutoCompleteTextView
-    protected lateinit var saveButton: MaterialButton
-    protected lateinit var clientNameTextInput: TextInputLayout
-    protected lateinit var clientNameEditText: TextInputEditText
-    protected lateinit var addressTextInput: TextInputLayout
-    protected lateinit var addressEditText: TextInputEditText
-    protected lateinit var phoneTextInput: TextInputLayout
-    protected lateinit var phoneEditText: TextInputEditText
-    protected lateinit var notesTextInput: TextInputLayout
-    protected lateinit var notesEditText: TextInputEditText
-    protected lateinit var reasonsForCallTextInput: TextInputLayout
-    protected lateinit var reasonsForCallEditText: TextInputEditText
+    protected open lateinit var binding: ActivityNewTicketBinding
+    protected open lateinit var selectDateTextInput: TextInputLayout
+    protected open lateinit var selectDateEditText: MaterialAutoCompleteTextView
+    protected open lateinit var saveButton: MaterialButton
+    protected open lateinit var clientNameTextInput: TextInputLayout
+    protected open lateinit var clientNameEditText: TextInputEditText
+    protected open lateinit var addressTextInput: TextInputLayout
+    protected open lateinit var addressEditText: TextInputEditText
+    protected open lateinit var phoneTextInput: TextInputLayout
+    protected open lateinit var phoneEditText: TextInputEditText
+    protected open lateinit var notesTextInput: TextInputLayout
+    protected open lateinit var notesEditText: TextInputEditText
+    protected open lateinit var reasonsForCallTextInput: TextInputLayout
+    protected open lateinit var reasonsForCallEditText: TextInputEditText
 
-    private val viewModel: NewTicketViewModel by lazy {
+    protected open val viewModel: NewTicketViewModel by lazy {
         ViewModelProvider(this, NewTicketViewModel.Factory(application)).get(NewTicketViewModel::class.java)
     }
 
@@ -44,7 +45,6 @@ open class NewTicketActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewTicketBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val toolbar = binding.layoutSimpleAppBar.toolbar
         val toolBarTitle = toolbar.findViewById<TextView>(R.id.toolbar_title)
@@ -59,8 +59,7 @@ open class NewTicketActivity : AppCompatActivity() {
                 addressEditText.text.toString(),
                 phoneEditText.text.toString(),
                 notesEditText.text.toString(),
-                reasonsForCallEditText.text.toString(),
-            )
+                reasonsForCallEditText.text.toString(),)
         }
 
     }

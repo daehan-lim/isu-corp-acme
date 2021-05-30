@@ -69,6 +69,10 @@ class WorkTicketActivity : AppCompatActivity() {
             popup.show()
         }
 
+        editTicketButton.setOnClickListener {
+            startActivity(Intent(applicationContext, EditTicketActivity::class.java))
+        }
+
         setBottomImageLogoCenter()
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener{

@@ -8,7 +8,9 @@ import ca.isucorp.acme.ui.newticket.NewTicketViewModel
 
 class EditTicketViewModel(application: Application) : NewTicketViewModel(application) {
 
+    fun editTicket() {
 
+    }
 
 
     /**

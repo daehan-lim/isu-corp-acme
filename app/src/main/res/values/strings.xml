@@ -85,4 +85,5 @@
     <string name="scheduled_for">Scheduled For</string>
     <string name="ticket_id_formatted">Ticket #%d</string>
     <string name="dashboard">Dashboard</string>
+    <string name="edit_ticket">Edit Ticket</string>
 </resources>
