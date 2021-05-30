@@ -25,13 +25,15 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/customer_info"
+            android:textIsSelectable="true"
             style="@style/overview_heading_text" />
 
         <TextView
             android:id="@+id/text_client"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_customer_info"
-            android:text="Jessica Green"
+            tools:text="Jessica Green"
+            android:textIsSelectable="true"
             style="@style/overview_normal_text" />
 
         <ImageView
@@ -51,8 +53,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/image_phone"
             app:layout_constraintTop_toTopOf="@id/image_phone"
-            android:text="519 733 8727"
+            tools:text="519 733 8727"
             android:fontFamily="@font/sfpro_display_regular"
+            android:textIsSelectable="true"
             android:layout_marginStart="10dp"
             android:textSize="@dimen/text_overview_phone_size"
             />
@@ -62,6 +65,7 @@
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/scheduled_for"
+            android:textIsSelectable="true"
             style="@style/overview_heading_text" />
 
         <TextView
@@ -69,8 +73,9 @@
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_scheduled_for"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Saturday, Dec 24, 2016  11:35 AM"
+            tools:text="Saturday, Dec 24, 2016  11:35 AM"
             style="@style/overview_normal_text"
+            android:textIsSelectable="true"
             android:layout_width="0dp"
             />
 
@@ -100,6 +105,7 @@
             app:layout_constraintTop_toBottomOf="@id/overview_first_divider_view"
             android:text="@string/address"
             style="@style/overview_heading_text"
+            android:textIsSelectable="true"
             android:layout_marginStart="4dp"
             />
 
@@ -109,7 +115,8 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_address"
             android:layout_width="0dp"
-            android:text="27 Brookview Dr North York, On M6A 2K4"
+            tools:text="27 Brookview Dr North York, On M6A 2K4"
+            android:textIsSelectable="true"
             style="@style/overview_normal_text" />
 
         <com.google.android.material.button.MaterialButton
@@ -149,6 +156,7 @@
             app:layout_constraintTop_toBottomOf="@id/overview_first_divider_view"
             android:text="@string/notes"
             style="@style/overview_heading_text"
+            android:textIsSelectable="true"
             android:layout_marginStart="4dp"
             />
 
@@ -160,7 +168,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/button_get_directions"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="89 Diagnostic Fee. Very Useful. Python is an incredibly versatile, expansive language which, due to its similarity to everyday
+            android:textIsSelectable="true"
+            tools:text="89 Diagnostic Fee. Very Useful. Python is an incredibly versatile, expansive language which, due to its similarity to everyday
 language, is surprisingly easy to learn even for inexperienced programmers."
             android:scrollbars = "vertical"
             style="@style/overview_normal_text"
@@ -190,6 +199,7 @@ language, is surprisingly easy to learn even for inexperienced programmers."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/overview_second_divider_view"
             android:text="@string/reason_for_call_heading"
+            android:textIsSelectable="true"
             style="@style/overview_heading_text"
             android:layout_width="wrap_content"
             />
@@ -202,7 +212,8 @@ language, is surprisingly easy to learn even for inexperienced programmers."
             app:layout_constraintEnd_toStartOf="@id/text_ticket_id"
             android:layout_marginEnd="20dp"
             app:layout_constraintTop_toTopOf="@id/text_heading_reason_for_call"
-            android:text="-Customer has noticed extremely low water pressure from the sink\n-Precision tune up\n-Estimate to panel upgrade"
+            tools:text="-Customer has noticed extremely low water pressure from the sink\n-Precision tune up\n-Estimate to panel upgrade"
+            android:textIsSelectable="true"
             android:textSize="@dimen/overview_reason_for_call_text_size"
             android:layout_marginStart="30dp"
             />
@@ -214,7 +225,8 @@ language, is surprisingly easy to learn even for inexperienced programmers."
             app:layout_constraintBottom_toBottomOf="@id/text_reason_for_call"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/fragment_overview_horizontal_margin"
-            android:text="Ticket #32783"
+            tools:text="Ticket #32783"
+            android:textIsSelectable="true"
             android:textSize="@dimen/overview_reason_for_call_text_size"
             />
 
