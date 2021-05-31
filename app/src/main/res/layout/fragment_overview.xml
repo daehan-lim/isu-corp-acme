@@ -92,6 +92,7 @@
         <TextView
             android:id="@+id/text_heading_address"
             app:layout_constraintStart_toEndOf="@id/image_address"
+            app:layout_constraintEnd_toStartOf="@id/image_get_directions"
             app:layout_constraintTop_toBottomOf="@id/text_scheduled_for"
             android:text="@string/address"
             style="@style/overview_heading_text"
@@ -103,12 +104,23 @@
         <TextView
             android:id="@+id/text_address"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/image_get_directions"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_address"
             android:layout_width="0dp"
             tools:text="27 Brookview Dr North York, On M6A 2K4"
             android:textIsSelectable="true"
             style="@style/overview_normal_text" />
+
+        <ImageView
+            android:id="@+id/image_get_directions"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_address"
+            app:layout_constraintBottom_toBottomOf="@id/text_address"
+            android:layout_marginEnd="@dimen/fragment_overview_horizontal_margin"
+            app:srcCompat="@drawable/ic_directions"
+            tools:ignore="ContentDescription" />
 
 
         <ImageView

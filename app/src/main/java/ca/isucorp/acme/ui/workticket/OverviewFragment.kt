@@ -79,6 +79,8 @@ class OverviewFragment:  Fragment() {
                 binding.textNotes.movementMethod = ScrollingMovementMethod()
                 binding.textNotes.makeScrollableInsideScrollView()
             }
+        } else {
+            binding.imageGetDirections?.setOnClickListener(getDirectionsListener)
         }
         return binding.root
     }
