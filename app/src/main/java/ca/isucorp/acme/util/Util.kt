@@ -163,6 +163,25 @@ fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewMode
 
 }
 
+/**
+ * It inflates  a [PopupMenu] and increases its items' text size if called from a tablet
+ * @param popup The [PopupMenu] to be inflated
+ * @param isTabletSize true if the device is a tablet
+ */
+fun inflateDropdownMenu(popup: PopupMenu, isTabletSize: Boolean) {
+    popup.inflate(R.menu.dropdown_menu)
+    if(isTabletSize) {
+        increaseMenuItemTextSize(popup, R.id.action_work_ticker)
+        increaseMenuItemTextSize(popup, R.id.action_get_directions)
+        increaseMenuItemTextSize(popup, R.id.action_dashboard)
+    }
+}
+
+/**
+ * Increases text size of the dropdown menu items by 50%.
+ * @param popupMenu The menu where the items are
+ * @param menuItemId The id of the menu item whose size is to be increased
+ */
 fun increaseMenuItemTextSize(popupMenu: PopupMenu, menuItemId: Int) {
     val menuItem = popupMenu.menu.findItem(menuItemId)
     val spanString = SpannableString(menuItem.title.toString())

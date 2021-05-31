@@ -22,7 +22,7 @@ import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.ui.workticket.WorkTicketActivity
-import ca.isucorp.acme.util.showDropdownMenu
+import ca.isucorp.acme.util.inflateDropdownMenu
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
 
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         hamburgerMenuIcon.setOnClickListener {
             val popup = PopupMenu(this, hamburgerMenuIcon)
-            showDropdownMenu(popup, this, isTabletSize)
+            inflateDropdownMenu(popup, isTabletSize)
             popup.setOnMenuItemClickListener { item: MenuItem? ->
                 when (item!!.itemId) {
                     R.id.action_work_ticker -> {
