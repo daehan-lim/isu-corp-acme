@@ -12,6 +12,9 @@ import ca.isucorp.acme.util.validateUserFields
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.button.MaterialButton
 
+/**
+ * Login screen, which is the first screen shown in the app
+ */
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginSignupViewModel by lazy {
