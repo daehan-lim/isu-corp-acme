@@ -83,4 +83,8 @@
     <dimen name="ic_edit_toolbar_size">37dp</dimen>
 
     <dimen name="work_ticket_toolbar_title_margin_start">54dp</dimen>
+
+    <dimen name="md_title_textsize" tools:override="true">26sp</dimen>
+    <dimen name="md_message_textsize" tools:override="true">24sp</dimen>
+    <dimen name="md_action_button_textsize" tools:override="true">18sp</dimen>
 </resources>
