@@ -136,7 +136,7 @@
             app:cornerRadius="0dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/button_login_text_size"
+            android:textSize="@dimen/button_get_directions_text_size"
             app:icon="@drawable/ic_baseline_location_on_24"
             app:iconGravity="end"
             tools:ignore="ContentDescription" />
