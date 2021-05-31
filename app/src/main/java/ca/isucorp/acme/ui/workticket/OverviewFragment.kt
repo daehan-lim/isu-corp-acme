@@ -26,13 +26,18 @@ class OverviewFragment:  Fragment() {
     private var isTabletSize: Boolean = false
     private var isLandscape: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentOverviewBinding.inflate(layoutInflater)
 
         isTabletSize = resources.getBoolean(R.bool.isTablet)
         isLandscape = resources.getBoolean(R.bool.isLandscape)
 
-        val ticket = activity?.intent?.getSerializableExtra(EXTRA_TICKET) as Ticket
+        val ticket = (activity?.intent?.getSerializableExtra(EXTRA_TICKET) as? Ticket).apply {
+            if (this == null) {
+                requireActivity().finish()
+                return null
+            }
+        }!!
 
         binding.textClient.text = ticket.clientName
         binding.textPhone.apply {

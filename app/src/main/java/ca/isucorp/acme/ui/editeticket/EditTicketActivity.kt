@@ -32,7 +32,12 @@ class EditTicketActivity : NewTicketActivity() {
 
         binding.layoutSimpleAppBar.toolbar.findViewById<TextView>(R.id.toolbar_title).text = getString(R.string.edit_ticket)
 
-        val ticket = (intent?.getSerializableExtra(EXTRA_TICKET) ?: finish()) as Ticket
+        val ticket = (intent?.getSerializableExtra(EXTRA_TICKET) as? Ticket).apply {
+            if (this == null) {
+                finish()
+                return
+            }
+        }!!
         clientNameEditText.setText(ticket.clientName)
         addressEditText.setText(ticket.address)
 

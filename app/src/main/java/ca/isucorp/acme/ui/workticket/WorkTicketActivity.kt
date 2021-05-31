@@ -38,7 +38,12 @@ class WorkTicketActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = ""
 
-        val ticket = intent?.getSerializableExtra(EXTRA_TICKET) as Ticket
+        val ticket = (intent?.getSerializableExtra(EXTRA_TICKET) as? Ticket).apply {
+            if (this == null) {
+                finish()
+                return
+            }
+        }!!
 
         val editTicketButton = toolbar.findViewById<ImageView>(R.id.button_edit_ticket)
         val dropdownMenuButton = toolbar.findViewById<ImageView>(R.id.button_menu)
