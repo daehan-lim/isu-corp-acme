@@ -25,7 +25,6 @@ import ca.isucorp.acme.ui.workticket.WorkTicketActivity
 import ca.isucorp.acme.util.showDropdownMenu
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 const val WRITE_TO_CALENDAR_PERMISSION_CODE = 100
 const val EXTRA_TICKET = "ca.isucorp.acme.ui.dashboard.MainActivity.TICKET"
@@ -83,128 +82,136 @@ class MainActivity : AppCompatActivity() {
                 .show()
         }
 
-            isTabletSize = resources.getBoolean(R.bool.isTablet)
-            if(isTabletSize) {
-                toolbar.layoutParams.height = resources.getDimension(R.dimen.action_bar_size).toInt()
-            }
-
-            hamburgerMenuIcon.setOnClickListener {
-                val popup = PopupMenu(this, hamburgerMenuIcon)
-                showDropdownMenu(popup, this, isTabletSize)
-                popup.setOnMenuItemClickListener { item: MenuItem? ->
-                    when (item!!.itemId) {
-                        R.id.action_work_ticker -> {
-                            startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
-                                putExtra(EXTRA_TICKET, viewModel.tickets.value?.last())
-                            })
-                        }
-                        R.id.action_get_directions -> {
-                            startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
-                        }
-                    }
-                    true
-                }
-                popup.show()
-            }
-
-            newTicketBarButton.setOnClickListener {
-                startActivity(Intent(applicationContext, NewTicketActivity::class.java))
-            }
-
-            val adapter = TicketsAdapter(TicketsAdapter.CallListener {
-                val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
-                startActivity(callIntent)
-            }, TicketsAdapter.ViewDetailsListener {
-                startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
-                    putExtra(EXTRA_TICKET, it)
-                })
-            })
-            binding.recyclerView.adapter = adapter
-
-            viewModel.tickets.observe(this, {
-                if(it.isNotEmpty()) {
-                    binding.noResultsAnimation.visibility = View.GONE
-                    binding.noResultsTextView.visibility = View.GONE
-                    binding.noResultsExplanationTextView.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
-                    adapter.submitList(it)
-                } else {
-                    binding.noResultsAnimation.visibility = View.VISIBLE
-                    binding.noResultsTextView.visibility = View.VISIBLE
-                    binding.noResultsExplanationTextView.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
-                }
-            })
-
+        isTabletSize = resources.getBoolean(R.bool.isTablet)
+        if(isTabletSize) {
+            toolbar.layoutParams.height = resources.getDimension(R.dimen.action_bar_size).toInt()
         }
 
-        private fun syncToCalendar() {
-            if(viewModel.dueTickets.value?.isNotEmpty() == true) {
-                val dueTickets = viewModel.dueTickets.value!!
-                try {
-                    for (dueTicket in dueTickets) {
-                        val timeInMilli = viewModel.toTimeInMilli(dueTicket.time)
-                        addEventToCalendar(
-                            applicationContext,
-                            getString(R.string.event_title_template, dueTicket.clientName),
-                            getString(R.string.address_template, dueTicket.address),
-                            timeInMilli,
-                            timeInMilli,
-                            dueTicket.id.toString()
-                        )
+        hamburgerMenuIcon.setOnClickListener {
+            val popup = PopupMenu(this, hamburgerMenuIcon)
+            showDropdownMenu(popup, this, isTabletSize)
+            popup.setOnMenuItemClickListener { item: MenuItem? ->
+                when (item!!.itemId) {
+                    R.id.action_work_ticker -> {
+                        val lastTicket = viewModel.tickets.value?.lastOrNull()
+                        if(lastTicket == null) {
+                            val snackbar = Snackbar.make(this.findViewById(android.R.id.content),
+                                getString(R.string.add_ticket_first), Snackbar.LENGTH_LONG)
+                            snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 2
+                            snackbar.show()
+                        } else {
+                            startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
+                                putExtra(EXTRA_TICKET, lastTicket)
+                            })
+                        }
                     }
-                    MaterialDialog(this)
-                        .title(text = getString(R.string.sync_sucesssful))
-                        .message(text = getString(R.string.sync_sucesssful_message))
-                        .positiveButton(R.string.accept) {}
-                        .show()
-                } catch (e: Exception) {
-                    MaterialDialog(this)
-                        .title(text = getString(R.string.sync_error))
-                        .message(text = getString(R.string.sync_error_message))
-                        .positiveButton(R.string.accept) {}
-                        .show()
+                    R.id.action_get_directions -> {
+                        startActivity(Intent(applicationContext, GetDirectionsActivity::class.java))
+                    }
                 }
+                true
+            }
+            popup.show()
+        }
+
+        newTicketBarButton.setOnClickListener {
+            startActivity(Intent(applicationContext, NewTicketActivity::class.java))
+        }
+
+        val adapter = TicketsAdapter(TicketsAdapter.CallListener {
+            val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it"))
+            startActivity(callIntent)
+        }, TicketsAdapter.ViewDetailsListener {
+            startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
+                putExtra(EXTRA_TICKET, it)
+            })
+        })
+        binding.recyclerView.adapter = adapter
+
+        viewModel.tickets.observe(this, {
+            if(it.isNotEmpty()) {
+                binding.noResultsAnimation.visibility = View.GONE
+                binding.noResultsTextView.visibility = View.GONE
+                binding.noResultsExplanationTextView.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
+                adapter.submitList(it)
             } else {
+                binding.noResultsAnimation.visibility = View.VISIBLE
+                binding.noResultsTextView.visibility = View.VISIBLE
+                binding.noResultsExplanationTextView.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
+            }
+        })
+
+    }
+
+    private fun syncToCalendar() {
+        if(viewModel.dueTickets.value?.isNotEmpty() == true) {
+            val dueTickets = viewModel.dueTickets.value!!
+            try {
+                for (dueTicket in dueTickets) {
+                    val timeInMilli = viewModel.toTimeInMilli(dueTicket.time)
+                    addEventToCalendar(
+                        applicationContext,
+                        getString(R.string.event_title_template, dueTicket.clientName),
+                        getString(R.string.address_template, dueTicket.address),
+                        timeInMilli,
+                        timeInMilli,
+                        dueTicket.id.toString()
+                    )
+                }
                 MaterialDialog(this)
-                    .title(text = getString(R.string.not_synced))
-                    .message(text = getString(R.string.no_due_tickets))
+                    .title(text = getString(R.string.sync_sucesssful))
+                    .message(text = getString(R.string.sync_sucesssful_message))
+                    .positiveButton(R.string.accept) {}
+                    .show()
+            } catch (e: Exception) {
+                MaterialDialog(this)
+                    .title(text = getString(R.string.sync_error))
+                    .message(text = getString(R.string.sync_error_message))
                     .positiveButton(R.string.accept) {}
                     .show()
             }
+        } else {
+            MaterialDialog(this)
+                .title(text = getString(R.string.not_synced))
+                .message(text = getString(R.string.no_due_tickets))
+                .positiveButton(R.string.accept) {}
+                .show()
         }
+    }
 
-        private fun requestCalendarPermission() {
-            calendarPermissionWasRequested = true
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(arrayOf(Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR), WRITE_TO_CALENDAR_PERMISSION_CODE)
-            }
+    private fun requestCalendarPermission() {
+        calendarPermissionWasRequested = true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(arrayOf(Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR), WRITE_TO_CALENDAR_PERMISSION_CODE)
         }
+    }
 
-        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            if (requestCode == WRITE_TO_CALENDAR_PERMISSION_CODE) {
-                if(calendarPermissionWasRequested) {
-                    calendarPermissionWasRequested = false
-                    if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        syncToCalendar()
-                    } else {
-                        val snackbar = Snackbar.make(this.findViewById(android.R.id.content),
-                            getString(R.string.calendar_permission_denied_explanation), Snackbar.LENGTH_LONG)
-                            .setAction(R.string.allow) {
-                                requestCalendarPermission()
-                            }
-                            .setActionTextColor(ContextCompat.getColor(applicationContext, R.color.snackbar_action))
-                        snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 4
-                        snackbar.show()
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == WRITE_TO_CALENDAR_PERMISSION_CODE) {
+            if(calendarPermissionWasRequested) {
+                calendarPermissionWasRequested = false
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    syncToCalendar()
+                } else {
+                    val snackbar = Snackbar.make(this.findViewById(android.R.id.content),
+                        getString(R.string.calendar_permission_denied_explanation), Snackbar.LENGTH_LONG)
+                        .setAction(R.string.allow) {
+                            requestCalendarPermission()
+                        }
+                        .setActionTextColor(ContextCompat.getColor(applicationContext, R.color.snackbar_action))
+                    snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 4
+                    snackbar.show()
 //                    Toast.makeText(requireContext(), getString(R.string.sms_permission_denied_explanation), Toast.LENGTH_LONG).show()
-                    }
                 }
             }
         }
-
-
-
-
-
     }
+
+
+
+
+
+}

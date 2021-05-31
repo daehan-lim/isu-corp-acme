@@ -96,4 +96,5 @@
     <string name="edit_comfirmation_message">Are you sure you want to edit this ticket?</string>
     <string name="add_comfirmation">Confirm Adding Ticket</string>
     <string name="add_comfirmation_message">Are you sure you want to add this ticket?</string>
+    <string name="add_ticket_first">You should add a ticket first</string>
 </resources>
