@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ListItemTicketBinding
 
+/**
+ * Adapter used to manage a list of tickets
+ */
 class TicketsAdapter(private val callListener: CallListener, private val viewDetailsListener: ViewDetailsListener)
     : ListAdapter<Ticket, TicketsAdapter.ViewHolder>(TicketDiffCallback()) {
 
@@ -38,15 +41,24 @@ class TicketsAdapter(private val callListener: CallListener, private val viewDet
 
     }
 
-
+    /**
+     * Class used to communicate the activity with the layout when the phone field gets clicked
+     */
     class CallListener(val callButtonListener: (phone: String) -> Unit) {
         fun onClick(ticket: Ticket) = callButtonListener(ticket.phone ?: "")
     }
 
+    /**
+     * Class used to communicate the activity with the layout when the list item gets clicked
+     */
     class ViewDetailsListener(val viewDetailsListener: (ticket: Ticket) -> Unit) {
         fun onClick(ticket: Ticket) = viewDetailsListener(ticket)
     }
 
+    /**
+     * This class calculates the difference between two lists and outputs a
+     * list of update operations that converts the first list into the second one.
+     */
     class TicketDiffCallback: DiffUtil.ItemCallback<Ticket>() {
         override fun areItemsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
             return  oldItem.id == newItem.id

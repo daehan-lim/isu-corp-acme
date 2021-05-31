@@ -1,4 +1,4 @@
-package ca.isucorp.acme.ui.editeticket
+package ca.isucorp.acme.ui.editticket
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

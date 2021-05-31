@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityNewTicketBinding
 import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
-import ca.isucorp.acme.ui.editeticket.EditTicketViewModel
+import ca.isucorp.acme.ui.editticket.EditTicketViewModel
 import ca.isucorp.acme.ui.workticket.WorkTicketActivity
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog

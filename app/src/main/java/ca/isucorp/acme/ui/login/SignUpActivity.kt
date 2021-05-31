@@ -9,13 +9,18 @@ import ca.isucorp.acme.databinding.ActivitySignUpBinding
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
 
-
+/**
+ * Activity where the user signs up
+ */
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private val viewModel: LoginSignupViewModel by lazy {
         ViewModelProvider(this, LoginSignupViewModel.Factory(application)).get(LoginSignupViewModel::class.java)
     }
 
+    /**
+     * Called when the activity is starting.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)

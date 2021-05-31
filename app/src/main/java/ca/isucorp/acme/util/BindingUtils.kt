@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import ca.isucorp.acme.database.model.Ticket
-import java.text.SimpleDateFormat
-import java.util.*
+
+/*
+    Filled with utility methods to bind the app's list layouts with data
+ */
+
 
 @BindingAdapter("clientName")
 fun TextView.setClientName(item: Ticket?) {
@@ -26,8 +29,6 @@ fun TextView.setAddress(item: Ticket?) {
 fun TextView.setDate(item: Ticket?) {
     item?.let {
         text = item.date
-        /*val dateStringParser = SimpleDateFormat(DATE_AND_TIME_PATTERN, Locale.ENGLISH)
-        text = dateStringParser.format(item.date)*/
     }
 }
 

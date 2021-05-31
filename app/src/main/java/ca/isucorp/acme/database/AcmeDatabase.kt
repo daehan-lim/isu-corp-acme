@@ -9,6 +9,9 @@ import ca.isucorp.acme.database.dao.UserDao
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
 
+/**
+ * Class that manages the app's database
+ */
 @Database(entities = [User::class, Ticket::class], version = 1, exportSchema = false)
 abstract class AcmeDatabase : RoomDatabase() {
 

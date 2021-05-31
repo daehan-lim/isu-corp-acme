@@ -5,9 +5,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
 
-
+/**
+ * Room's Database Access Object class for the [User] table
+ */
 @Dao
 interface UserDao {
 

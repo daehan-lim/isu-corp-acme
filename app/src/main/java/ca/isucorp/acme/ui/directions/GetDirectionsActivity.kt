@@ -23,11 +23,29 @@ import ca.isucorp.acme.util.goBackWithAnimation
 import ca.isucorp.acme.util.setUpInActivity
 import com.afollestad.materialdialogs.MaterialDialog
 
+/**
+ * The base url of all the map requests
+ */
 const val BASE_URL = "https://www.google.com/maps"
+
+/**
+ * End point used to search addresses on the map
+ */
 const val SEARCH_ENDPOINT = "/search/"
+
+/**
+ * The url to use for making search requests to the map
+ */
 const val SEARCH_URL = BASE_URL + SEARCH_ENDPOINT
 
+/**
+ * Code used to request location permission
+ */
 const val LOCATION_PERMISSION_CODE = 101
+
+/**
+ * Activity used to get directions to the user
+ */
 class GetDirectionsActivity : AppCompatActivity() {
     private var mGeoLocationCallback: GeolocationPermissions.Callback? = null
     private var mGeoLocationRequestOrigin: String? = null
@@ -64,6 +82,9 @@ class GetDirectionsActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Configures the webView
+     */
     @SuppressLint("SetJavaScriptEnabled")
     private fun setUpWebView() {
         binding.webView.apply {
@@ -71,7 +92,6 @@ class GetDirectionsActivity : AppCompatActivity() {
             settings.loadWithOverviewMode = false
             settings.useWideViewPort = false
             settings.domStorageEnabled = true
-
 
             if(!isTabletSize) {
                 settings.loadWithOverviewMode = true
@@ -84,7 +104,6 @@ class GetDirectionsActivity : AppCompatActivity() {
                 this.isScrollbarFadingEnabled = false
                 setDesktopMode()
             }
-
 
             webChromeClient = object : WebChromeClient() {
                 override fun onGeolocationPermissionsShowPrompt(origin: String, callback: GeolocationPermissions.Callback) {
@@ -176,13 +195,17 @@ class GetDirectionsActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Request permission to access the user's location
+     */
     private fun requestLocationPermission() {
-        ActivityCompat.requestPermissions(
-            this@GetDirectionsActivity,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE
-        )
+        ActivityCompat.requestPermissions(this@GetDirectionsActivity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_CODE)
     }
 
+    /**
+     * It makes the webView use desktop mode to load the map
+     */
     private fun setDesktopMode() {
         var newUserAgent = binding.webView.settings.userAgentString
         try {

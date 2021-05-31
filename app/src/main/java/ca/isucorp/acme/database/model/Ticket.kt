@@ -4,7 +4,9 @@ import androidx.room.*
 import java.io.Serializable
 import java.util.*
 
-
+/**
+ * Class that represents a "ticket" table in the database
+ */
 @Entity(tableName = "ticket_table")
 data class Ticket (
     @ColumnInfo(name = "client_name")

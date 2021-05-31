@@ -16,7 +16,7 @@ import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.databinding.ActivityWorkTicketBinding
 import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
 import ca.isucorp.acme.ui.directions.GetDirectionsActivity
-import ca.isucorp.acme.ui.editeticket.EditTicketActivity
+import ca.isucorp.acme.ui.editticket.EditTicketActivity
 import ca.isucorp.acme.util.*
 
 

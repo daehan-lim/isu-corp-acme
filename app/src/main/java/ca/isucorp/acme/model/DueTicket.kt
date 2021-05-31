@@ -1,10 +1,11 @@
 package ca.isucorp.acme.model
 
 import java.time.LocalDateTime
-import java.util.*
+import ca.isucorp.acme.database.model.Ticket
 
-
-
+/**
+ * A [Ticket] whose date has passed
+ */
 data class DueTicket (
     var clientName: String,
     var address: String,

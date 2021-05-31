@@ -7,10 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import ca.isucorp.acme.database.AcmeDatabase
 import kotlinx.coroutines.*
 
+/**
+ * Base class for view models that use coroutines and access the app's database
+ */
 open class DbAccessViewModel(application: Application) : AndroidViewModel(application) {
 
     protected open val database = AcmeDatabase.getDatabase(application)
 
+    @Suppress("PropertyName")
     protected open val _isError = MutableLiveData<Boolean>().apply {
         this.value = false
     }

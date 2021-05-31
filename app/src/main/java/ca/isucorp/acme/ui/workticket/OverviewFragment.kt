@@ -19,11 +19,25 @@ import ca.isucorp.acme.util.makeScrollableInsideScrollView
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * EXTRA for the address parameter passed to this fragment's parent activity
+ */
 const val EXTRA_ADDRESS = "ca.isucorp.acme.ui.workticket.OverviewFragment.ADDRESS"
+
+/**
+ * First and main fragment of [WorkTicketActivity]
+ */
 class OverviewFragment:  Fragment() {
     private lateinit var binding: FragmentOverviewBinding
 
+    /**
+     * Whether the device is a tablet
+     */
     private var isTabletSize: Boolean = false
+
+    /**
+     * Whether the device is in horizontal position
+     */
     private var isLandscape: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

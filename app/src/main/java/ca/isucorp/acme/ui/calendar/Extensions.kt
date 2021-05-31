@@ -12,6 +12,10 @@ import java.time.DayOfWeek
 import java.time.temporal.WeekFields
 import java.util.*
 
+/*
+    Extension functions to use in the CalendarActivity
+ */
+
 
 internal fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
     return context.layoutInflater.inflate(layoutRes, this, attachToRoot)

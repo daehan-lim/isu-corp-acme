@@ -7,9 +7,14 @@ import android.provider.CalendarContract
 import java.lang.Exception
 import java.util.*
 
+/**
+ * It returns the id of the user's primary calendar or the first calendar found otherwise if
+ * there is no primary calendar
+ * @param contentResolver
+ */
+@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
 fun getCalendarId(contentResolver: ContentResolver) : Long? {
     val projection = arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.CALENDAR_DISPLAY_NAME)
-
     var calCursor = contentResolver.query(
         CalendarContract.Calendars.CONTENT_URI,
         projection,
@@ -30,13 +35,10 @@ fun getCalendarId(contentResolver: ContentResolver) : Long? {
 
     if (calCursor != null) {
         if (calCursor.moveToFirst()) {
-            val calName: String
-            val calID: String
             val nameCol = calCursor.getColumnIndex(projection[1])
             val idCol = calCursor.getColumnIndex(projection[0])
-
-            calName = calCursor.getString(nameCol)
-            calID = calCursor.getString(idCol)
+            val calName: String = calCursor.getString(nameCol)
+            val calID: String = calCursor.getString(idCol)
 
             calCursor.close()
             return calID.toLong()
@@ -45,7 +47,9 @@ fun getCalendarId(contentResolver: ContentResolver) : Long? {
     return null
 }
 
-
+/**
+ * It adds an event to the user's calendar if it does not aready exit
+ */
 fun addEventToCalendar(context: Context, title: String, description: String?, startDateMillis: Long, endDateInMillis: Long,
                        tag: String): Long? {
     val timeZone = TimeZone.getDefault()
@@ -69,6 +73,9 @@ fun addEventToCalendar(context: Context, title: String, description: String?, st
     return null
 }
 
+/**
+ * It returns the id of a calendar event or null if it does not exist
+ */
 fun checkIfEventAlreadyExist(contentResolver: ContentResolver, tag: String, calendarId: Long): Long? {
     val projection = arrayOf(CalendarContract.Events._ID, CalendarContract.Events.DTSTART,
         CalendarContract.Events.DTEND, CalendarContract.Events.UID_2445)

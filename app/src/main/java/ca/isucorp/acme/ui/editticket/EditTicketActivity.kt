@@ -1,16 +1,12 @@
-package ca.isucorp.acme.ui.editeticket
+package ca.isucorp.acme.ui.editticket
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import ca.isucorp.acme.BR
 import ca.isucorp.acme.R
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
@@ -19,7 +15,9 @@ import ca.isucorp.acme.ui.workticket.WorkTicketActivity
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
 
-
+/**
+ * Screen where user can edit or remove a ticket previously selected and passed to this activity as an EXTRA
+ */
 class EditTicketActivity : NewTicketActivity() {
 
     override val viewModel: EditTicketViewModel by lazy {
@@ -28,7 +26,6 @@ class EditTicketActivity : NewTicketActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         binding.layoutSimpleAppBar.toolbar.findViewById<TextView>(R.id.toolbar_title).text = getString(R.string.edit_ticket)
 

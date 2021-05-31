@@ -12,11 +12,23 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * It provides an abstraction of the [Ticket] table of the database
+ * with methods and attributes to manage tickets without the calling class having to know
+ * about the database
+ */
 class TicketRepository(private val database: AcmeDatabase) {
 
-
+    /**
+     * Contains a reference to all the tickets in the database through a [LiveData] that
+     * gets updated every time the ticket table changes
+     */
     val tickets = database.ticketDao.getAllTickets()
 
+    /**
+     * Contains a reference to all the due tickets in the database through a [LiveData] that
+     * gets updated every time the ticket table changes
+     */
     val dueTickets: LiveData<List<DueTicket>> = Transformations.map(tickets) { tickets ->
         val dueTickets = mutableListOf<DueTicket>()
         for(ticket in tickets) {
@@ -31,7 +43,7 @@ class TicketRepository(private val database: AcmeDatabase) {
     }
 
     /**
-     * Register a new ticket in the app
+     * Adds a new ticket to the app
      * This function uses the IO dispatcher to ensure the database insert database operation
      * happens on the IO dispatcher.
      *
@@ -42,18 +54,27 @@ class TicketRepository(private val database: AcmeDatabase) {
         }
     }
 
+    /**
+     * Modifies a [Ticket]'s fields
+     */
     suspend fun updateTicket(ticket: Ticket) {
         withContext(Dispatchers.IO) {
             database.ticketDao.insert(ticket)
         }
     }
 
+    /**
+     * It returns the id of a ticket or null if it is not found in the database
+     */
     suspend fun findTicket(id: Long): Ticket? {
         return withContext(Dispatchers.IO) {
             database.ticketDao.findTicket(id)
         }
     }
 
+    /**
+     * It removes a ticket given its id
+     */
     suspend fun removeTicket(id: Long) {
         withContext(Dispatchers.IO) {
             database.ticketDao.remove(id)

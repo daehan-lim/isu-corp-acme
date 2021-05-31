@@ -5,7 +5,9 @@ import androidx.room.*
 import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
 
-
+/**
+ * Room's Database Access Object class for the [Ticket] table
+ */
 @Dao
 interface TicketDao {
 

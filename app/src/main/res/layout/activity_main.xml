@@ -56,7 +56,7 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="no_tickets2.json"
+            app:lottie_fileName="no_tickets.json"
             app:lottie_loop="true"
             app:lottie_speed="1.5"
             tools:visibility="visible"

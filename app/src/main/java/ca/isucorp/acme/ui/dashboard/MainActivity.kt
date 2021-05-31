@@ -29,19 +29,29 @@ import com.google.android.material.snackbar.Snackbar
 const val WRITE_TO_CALENDAR_PERMISSION_CODE = 100
 const val EXTRA_TICKET = "ca.isucorp.acme.ui.dashboard.MainActivity.TICKET"
 
+/**
+ * Main activity of the app containing the dashboard screen
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    /**
+     * Whether the app requested permission to read and write the calendar
+     */
     private var calendarPermissionWasRequested = false
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
     }
 
-
-
+    /**
+     * Indicates whether the the device is a tablet or not
+     */
     private var isTabletSize: Boolean = false
 
+    /**
+     * Called when the activity is starting.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -145,6 +155,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * It syncs the due tickets to the device's calendars
+     */
     private fun syncToCalendar() {
         if(viewModel.dueTickets.value?.isNotEmpty() == true) {
             val dueTickets = viewModel.dueTickets.value!!
@@ -181,6 +194,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Requests permission to read and write the calendar
+     */
     private fun requestCalendarPermission() {
         calendarPermissionWasRequested = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -204,7 +220,6 @@ class MainActivity : AppCompatActivity() {
                         .setActionTextColor(ContextCompat.getColor(applicationContext, R.color.snackbar_action))
                     snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 4
                     snackbar.show()
-//                    Toast.makeText(requireContext(), getString(R.string.sms_permission_denied_explanation), Toast.LENGTH_LONG).show()
                 }
             }
         }

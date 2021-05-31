@@ -1,12 +1,13 @@
 package ca.isucorp.acme.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import ca.isucorp.acme.database.AcmeDatabase
 import ca.isucorp.acme.database.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Repository class to manage [User] objects using the Repository pattern with the MVVM architecture
+ */
 class UserRepository(private val database: AcmeDatabase) {
 
 
@@ -22,6 +23,9 @@ class UserRepository(private val database: AcmeDatabase) {
         }
     }
 
+    /**
+     * It returns a user id given their user name and password, or null if the user does not exist
+     */
     suspend fun findUser(username: String, password: String): User? {
         return withContext(Dispatchers.IO) {
             database.userDao.findUser(username, password)

@@ -31,7 +31,7 @@
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".ui.directions.GetDirectionsActivity" />
         <activity android:name=".ui.workticket.WorkTicketActivity"/>
-        <activity android:name=".ui.editeticket.EditTicketActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ui.editticket.EditTicketActivity" android:windowSoftInputMode="stateHidden"/>
 
     </application>
 
