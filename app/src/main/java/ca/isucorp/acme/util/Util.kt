@@ -1,9 +1,5 @@
 package ca.isucorp.acme.util
 
-import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
-import android.provider.CalendarContract
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
@@ -11,7 +7,6 @@ import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.text.style.RelativeSizeSpan
 import android.text.style.UnderlineSpan
-import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
@@ -19,16 +14,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import ca.isucorp.acme.R
-import ca.isucorp.acme.ui.directions.GetDirectionsActivity
 import ca.isucorp.acme.ui.login.LoginSignupViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
+import ca.isucorp.acme.ui.login.LoginActivity
+import ca.isucorp.acme.ui.login.SignUpActivity
 
 
 /**
@@ -69,7 +64,11 @@ fun TextView.underlineText() {
     text = content
 }
 
-
+/**
+ * Closes the current screen and returns to the previous one with an animation
+ * @param activity the activity where the method is being called from
+ * @param anim The resource id of the animation to be displayed
+ */
 fun goBackWithAnimation(activity: AppCompatActivity, anim: Int?) {
     activity.finish()
     if(anim != null) {
@@ -77,6 +76,11 @@ fun goBackWithAnimation(activity: AppCompatActivity, anim: Int?) {
     }
 }
 
+/**
+ * Prepare this [Toolbar] and set its navigation icon
+ * @param activity The activity the toolbar is to be set in
+ * @param goBackAnimation the animation to display when navigation icon is clicked
+ */
 fun Toolbar.setUpInActivity(activity: AppCompatActivity, goBackAnimation: Int?) {
     activity.setSupportActionBar(this)
     title = ""
@@ -101,6 +105,16 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
+/**
+ * Called when user clicks in a login or sign up button.
+ *
+ * It validates the fields and enables or disables the button accordingly
+ *
+ * @param parentLayout The layout where all the fields are contained. Could be the "login" layout or the "sign up" layout
+ * @param activity One of [LoginActivity] or [SignUpActivity]
+ * @param viewModel The [LoginSignupViewModel] used to validate the fields
+ * @param isSignUpScreen Indicates whether the method is being called from [SignUpActivity] or not
+ */
 fun validateUserFields(parentLayout: View, activity: AppCompatActivity, viewModel: LoginSignupViewModel, isSignUpScreen: Boolean = false) {
     val usernameTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_user_name)
     val passwordTextInput = parentLayout.findViewById<TextInputLayout>(R.id.text_input_password)
@@ -190,6 +204,9 @@ fun increaseMenuItemTextSize(popupMenu: PopupMenu, menuItemId: Int) {
     menuItem.title = spanString
 }
 
+/**
+ * Converts a [Date] variable to [LocalDateTime]
+ */
 fun convertToLocalDateTime(date: Date?): LocalDateTime {
     return Instant.ofEpochMilli(date?.time ?: Calendar.getInstance().timeInMillis)
         .atZone(ZoneId.systemDefault())
@@ -212,15 +229,4 @@ fun TextView.makeScrollableInsideScrollView() {
         }
         false
     }
-}
-
-fun showDropdownMenu(popup: PopupMenu, activity: AppCompatActivity, isTabletSize: Boolean) {
-    popup.inflate(R.menu.dropdown_menu)
-    if(isTabletSize) {
-        increaseMenuItemTextSize(popup, R.id.action_work_ticker)
-        increaseMenuItemTextSize(popup, R.id.action_get_directions)
-        increaseMenuItemTextSize(popup, R.id.action_dashboard)
-    }
-
-    popup.show()
 }
