@@ -61,7 +61,7 @@ class WorkTicketActivity : AppCompatActivity() {
 
         dropdownMenuButton.setOnClickListener {
             val popup = PopupMenu(this, editTicketButton)
-            showDropdownMenu(popup, this, isTabletSize)
+            inflateDropdownMenu(popup, isTabletSize)
             popup.menu.findItem(R.id.action_work_ticker).isVisible = false
             popup.menu.findItem(R.id.action_dashboard).isVisible = true
             popup.setOnMenuItemClickListener { item: MenuItem? ->
