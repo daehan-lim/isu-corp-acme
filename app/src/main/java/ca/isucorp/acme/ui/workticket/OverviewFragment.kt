@@ -23,9 +23,14 @@ const val EXTRA_ADDRESS = "ca.isucorp.acme.ui.workticket.OverviewFragment.ADDRES
 class OverviewFragment:  Fragment() {
     private lateinit var binding: FragmentOverviewBinding
 
+    private var isTabletSize: Boolean = false
+    private var isLandscape: Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentOverviewBinding.inflate(layoutInflater)
 
+        isTabletSize = resources.getBoolean(R.bool.isTablet)
+        isLandscape = resources.getBoolean(R.bool.isLandscape)
 
         val ticket = activity?.intent?.getSerializableExtra(EXTRA_TICKET) as Ticket
 
@@ -53,11 +58,15 @@ class OverviewFragment:  Fragment() {
         binding.textScheduledFor.text = dateStringParser.format(date!!)
 
         binding.textAddress.text = ticket.address
-        binding.buttonGetDirections.setOnClickListener {
+        val getDirectionsListener = View.OnClickListener {
             startActivity(Intent(requireContext(), GetDirectionsActivity::class.java).apply {
                 putExtra(EXTRA_ADDRESS, ticket.address)
             })
         }
+        binding.buttonGetDirections.setOnClickListener(getDirectionsListener)
+        binding.imageAddress.setOnClickListener(getDirectionsListener)
+        binding.textAddress.setOnClickListener(getDirectionsListener)
+        binding.textHeadingAddress.setOnClickListener(getDirectionsListener)
 
         binding.textNotes.text = ticket.notes
 
@@ -65,9 +74,11 @@ class OverviewFragment:  Fragment() {
 
         binding.textTicketId.text = getString(R.string.ticket_id_formatted, ticket.id)
 
-        if(binding.textNotes.text.length >= 25) {
-            binding.textNotes.movementMethod = ScrollingMovementMethod()
-            binding.textNotes.makeScrollableInsideScrollView()
+        if(isLandscape || isTabletSize) {
+            if (binding.textNotes.text.length >= 25) {
+                binding.textNotes.movementMethod = ScrollingMovementMethod()
+                binding.textNotes.makeScrollableInsideScrollView()
+            }
         }
         return binding.root
     }

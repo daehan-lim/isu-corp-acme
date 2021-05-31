@@ -32,7 +32,8 @@
             android:id="@+id/text_client"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_customer_info"
-            tools:text="Jessica Green"
+            app:layout_constraintEnd_toStartOf="@id/image_phone"
+            tools:text="Penjan Antonio Eng Lim"
             android:textIsSelectable="true"
             style="@style/overview_normal_text" />
 
@@ -52,6 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/image_phone"
+            app:layout_constraintEnd_toStartOf="@id/guideline_center"
             app:layout_constraintTop_toTopOf="@id/image_phone"
             tools:text="519 733 8727"
             android:fontFamily="@font/sfpro_display_regular"
