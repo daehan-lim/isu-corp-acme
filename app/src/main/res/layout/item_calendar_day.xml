@@ -9,6 +9,7 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/frame_layout_calendar_day"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="1dp"

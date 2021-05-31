@@ -49,6 +49,7 @@
     <dimen name="ic_client_name_calendar_size">24dp</dimen>
     <dimen name="ic_address_calendar_size">28dp</dimen>
     <dimen name="calendar_text_day_size">12sp</dimen>
+    <dimen name="calendar_text_day_size_today">14sp</dimen>
     <dimen name="first_event_view_margin_bottom">18dp</dimen>
     <dimen name="second_event_view_margin_bottom">8dp</dimen>
     <dimen name="calendar_event_view_height">5dp</dimen>

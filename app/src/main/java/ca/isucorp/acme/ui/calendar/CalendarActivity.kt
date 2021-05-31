@@ -1,7 +1,10 @@
 package ca.isucorp.acme.ui.calendar
 
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -44,6 +47,8 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalendarBinding
 
     private lateinit var dueTicketsByDate: Map<LocalDate, List<DueTicket>>
+
+    private val today = LocalDate.now()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,13 +100,29 @@ class CalendarActivity : AppCompatActivity() {
                     container.binding.viewSecondEvent.background = null
 
                     if (day.owner == DayOwner.THIS_MONTH) {
-                        textView.setTextColorRes(R.color.primaryColor)
                         container.binding.layoutCalendarDay.setBackgroundResource(
                             if (selectedDate == day.date) {
                                 R.drawable.bg_selected
                             } else {
                                 0
                             })
+
+                        val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+                        if(day.date == today) {
+                            textView.setTextColorRes(R.color.selected_day_blue)
+                            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.calendar_text_day_size_today))
+                            /*container.binding.frameLayoutCalendarDay.setBackgroundResource(R.color.primaryLightColor)
+                            textView.setBackgroundResource(R.drawable.bg_today)
+                            params.gravity = Gravity.CENTER
+//                            textView.layoutParams = params*/
+                        } else {
+                            textView.setTextColorRes(R.color.primaryColor)
+                            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.calendar_text_day_size))
+                            /*container.binding.frameLayoutCalendarDay.setBackgroundResource(R.color.list_background_grey)
+                            textView.setBackgroundResource(0)
+                            params.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+//                            textView.layoutParams = params*/
+                        }
 
                         val tickets = dueTicketsByDate[day.date]
                         if (tickets != null) {
