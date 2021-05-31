@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
+import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.repository.TicketRepository
 import ca.isucorp.acme.ui.DbAccessViewModel
 import ca.isucorp.acme.util.DAY_SHORT_MONTH_YEAR_PATTERN
@@ -24,6 +25,8 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
         get() = _dateText
 
     protected open var dateString: String? = null
+
+    var ticket: Ticket? = null
 
     protected open val ticketRepository: TicketRepository
         get() = TicketRepository(database)
@@ -87,8 +90,8 @@ open class NewTicketViewModel(application: Application) : DbAccessViewModel(appl
         coroutineScope.launch {
             try {
                 val id = ticketRepository.addTicket(clientName, address, _dateText.value ?: "", phone, notes, reasonsForCall)
-                val addedTicket = ticketRepository.findTicket(id)
-                if(addedTicket != null) {
+                ticket = ticketRepository.findTicket(id)
+                if(ticket != null) {
                     _manageTicketFormState.value = ManageTicketFormState(isTicketAdded = true)
                 } else {
                     _manageTicketFormState.value = ManageTicketFormState(isTicketAdded = false)

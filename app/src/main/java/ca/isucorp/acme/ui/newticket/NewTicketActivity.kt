@@ -1,5 +1,6 @@
 package ca.isucorp.acme.ui.newticket
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityNewTicketBinding
+import ca.isucorp.acme.ui.dashboard.EXTRA_TICKET
 import ca.isucorp.acme.ui.editeticket.EditTicketViewModel
+import ca.isucorp.acme.ui.workticket.WorkTicketActivity
 import ca.isucorp.acme.util.*
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.button.MaterialButton
@@ -69,6 +72,11 @@ open class NewTicketActivity : AppCompatActivity() {
                 val formState = it ?: return@Observer
 
                 if (formState.isTicketAdded) {
+                    finish()
+                    startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
+                        putExtra(EXTRA_TICKET, viewModel.ticket)
+                    })
+                    /*
                     val materialDialog = MaterialDialog(this)
                         .title(text = getString(R.string.ticket_added))
                         .message(text = getString(R.string.ticket_added_message))
@@ -78,7 +86,7 @@ open class NewTicketActivity : AppCompatActivity() {
                     materialDialog.setOnCancelListener {
                         resetForm()
                     }
-                    materialDialog.show()
+                    materialDialog.show()*/
                     return@Observer
                 }
 
