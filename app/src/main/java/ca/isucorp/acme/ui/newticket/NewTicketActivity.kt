@@ -72,10 +72,17 @@ open class NewTicketActivity : AppCompatActivity() {
                 val formState = it ?: return@Observer
 
                 if (formState.isTicketAdded) {
-                    finish()
-                    startActivity(Intent(applicationContext, WorkTicketActivity::class.java). apply {
-                        putExtra(EXTRA_TICKET, viewModel.ticket)
-                    })
+                    MaterialDialog(this)
+                        .title(text = getString(R.string.add_comfirmation))
+                        .message(text = getString(R.string.add_comfirmation_message))
+                        .positiveButton(R.string.accept) {
+                            finish()
+                            startActivity(Intent(applicationContext, WorkTicketActivity::class.java).apply {
+                                putExtra(EXTRA_TICKET, viewModel.ticket)
+                            })
+                        }
+                        .negativeButton(R.string.cancel){}
+                        .show()
                     /*
                     val materialDialog = MaterialDialog(this)
                         .title(text = getString(R.string.ticket_added))

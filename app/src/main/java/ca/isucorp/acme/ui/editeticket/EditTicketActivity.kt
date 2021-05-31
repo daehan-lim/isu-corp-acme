@@ -86,10 +86,17 @@ class EditTicketActivity : NewTicketActivity() {
                     materialDialog.show()
                 }
                 formState.isTicketEdited -> {
-                    finish()
-                    startActivity(Intent(applicationContext, WorkTicketActivity::class.java).apply {
-                        putExtra(EXTRA_TICKET, viewModel.ticket)
-                    })
+                    MaterialDialog(this)
+                        .title(text = getString(R.string.edit_comfirmation))
+                        .message(text = getString(R.string.edit_comfirmation_message))
+                        .positiveButton(R.string.accept) {
+                            finish()
+                            startActivity(Intent(applicationContext, WorkTicketActivity::class.java).apply {
+                                putExtra(EXTRA_TICKET, viewModel.ticket)
+                            })
+                        }
+                        .negativeButton(R.string.cancel){}
+                        .show()
                 }
                 else -> {
                     binding.scrollView.smoothScrollTo(0, 0)

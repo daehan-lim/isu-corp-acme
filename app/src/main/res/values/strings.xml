@@ -92,4 +92,8 @@
     <string name="ticket_id_formatted">Ticket #%d</string>
     <string name="dashboard">Dashboard</string>
     <string name="edit_ticket">Edit Ticket</string>
+    <string name="edit_comfirmation">Confirm Edit</string>
+    <string name="edit_comfirmation_message">Are you sure you want to edit this ticket?</string>
+    <string name="add_comfirmation">Confirm Adding Ticket</string>
+    <string name="add_comfirmation_message">Are you sure you want to add this ticket?</string>
 </resources>
