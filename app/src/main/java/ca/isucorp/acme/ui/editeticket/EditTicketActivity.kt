@@ -90,6 +90,8 @@ class EditTicketActivity : NewTicketActivity() {
                 return@Observer
             }
 
+            binding.scrollView.smoothScrollTo(0, 0)
+
             updateFieldsWithErrorMessage(formState)
         })
 
