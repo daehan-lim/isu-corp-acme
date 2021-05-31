@@ -107,21 +107,12 @@ class CalendarActivity : AppCompatActivity() {
                                 0
                             })
 
-                        val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
                         if(day.date == today) {
                             textView.setTextColorRes(R.color.selected_day_blue)
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.calendar_text_day_size_today))
-                            /*container.binding.frameLayoutCalendarDay.setBackgroundResource(R.color.primaryLightColor)
-                            textView.setBackgroundResource(R.drawable.bg_today)
-                            params.gravity = Gravity.CENTER
-//                            textView.layoutParams = params*/
                         } else {
                             textView.setTextColorRes(R.color.primaryColor)
                             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.calendar_text_day_size))
-                            /*container.binding.frameLayoutCalendarDay.setBackgroundResource(R.color.list_background_grey)
-                            textView.setBackgroundResource(0)
-                            params.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-//                            textView.layoutParams = params*/
                         }
 
                         val tickets = dueTicketsByDate[day.date]
