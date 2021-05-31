@@ -15,10 +15,10 @@ class EditTicketViewModel(application: Application) : NewTicketViewModel(applica
         if (!isFormValid(clientName, address, phone)) {
             return
         }
-        val ticket = Ticket(clientName, address, _dateText.value ?: "", phone, notes, reasonsForCall, id)
+        ticket = Ticket(clientName, address, _dateText.value ?: "", phone, notes, reasonsForCall, id)
         coroutineScope.launch {
             try {
-                ticketRepository.updateTicket(ticket)
+                ticketRepository.updateTicket(ticket!!)
                 _manageTicketFormState.value = ManageTicketFormState(isTicketEdited = true)
             } catch (e: Exception) {
                 _manageTicketFormState.value = ManageTicketFormState(isTicketEdited = false)
