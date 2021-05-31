@@ -80,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_ticket"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:onClick="@{() -> viewDetailsListener.onClick(ticket)}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textColor="@color/white"
