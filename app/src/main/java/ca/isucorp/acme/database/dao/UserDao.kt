@@ -1,11 +1,9 @@
 package ca.isucorp.acme.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ca.isucorp.acme.database.model.Ticket
 import ca.isucorp.acme.database.model.User
 
 /**

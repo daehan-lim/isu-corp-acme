@@ -73,8 +73,8 @@ open class NewTicketActivity : AppCompatActivity() {
 
                 if (formState.isTicketAdded) {
                     MaterialDialog(this)
-                        .title(text = getString(R.string.add_comfirmation))
-                        .message(text = getString(R.string.add_comfirmation_message))
+                        .title(text = getString(R.string.add_confirmation))
+                        .message(text = getString(R.string.add_confirmation_message))
                         .positiveButton(R.string.accept) {
                             finish()
                             startActivity(Intent(applicationContext, WorkTicketActivity::class.java).apply {
@@ -169,7 +169,7 @@ open class NewTicketActivity : AppCompatActivity() {
         binding.scrollView.smoothScrollTo(0, 0)
     }
 
-    protected fun showDatePicker() {
+    private fun showDatePicker() {
         val constraintsBuilder = CalendarConstraints.Builder()
             .setValidator(DateValidatorPointForward.now())
         val datePicker = MaterialDatePicker.Builder.datePicker()

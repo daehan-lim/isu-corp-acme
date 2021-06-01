@@ -89,8 +89,8 @@ class EditTicketActivity : NewTicketActivity() {
                 }
                 formState.isTicketEdited -> {
                     MaterialDialog(this)
-                        .title(text = getString(R.string.edit_comfirmation))
-                        .message(text = getString(R.string.edit_comfirmation_message))
+                        .title(text = getString(R.string.edit_confirmation))
+                        .message(text = getString(R.string.edit_confirmation_message))
                         .positiveButton(R.string.accept) {
                             finish()
                             startActivity(Intent(applicationContext, WorkTicketActivity::class.java).apply {

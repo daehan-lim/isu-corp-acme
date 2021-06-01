@@ -19,9 +19,9 @@ import ca.isucorp.acme.R
 import ca.isucorp.acme.databinding.ActivityMainBinding
 import ca.isucorp.acme.ui.calendar.CalendarActivity
 import ca.isucorp.acme.ui.directions.GetDirectionsActivity
-import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.ui.newticket.NewTicketActivity
 import ca.isucorp.acme.ui.workticket.WorkTicketActivity
+import ca.isucorp.acme.util.addEventToCalendar
 import ca.isucorp.acme.util.inflateDropdownMenu
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.snackbar.Snackbar
@@ -174,8 +174,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
                 MaterialDialog(this)
-                    .title(text = getString(R.string.sync_sucesssful))
-                    .message(text = getString(R.string.sync_sucesssful_message))
+                    .title(text = getString(R.string.sync_successful))
+                    .message(text = getString(R.string.sync_successful_message))
                     .positiveButton(R.string.accept) {}
                     .show()
             } catch (e: Exception) {

@@ -4,7 +4,6 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.provider.CalendarContract
-import java.lang.Exception
 import java.util.*
 
 /**
@@ -48,7 +47,7 @@ fun getCalendarId(contentResolver: ContentResolver) : Long? {
 }
 
 /**
- * It adds an event to the user's calendar if it does not aready exit
+ * It adds an event to the user's calendar if it does not already exit
  */
 fun addEventToCalendar(context: Context, title: String, description: String?, startDateMillis: Long, endDateInMillis: Long,
                        tag: String): Long? {

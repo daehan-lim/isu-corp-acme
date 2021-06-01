@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/thrusday_short"
+        android:text="@string/thursday_short"
         android:textColor="@color/black"
         android:textSize="@dimen/header_day_of_week_text_size" />
 

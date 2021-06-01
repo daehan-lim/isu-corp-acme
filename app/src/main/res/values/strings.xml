@@ -9,7 +9,6 @@
     <string name="repeat_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="user_name_allowed_digits">áéíóúÁÉÍÓÚabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_</string>
-    <string name="client_name_allowed_digits">áéíóúÁÉÍÓÚabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 </string>
     <string name="username_empty_error">Username should not be empty</string>
     <string name="client_name_empty_error">Client name should not be empty</string>
     <string name="address_empty_error">Address should not be empty</string>
@@ -60,20 +59,20 @@
     <string name="monday_short">MON</string>
     <string name="tuesday_short">TUE</string>
     <string name="wednesday_short">WED</string>
-    <string name="thrusday_short">THU</string>
+    <string name="thursday_short">THU</string>
     <string name="friday_short">FRI</string>
     <string name="saturday_short">SAT</string>
     <string name="due_tickets">Due Tickets</string>
     <string name="event_title_template">Ticket scheduled for %s</string>
     <string name="address_template">Address: %s</string>
     <string name="sync_error">Sync Error</string>
-    <string name="sync_error_message">Your due tickets could not be synced to your device calendar. Make sure your calendar is correctly set up and try agan</string>
+    <string name="sync_error_message">Your due tickets could not be synced to your device calendar. Make sure your calendar is correctly set up and try again</string>
     <string name="calendar_permission_denied_explanation">ACME needs permission to access your calendar in order to sync your due tickets</string>
     <string name="allow">Allow</string>
     <string name="not_synced">Not synced</string>
     <string name="no_due_tickets">You have no due tickets</string>
-    <string name="sync_sucesssful">Sync Successful</string>
-    <string name="sync_sucesssful_message">Your due tickets were added to your device calendar.</string>
+    <string name="sync_successful">Sync Successful</string>
+    <string name="sync_successful_message">Your due tickets were added to your device calendar.</string>
     <string name="sync_with_calendar">Sync with device calendar?</string>
     <string name="sync_with_calendar_message">This will add your due tickets to your device calendar. Are you sure you want to sync?</string>
     <string name="remove_ticker">Delete ticket?</string>
@@ -92,9 +91,9 @@
     <string name="ticket_id_formatted">Ticket #%d</string>
     <string name="dashboard">Dashboard</string>
     <string name="edit_ticket">Edit Ticket</string>
-    <string name="edit_comfirmation">Confirm Edit</string>
-    <string name="edit_comfirmation_message">Are you sure you want to edit this ticket?</string>
-    <string name="add_comfirmation">Confirm Adding Ticket</string>
-    <string name="add_comfirmation_message">Are you sure you want to add this ticket?</string>
+    <string name="edit_confirmation">Confirm Edit</string>
+    <string name="edit_confirmation_message">Are you sure you want to edit this ticket?</string>
+    <string name="add_confirmation">Confirm Adding Ticket</string>
+    <string name="add_confirmation_message">Are you sure you want to add this ticket?</string>
     <string name="add_ticket_first">You should add a ticket first</string>
 </resources>

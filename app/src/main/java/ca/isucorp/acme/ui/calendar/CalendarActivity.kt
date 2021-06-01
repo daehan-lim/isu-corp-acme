@@ -2,9 +2,7 @@ package ca.isucorp.acme.ui.calendar
 
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -59,8 +57,8 @@ class CalendarActivity : AppCompatActivity() {
         toolBarTitle.text = getString(R.string.due_tickets)
         binding.layoutSimpleAppBar.toolbar.setUpInActivity(this, DEFAULT_GO_BACK_ANIMATION)
 
-        viewModel.dueTickets.observe(this, {
-            dueTicketsByDate = it
+        viewModel.dueTickets.observe(this, { dueTicketMap ->
+            dueTicketsByDate = dueTicketMap
             binding.recyclerEvents.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
             binding.recyclerEvents.adapter = eventsAdapter
             eventsAdapter.notifyDataSetChanged()
